@@ -5,7 +5,7 @@ import { tools } from '@/lib/tools';
 
 export function HomeScreen() {
   const popularTools = tools.slice(0, 6);
-  const recentTools = [tools[1], tools[0], tools[4]];
+  const recentTools = [tools[1], tools[0], tools[2]];
 
   return (
     <>
