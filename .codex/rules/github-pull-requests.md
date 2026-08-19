@@ -36,6 +36,17 @@ description, before the normal change summary:
 THIS SHOULD BE REVIEW CAREFULLY!!!
 ```
 
+## Commit message requirements
+
+- Every new commit must use exactly this subject format:
+  `Feat#[number_feature]: [short_description_below_40_chars]`.
+- Replace `[number_feature]` with the numeric feature or requirement identifier, without leading
+  zeroes unless the identifier itself requires them.
+- Replace `[short_description_below_40_chars]` with a clear description of fewer than 40
+  characters. Do not add a body when a one-line subject is sufficient.
+- Validate the subject before committing. For example:
+  `Feat#4: add timestamp test coverage`.
+
 ## Required creation sequence
 
 Complete these steps in order before invoking `gh pr create`:
