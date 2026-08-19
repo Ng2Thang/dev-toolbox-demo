@@ -1,0 +1,4 @@
+interface:
+  display_name: "Stitch Screen Sync"
+  short_description: "Sync Stitch screens into this project"
+  default_prompt: "Use $stitch-screen-sync to sync the requested Stitch screens into this project."

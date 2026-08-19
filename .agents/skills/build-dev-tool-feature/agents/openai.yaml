@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build Dev Tool Feature"
+  short_description: "Design, approve, build, and deploy a tool"
+  default_prompt: "Use $build-dev-tool-feature to design and build a new Dev Toolbox feature."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Stitch Screen Improve"
+  short_description: "Improve one Stitch screen precisely"
+  default_prompt: "Use $stitch-screen-improve to improve this specific screen against its Stitch reference."

@@ -1,0 +1,14 @@
+[mcp_servers.stitch]
+url = "https://stitch.googleapis.com/mcp"
+enabled = true
+startup_timeout_sec = 30
+
+[mcp_servers.stitch.env_http_headers]
+"X-Goog-Api-Key" = "STITCH_API_KEY"
+
+[mcp_servers.supabase]
+url = ""
+
+[mcp_servers.github]
+url = "https://api.githubcopilot.com/mcp/"
+bearer_token_env_var = "GITHUB_MCP_TOKEN"
