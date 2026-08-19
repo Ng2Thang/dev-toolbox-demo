@@ -1,24 +1,64 @@
 # REQ-001 task log
 
-## REQ-008 Encoder / Decoder design plan
+## Detailed repository test-report skill plan
+
+1. Capture structured Vitest output so test totals and individual failures are reliable.
+2. Group test files into feature, API/routes, shared-library, app-route, test-infrastructure, and other categories.
+3. Export unique Markdown and JSON reports with file/test pass-fail-skipped totals and concise failed-test details.
+4. Validate the generator against the current passing repository suite.
+
+## Repository test-report skill plan
+
+1. Add a repository-local skill that runs the complete Vitest suite and reports its actual totals.
+2. Provide a reusable Markdown template that separates test outcomes from the optional quality gate.
+3. Validate the skill's file structure and instructions without executing a test run for this planning request.
+
+## REQ-004 timestamp test regeneration plan
+
+1. Trace REQ-004, the timestamp feature's pure converter and client component, and existing Vitest conventions.
+2. Replace the legacy timestamp coverage with three focused Level 1–3 feature test files, each containing five evidence-backed runnable cases.
+3. Run the three focused files, then the repository test and quality gates; review the diff for scope and secrets.
+
+## Requirement, UI, and feature test-generation skill (plan-only)
 
 Plan:
 
-1. Create an approval-gated requirement for a browser-local UTF-8 Encoder / Decoder covering Base64, Base64URL, URL percent encoding, hexadecimal, and HTML entities.
-2. Generate and inspect a focused Dev Toolbox Stitch screen with format/direction controls, input/output editors, conversion actions, and validation states.
-3. Record the resulting Stitch screen in REQ-008 and keep the requirement in `design-review` until the user explicitly approves its UI.
+1. Define a repository-local skill that consumes a feature requirement, its approved Stitch UI reference, and the implemented feature boundaries.
+2. Have the skill derive a traceable test matrix: pure-logic unit tests, client component behavior tests, server validation/API tests, and explicit exclusions for purely visual details.
+3. Encode existing Vitest, React Testing Library, feature-folder, and client/server conventions so generated tests fit this repository rather than introducing a second testing style.
+4. Validate the skill against representative existing features, then refine its test-selection rules before using it for new requirements.
 
-Navigation revision: the approved screen's sidebar was updated in Stitch to use direct tool links
-in requirement order, ending with Encoder / Decoder and Saved Runs. REQ-008 returned to
-`design-review` pending approval of this changed reference.
+Tiering update:
 
-## REQ-001 through REQ-007 Stitch requirement planning
+1. Generate Level 1 core/common and applicable Level 2 realistic/intermediate cases by default.
+2. Generate Level 3 advanced cases only when a requirement, implementation, or explicit request identifies a concrete risk.
+3. Require each generated case to state its evidence, layer, expected assertion, and—at Level 3—its risk rationale.
+4. Create three feature-prefixed level files without mixing cases; each must contain at least five runnable, evidence-backed cases.
+
+## Feature retirement: REQ-005 through REQ-008
+
+Plan:
+
+1. Remove the four retired feature requirements, route pages, feature modules, and feature-specific tests.
+2. Remove their registry, navigation, shared-test, CSS, and task-log references while retaining REQ-001 through REQ-004.
+3. Run the full quality gate and review the resulting diff for dangling references.
+
+## REQ-009 Local-only Dev Toolbox design plan
+
+Plan:
+
+1. Record the Supabase-removal requirement and generate a focused Stitch reference for the updated shared shell and home route.
+2. Keep the requirement in design review until the user explicitly approves the current Stitch UI.
+3. After approval, remove Saved Runs, the runs API, Supabase dependencies/configuration, and all related documentation while preserving the browser-local utilities.
+4. Run targeted formatting and the full quality gate, review the diff, commit and push a feature branch, open a GitHub PR, and validate a Vercel Preview deployment.
+
+## REQ-001 through REQ-004 Stitch requirement planning
 
 Plan:
 
 1. Resolve the current Dev Toolbox Stitch project and inspect every existing utility screen.
-2. Create approval-gated requirements for the home screen and six registered tools, linking each requirement to its matching Stitch screen and route.
-3. Keep all seven requirements in `design-review`; do not alter application code until the user explicitly approves the relevant UI.
+2. Create approval-gated requirements for the home screen and three registered tools, linking each requirement to its matching Stitch screen and route.
+3. Keep all four requirements in `design-review`; do not alter application code until the user explicitly approves the relevant UI.
 
 ## Connection doctor
 
@@ -48,13 +88,12 @@ required `tool_runs` table and index, so it was not edited or duplicated.
    five utilities and Saved Runs.
 3. Bring the JWT Decoder screen into the shared visual system while preserving its successful
    decode and Save Run behavior.
-4. Add JSON Formatter, Unix Timestamp Converter, Concatenate String, and UUID Generator
-   screens with client-side validation, useful empty/success/error states, and consistent
-   interaction patterns.
+4. Add JSON Formatter and Unix Timestamp Converter screens with client-side validation, useful
+   empty/success/error states, and consistent interaction patterns.
 5. Generalize saved-run integration where appropriate, preserving the existing server-only
    Supabase boundary and `/history` behavior.
 6. Run typecheck and production build, inspect the final diff, and validate the implemented
-   screens against all six Stitch references.
+   screens against the retained Stitch references.
 7. Create a feature branch, commit, open a PR, and use the Vercel preview for validation;
    production promotion remains out of scope unless policy permits it.
 
@@ -70,8 +109,6 @@ desktop screens. Route mapping:
 - JWT Decoder -> `/tools/jwt`
 - JSON Formatter -> `/tools/json`
 - Unix Timestamp Converter -> `/tools/timestamp`
-- Concatenate String -> `/tools/concat`
-- UUID Generator -> `/tools/uuid`
 
 The existing `/history` route remains supported for saved tool runs.
 
@@ -122,3 +159,11 @@ Plan:
 Completed: added the `build-dev-tool-feature` repository skill with a feature-form reference,
 delivery checklist, explicit Stitch UI approval gate, and post-approval implementation flow.
 Updated repository guidance and maps. Skill validation and `npm run check` pass (17 tests).
+
+## GitHub pull request rules
+
+Plan:
+
+1. Add a repository-local Codex rule for branch validation, current full-suite test reporting,
+   and a visible warning for PRs larger than 2,000 changed lines.
+2. Keep it separate from existing draft documentation so Codex discovers it from `.codex/rules`.
