@@ -1,5 +1,24 @@
 # REQ-001 task log
 
+## REQ-002 JWT Decoder Stitch design
+
+1. Generated and inspected the desktop JWT Decoder screen in the Dev Toolbox Stitch project for `/tools/jwt`.
+2. Recorded screen `4c9eb2b553cc43d791eb105ebbd8b2d5` in REQ-002; keep the requirement in `design-review` pending explicit UI approval.
+
+## REQ-002 through REQ-004 screen sync and delivery plan
+
+1. Inspect the Dev Toolbox Stitch project and recreate the missing JWT Decoder, JSON Formatter, and Unix Timestamp Converter screens, then record the current screen identifiers and routes in their requirements.
+2. Keep REQ-002, REQ-003, and REQ-004 in `design-review` and obtain explicit approval of the latest UI references before altering application code.
+3. After approval, sync the three thin App Router pages and feature modules to the approved screens, preserving browser-local processing and the existing saved-run boundary.
+4. Generate the missing three-level feature suites with evidence-backed cases, run scoped formatting and `npm run check`, review the diff, and then create a feature-branch PR and validate its Vercel Preview.
+
+## REQ-003 JSON Formatter tiered test plan
+
+1. Trace REQ-003, the JSON formatting domain helper, the client workspace, and existing Vitest conventions.
+2. Replace the legacy combined JSON Formatter component suite with separate Level 1, Level 2, and Level 3 feature tests, each containing five evidence-backed cases.
+3. Cover valid structures and primitives, malformed and empty input, clear/recovery behavior, and the evidenced Unicode, CRLF, determinism, and round-trip risks.
+4. Run the three focused files, the full test suite, and the repository quality gate; review the diff for scope and secrets.
+
 ## Detailed repository test-report skill plan
 
 1. Capture structured Vitest output so test totals and individual failures are reliable.
