@@ -3,8 +3,8 @@ id: REQ-004
 status: design-review
 route: /tools/timestamp
 stitch_project: Dev Toolbox
-stitch_screen_id: 4f93fcfe8fad4d84920ad5f28b339946
-stitch_screen_title: Unix Timestamp Converter
+stitch_screen_id: e9c4c707ccbe45369e244a11ecb6ba3c
+stitch_screen_title: Unix Timestamp Converter - Refined
 ui_approved_at:
 ---
 

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JSON Formatter - Dev Toolbox</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#07006c",
+                      "on-tertiary-container": "#461f00",
+                      "on-surface-variant": "#c2c6d6",
+                      "surface": "#12131a",
+                      "surface-tint": "#adc6ff",
+                      "on-error": "#690005",
+                      "on-primary-fixed-variant": "#004395",
+                      "primary": "#adc6ff",
+                      "outline-variant": "#424754",
+                      "secondary-fixed": "#e1e0ff",
+                      "primary-container": "#4d8eff",
+                      "on-secondary-fixed-variant": "#2f2ebe",
+                      "primary-fixed-dim": "#adc6ff",
+                      "on-secondary-container": "#b0b2ff",
+                      "tertiary": "#ffb786",
+                      "error-container": "#93000a",
+                      "on-secondary": "#1000a9",
+                      "on-error-container": "#ffdad6",
+                      "surface-container": "#1e1f26",
+                      "tertiary-fixed": "#ffdcc6",
+                      "on-primary": "#002e6a",
+                      "on-surface": "#e3e1ec",
+                      "tertiary-fixed-dim": "#ffb786",
+                      "surface-container-high": "#292931",
+                      "surface-container-lowest": "#0d0e15",
+                      "on-tertiary": "#502400",
+                      "secondary": "#c0c1ff",
+                      "secondary-container": "#3131c0",
+                      "inverse-surface": "#e3e1ec",
+                      "surface-container-highest": "#33343c",
+                      "on-primary-container": "#00285d",
+                      "inverse-on-surface": "#2f3038",
+                      "error": "#ffb4ab",
+                      "tertiary-container": "#df7412",
+                      "primary-fixed": "#d8e2ff",
+                      "surface-bright": "#383941",
+                      "on-background": "#e3e1ec",
+                      "background": "#12131a",
+                      "on-primary-fixed": "#001a42",
+                      "surface-variant": "#33343c",
+                      "outline": "#8c909f",
+                      "on-tertiary-fixed": "#311400",
+                      "surface-dim": "#12131a",
+                      "on-tertiary-fixed-variant": "#723600",
+                      "secondary-fixed-dim": "#c0c1ff",
+                      "inverse-primary": "#005ac2",
+                      "surface-container-low": "#1a1b22"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "unit": "4px",
+                      "gutter": "16px",
+                      "lg": "24px",
+                      "xs": "4px",
+                      "margin": "24px",
+                      "sm": "8px",
+                      "xl": "48px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Geist"],
+                      "label-caps": ["Geist"],
+                      "body-sm": ["Geist"],
+                      "body-md": ["Geist"],
+                      "code-md": ["JetBrains Mono"],
+                      "headline-md": ["Geist"]
+              },
+              "fontSize": {
+                      "headline-lg": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "code-md": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        [data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+        .code-input-glow:focus-within {
+            box-shadow: 0 0 0 1px theme('colors.primary'), 0 0 12px rgba(173, 198, 255, 0.15);
+        }
+        .json-key { color: theme('colors.primary'); }
+        .json-string { color: theme('colors.tertiary'); }
+        .json-number { color: theme('colors.secondary'); }
+        .json-boolean { color: theme('colors.error'); }
+        
+        /* Custom scrollbar for editors */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: theme('colors.surface-container-lowest'); }
+        ::-webkit-scrollbar-thumb { background: theme('colors.surface-variant'); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: theme('colors.outline'); }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex">
+<!-- SideNavBar (Shared Component) -->
+<nav class="w-[240px] h-screen fixed left-0 top-0 bg-surface-container dark:bg-surface-container border-r border-outline-variant dark:border-outline-variant flex flex-col p-md z-50">
+<!-- Brand / Header -->
+<div class="mb-xl flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-primary text-on-primary flex items-center justify-center font-bold">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface leading-none text-base">Dev Toolbox</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 text-xs">Utility Suite</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<ul class="space-y-sm flex-1">
+<li class="">
+<a class="flex items-center gap-sm px-sm py-2 rounded text-on-surface-variant font-body-sm hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors hover:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit_note">edit_note</span>
+                    Text
+                </a>
+</li>
+<li class="">
+<a class="flex items-center gap-sm px-sm py-2 rounded text-on-surface-variant font-body-sm hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors hover:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="enhanced_encryption">enhanced_encryption</span>
+                    Encode/Decode
+                </a>
+</li>
+<li class="">
+<a class="flex items-center gap-sm px-sm py-2 rounded text-primary dark:text-primary font-bold bg-surface-container-high hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors hover:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="data_object" data-weight="fill">data_object</span>
+                    JSON Formatter
+                </a>
+</li>
+<li class="">
+<a class="flex items-center gap-sm px-sm py-2 rounded text-on-surface-variant font-body-sm hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors hover:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="settings_suggest">settings_suggest</span>
+                    Generators
+                </a>
+</li>
+<li class="">
+<a class="flex items-center gap-sm px-sm py-2 rounded text-on-surface-variant font-body-sm hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors hover:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="terminal">terminal</span>
+                    Developer
+                </a>
+</li>
+</ul>
+<!-- CTA & Footer -->
+<div class="mt-auto border-t border-outline-variant pt-md space-y-sm">
+<button class="w-full flex items-center justify-center gap-sm py-2 px-sm rounded bg-surface-variant text-on-surface font-body-sm border border-outline-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="search">search</span>
+                Command Palette (⌘K)
+            </button>
+<div class="flex flex-col gap-unit pt-sm">
+<a class="flex items-center gap-sm px-sm py-2 rounded text-on-surface-variant font-body-sm hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="settings">settings</span>
+                    Settings
+                </a>
+<a class="flex items-center gap-sm px-sm py-2 rounded text-on-surface-variant font-body-sm hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="dark_mode">dark_mode</span>
+                    Dark Mode
+                </a>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-[240px] flex flex-col min-h-screen">
+<!-- TopAppBar (Shared Component) -->
+<header class="bg-surface dark:bg-surface flex justify-between items-center h-16 px-lg w-full border-b border-outline-variant dark:border-outline-variant docked top-0 sticky z-40">
+<div class="flex items-center gap-lg">
+<!-- Search on left -->
+<div class="relative flex items-center text-on-surface-variant focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined absolute left-3 text-[18px]" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-surface-container border border-outline-variant rounded font-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all w-64" placeholder="Search tools..." type="text"/>
+</div>
+<nav class="flex gap-md h-full items-center">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface uppercase tracking-wider transition-colors h-full flex items-center pt-1" href="#">Favorites</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface uppercase tracking-wider transition-colors h-full flex items-center pt-1" href="#">Recent</a>
+</nav>
+</div>
+<div class="flex items-center gap-sm text-on-surface-variant">
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container-high transition-colors hover:text-on-surface click:opacity-80">
+<span class="material-symbols-outlined text-[20px]" data-icon="star">star</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container-high transition-colors hover:text-on-surface click:opacity-80">
+<span class="material-symbols-outlined text-[20px]" data-icon="content_copy">content_copy</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container-high transition-colors hover:text-error click:opacity-80">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+</button>
+</div>
+</header>
+<!-- Tool Workspace -->
+<main class="flex-1 p-lg flex flex-col gap-md">
+<!-- Header section -->
+<div class="flex items-end justify-between mb-sm">
+<div>
+<div class="flex items-center gap-sm mb-1">
+<h2 class="font-headline-lg text-headline-lg text-on-surface m-0">JSON Formatter</h2>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant text-xs font-label-caps border border-outline-variant">Local-only</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Prettify, minify, and validate JSON data locally in your browser.</p>
+</div>
+<div class="flex gap-md items-center">
+<!-- Controls Row -->
+<div class="flex items-center gap-2">
+<span class="text-xs font-label-caps text-on-surface-variant uppercase tracking-wider">Indent:</span>
+<div class="flex bg-surface-container-highest p-1 rounded border border-outline-variant">
+<button class="px-3 py-1 text-xs font-label-caps text-label-caps bg-surface-container-low text-primary rounded shadow-sm">2 Spaces</button>
+<button class="px-3 py-1 text-xs font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface rounded transition-colors">4 Spaces</button>
+<button class="px-3 py-1 text-xs font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface rounded transition-colors">Tabs</button>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs font-label-caps text-on-surface-variant uppercase tracking-wider">Sort Keys:</span>
+<button class="w-8 h-4 bg-surface-variant rounded-full relative transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background">
+<span class="absolute left-0.5 top-0.5 w-3 h-3 bg-on-surface-variant rounded-full transition-transform"></span>
+</button>
+</div>
+</div>
+</div>
+<!-- Error Banner -->
+<div class="bg-error-container/20 border border-error-container text-on-error-container px-md py-sm rounded flex items-center gap-sm">
+<span class="material-symbols-outlined text-error" data-icon="error">error</span>
+<div class="flex-1 font-body-sm">
+<span class="font-bold text-error">Invalid JSON:</span> Expected double quote '"' at line 4, column 15.
+                </div>
+<button class="text-on-error-container hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="close">close</span>
+</button>
+</div>
+<!-- Success Banner (Hidden by default, structure provided) -->
+<!-- <div class="bg-primary-container/20 border border-primary-container text-on-primary-container px-md py-sm rounded flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle">check_circle</span>
+<div class="flex-1 font-body-sm">
+<span class="font-bold text-primary">Successfully Formatted</span>
+                </div>
+<button class="text-on-primary-container hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="close">close</span>
+</button>
+</div> -->
+<!-- Editor Grid Layout -->
+<div class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-md min-h-[500px]">
+<!-- Input Panel -->
+<div class="bg-[#18181b] border border-[#27272a] rounded flex flex-col overflow-hidden code-input-glow relative group flex-1">
+<div class="bg-surface-container-highest border-b border-[#27272a] px-sm py-2 flex justify-between items-center z-10">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Input</span>
+</div>
+<div class="flex-1 flex bg-[#0d0e15] relative">
+<!-- Line numbers -->
+<div class="w-8 border-r border-[#27272a] bg-surface-container-lowest flex flex-col py-sm items-end pr-2 text-outline-variant font-code-md text-code-md select-none text-[11px] leading-[20px]">
+<span class="">1</span>
+<span class="">2</span>
+<span class="">3</span>
+<span class="">4</span>
+<span class="">5</span>
+</div>
+<!-- Textarea -->
+<textarea class="flex-1 bg-transparent text-on-surface font-code-md text-code-md p-sm resize-none focus:outline-none focus:ring-0 border-none leading-[20px] spellcheck-false" placeholder="Paste your JSON here..." spellcheck="false">{
+  "project": "Dev Toolbox",
+  "status": "active"
+  "version": 1.0,
+}</textarea>
+<!-- Error squiggle overlay approx position -->
+<div class="absolute left-8 right-0 top-[60px] h-[2px] bg-error opacity-50 z-0 pointer-events-none w-[100px] ml-sm"></div>
+</div>
+<!-- Input Footer -->
+<div class="bg-surface-container-lowest border-t border-[#27272a] p-sm flex justify-between items-center z-10">
+<div class="flex items-center gap-4 text-xs font-code-md text-outline-variant">
+<span>Ln 4, Col 15</span>
+<span>92 chars</span>
+</div>
+<div class="flex gap-sm">
+<button class="text-sm px-4 py-1.5 bg-surface border border-outline-variant rounded text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-colors font-semibold">
+                                Clear
+                            </button>
+<button class="text-sm px-4 py-1.5 bg-primary text-on-primary font-bold rounded hover:bg-primary-fixed transition-colors shadow-[0_0_8px_rgba(173,198,255,0.3)]">
+                                Format
+                            </button>
+</div>
+</div>
+</div>
+<!-- Output Panel -->
+<div class="bg-[#18181b] border border-[#27272a] rounded flex flex-col overflow-hidden relative flex-1">
+<div class="bg-surface-container-highest border-b border-[#27272a] px-sm py-2 flex justify-between items-center z-10">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Output</span>
+</div>
+<div class="flex-1 flex bg-[#0d0e15]">
+<!-- Line numbers -->
+<div class="w-8 border-r border-[#27272a] bg-surface-container-lowest flex flex-col py-sm items-end pr-2 text-outline-variant font-code-md text-code-md select-none text-[11px] leading-[20px]">
+<span class="">1</span>
+<span class="">2</span>
+<span class="">3</span>
+<span class="">4</span>
+<span class="">5</span>
+</div>
+<!-- Formatted output view -->
+<div class="flex-1 p-sm font-code-md text-code-md leading-[20px] overflow-auto text-on-surface opacity-50 select-text">
+<!-- Showing grayed out due to error state -->
+<pre><code>{
+  <span class="json-key">"project"</span>: <span class="json-string">"Dev Toolbox"</span>,
+  <span class="json-key">"status"</span>: <span class="json-string">"active"</span>,
+  <span class="json-key">"version"</span>: <span class="json-number">1.0</span>
+}</code></pre>
+</div>
+</div>
+<!-- Overlay for error state blocking output -->
+<div class="absolute inset-0 top-[40px] bottom-[56px] bg-background/80 backdrop-blur-[2px] flex items-center justify-center flex-col gap-2 z-20">
+<span class="material-symbols-outlined text-outline-variant text-[32px]" data-icon="bug_report">bug_report</span>
+<p class="font-body-sm text-outline-variant">Fix errors in input to format</p>
+<button class="mt-2 text-xs px-3 py-1.5 border border-primary text-primary rounded hover:bg-primary/10 transition-colors">Validate Anyway</button>
+</div>
+<!-- Output Footer -->
+<div class="bg-surface-container-lowest border-t border-[#27272a] p-sm flex justify-between items-center z-10">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="text-xs font-body-sm text-outline-variant">Error</span>
+<!-- Success state example -->
+<!-- <span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-xs font-body-sm text-outline-variant">Successfully Formatted</span> -->
+</div>
+<div class="flex gap-sm">
+<button class="text-sm px-4 py-1.5 bg-surface border border-outline-variant rounded text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-colors font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="library_books">library_books</span> Example
+                            </button>
+<button class="text-sm px-4 py-1.5 bg-surface border border-outline-variant rounded text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-colors font-semibold flex items-center gap-2 opacity-50 cursor-not-allowed">
+<span class="material-symbols-outlined text-[16px]" data-icon="save">save</span> Save Run
+                            </button>
+<button class="text-sm px-4 py-1.5 bg-surface border border-outline-variant rounded text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-colors font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="content_copy">content_copy</span> Copy
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="mt-auto pt-md flex justify-between items-center border-t border-outline-variant text-on-surface-variant font-body-sm text-xs">
+<p>© 2024 Dev Toolbox</p>
+<div class="flex gap-md">
+<a class="hover:text-on-surface transition-colors underline decoration-outline-variant underline-offset-2" href="#">Documentation</a>
+<a class="hover:text-on-surface transition-colors underline decoration-outline-variant underline-offset-2" href="#">Keyboard Shortcuts</a>
+</div>
+</footer>
+</main>
+</div>
+</body></html>

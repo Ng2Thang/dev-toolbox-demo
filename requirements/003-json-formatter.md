@@ -1,11 +1,11 @@
 ---
 id: REQ-003
-status: design-review
+status: implementing
 route: /tools/json
 stitch_project: Dev Toolbox
-stitch_screen_id: 104091317a754eac81d6bd73495d0236
-stitch_screen_title: JSON Formatter
-ui_approved_at:
+stitch_screen_id: 63710ae7475446a88940dd6d9a3f8180
+stitch_screen_title: JSON Formatter - Refined
+ui_approved_at: 2026-08-20
 ---
 
 # REQ-003 - JSON Formatter
