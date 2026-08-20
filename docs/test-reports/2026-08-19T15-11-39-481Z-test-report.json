@@ -1,0 +1,88 @@
+{
+  "timestamp": "2026-08-19T15:11:39.481Z",
+  "repository": "dev-toolbox-demo",
+  "branch": "main",
+  "commit": "9d23b50",
+  "platform": "win32",
+  "node": "v24.18.0",
+  "npm": "unavailable",
+  "success": true,
+  "durationMs": 5846,
+  "files": {
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0
+  },
+  "tests": {
+    "passed": 28,
+    "failed": 0,
+    "skipped": 0,
+    "total": 28
+  },
+  "categories": [
+    {
+      "category": "API/routes",
+      "passedFiles": 1,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 4,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "Feature: json",
+      "passedFiles": 1,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 2,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "Feature: jwt",
+      "passedFiles": 1,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 1,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "Feature: runs",
+      "passedFiles": 1,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 2,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "Feature: timestamp",
+      "passedFiles": 3,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 15,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "Feature: tools",
+      "passedFiles": 1,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 1,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "Shared libraries",
+      "passedFiles": 1,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 3,
+      "failedTests": 0,
+      "skippedTests": 0
+    }
+  ],
+  "failedOrSkipped": []
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Feature Test Generation"
+  short_description: "Derive focused tests from feature evidence"
+  default_prompt: "Use $feature-test-generation to derive and add tests for this feature from its requirement, approved UI, and implementation."
