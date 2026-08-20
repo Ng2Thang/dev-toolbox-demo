@@ -3,7 +3,7 @@ id: REQ-002
 status: design-review
 route: /tools/jwt
 stitch_project: Dev Toolbox
-stitch_screen_id: 4bf63066a08946f7865234d9d7d3961c
+stitch_screen_id: 
 stitch_screen_title: JWT Decoder
 ui_approved_at:
 ---
