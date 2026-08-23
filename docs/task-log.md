@@ -1,5 +1,23 @@
 # REQ-001 task log
 
+## README repository-audit plan
+
+1. Inspect repository guidance, the current implementation, configuration, quality commands, and README for documentation drift.
+2. Replace the stale README with an accurate overview of the implemented tools, optional saved-run persistence, local setup, commands, repository layout, delivery workflow, and security boundaries.
+3. Review the documentation diff and run a non-mutating format check on the changed Markdown files.
+
+## README skills-and-agents follow-up plan
+
+1. Inventory repository-local skills and distinguish the workflows that apply to this Next.js project from unrelated templates.
+2. Document the delivery and design-support skills, agent handoff, and explicit Stitch UI-approval gate in the README.
+3. Format the updated Markdown and review the documentation-only diff.
+
+## README and architecture alignment plan
+
+1. Compare the README against the architecture's route model, feature ownership, saved-run flow, security boundaries, repository map, and quality commands.
+2. Add the missing route and client/server ownership summary, saved-run flow, formatting command, and `.codex/skills/` map entry without duplicating the architecture as a second source of truth.
+3. Format the Markdown and review the documentation diff for accuracy and scope.
+
 ## REQ-002 JWT Decoder Stitch design
 
 1. Generated and inspected the desktop JWT Decoder screen in the Dev Toolbox Stitch project for `/tools/jwt`.
