@@ -25,28 +25,28 @@ describe('JSON Formatter - Level 2 realistic/intermediate', () => {
     const input = screen.getByLabelText('JSON input');
 
     fireEvent.change(input, { target: { value: '{' } });
-    fireEvent.click(screen.getByRole('button', { name: 'Format JSON' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Format' }));
     expect(input).toHaveValue('{');
     expect(screen.getByRole('alert')).toBeInTheDocument();
 
     fireEvent.change(input, { target: { value: '{"fixed":true}' } });
-    fireEvent.click(screen.getByRole('button', { name: 'Format JSON' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Format' }));
 
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
-    expect(screen.getByText('Formatted output').nextElementSibling).toHaveTextContent(
-      '"fixed": true',
-    );
+    expect(screen.getByLabelText('JSON output editor')).toHaveTextContent('"fixed": true');
   });
 
   it('clears input, formatted output, and an existing error', () => {
     render(<JsonFormatter />);
     const input = screen.getByLabelText('JSON input');
     fireEvent.change(input, { target: { value: '{' } });
-    fireEvent.click(screen.getByRole('button', { name: 'Format JSON' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Format' }));
     fireEvent.click(screen.getByRole('button', { name: 'Clear' }));
 
     expect(input).toHaveValue('');
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
-    expect(screen.queryByText('Formatted output')).not.toBeInTheDocument();
+    expect(screen.getByLabelText('JSON output editor')).toHaveTextContent(
+      '"project": "Dev Toolbox"',
+    );
   });
 });
