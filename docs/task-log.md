@@ -215,3 +215,9 @@ Plan:
 ## REQ-002 quality-gate evidence
 
 Scoped JWT formatting passed. The full repository gate passed: formatting, lint, typecheck, 60 Vitest tests, and the production compilation. Next: commit REQ-002 evidence, generate the post-commit test report, open or update the pull request, and validate its Vercel Preview.
+
+## Manual Vercel deployment controls
+
+1. Disable Git-triggered Vercel deployments with `git.deploymentEnabled: false` in `vercel.json`.
+2. Add an explicit-only manual deployment skill that validates a ready preview target and refuses production deployment or promotion.
+3. Validate the skill structure and configuration, then commit and update the active PR without staging unrelated local changes.
