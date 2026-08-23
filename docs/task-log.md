@@ -20,6 +20,12 @@
 | 3     | Browser capability and clipboard failures | Requirement capability validation and approved copied feedback | Client        | Unsupported crypto and rejected clipboard show actionable errors.             |
 | 3     | v1 monotonic time / v7 timestamp ordering | UUID version semantics                                         | Domain        | Sequential generated values preserve nondecreasing encoded timestamps.        |
 
+## REQ-005 UUID Generator delivery evidence
+
+- Approved Stitch reference: `9526f5b6ba6b472f9d123d8a242389ca` (Dev Toolbox, `/tools/uuid`).
+- Full `npm run check` passed: formatting, lint, strict typecheck, 75 Vitest tests, and production build.
+- Pull request: #9. Vercel Preview is Ready at `https://dev-toolbox-demo-qc8meqgcs-sample-d689.vercel.app`; direct route access is SSO-gated, while deployment status and build output were validated.
+
 ## REQ-004 approved implementation plan
 
 1. Use the approved Dev Toolbox Stitch screen `e9c4c707ccbe45369e244a11ecb6ba3c` as the visual contract for `/tools/timestamp`.
