@@ -70,17 +70,23 @@ as the contract.
 Implement only the layers the feature needs:
 
 1. Add the thin App Router page and feature module.
-2. Add the tool to `lib/tools.ts` when it belongs in navigation.
+2. Register every new Dev Toolbox tool in `lib/tools.ts`. Append it to preserve first-added, first-displayed order; the registry drives both Home **Popular tools** and the AppShell sidebar.
 3. Keep pure transformation logic separate from the client component.
 4. Use the existing saved-run API when the feature only needs run history.
 5. Add Zod validation, a server-only repository, and API handling for new server data.
 6. Create a new Supabase migration for new schema; never edit an applied migration.
-7. Add unit tests for domain logic and component/route tests for observable behavior.
+7. After all required implementation layers are in place, invoke `$feature-test-generation` with
+   the current requirement, approved Stitch reference, and implementation. It owns the focused
+   tiered feature suite, including applicable domain, component, and route coverage.
 8. Preserve the client/server and security boundaries in `ARCHITECTURE.md`.
 
 Set the requirement status to `implementing` when code work begins.
 
 ## 5. Verify and deliver
+
+Before formatting, run `$feature-test-generation` when the feature's tests have not already been
+generated in this implementation pass. Treat its tiered traceability matrix and generated test
+files as part of the delivery contract.
 
 Formatting is mandatory for every implemented requirement, but it must be scoped to the feature's
 changed files. Build an explicit path list from the feature folder, its route page, its tests, and
@@ -91,9 +97,20 @@ feature unless the user explicitly asks for a full-repository format.
 Fix failures and rerun until green or a real external blocker remains. Review the complete diff for
 secrets, temporary files, unrelated changes, requirement coverage, and migration safety.
 
-Create a feature branch and commit, then open a GitHub pull request and validate the Vercel
-Preview when those connections are available. Never promote to production as part of this skill.
+Create a feature branch and commit, then run `npm run test:report` against that committed `HEAD`.
+Include its full-project result, tested commit SHA, and report paths in the `## Test Report`
+section of the pull-request template before opening a GitHub pull request and validating the Vercel
+Preview when those connections are available.
 
+After the pull request is created or updated, add one PR conversation comment with a compact report
+summary: tested commit SHA, passed/failed/skipped totals, the Markdown and JSON report paths, and
+concise failures or a passing result. Use a normal PR comment (for example, `gh pr comment`), not a
+line-level review comment.
+
+Before opening the pull request, read `.github/pull_request_template.md` and use its structure,
+completing every applicable field with evidence from the requirement and verification. Do not replace
+it with an ad-hoc PR body. If the template is unavailable, report that delivery blocker. Never
+promote to production as part of this skill.
 Set the requirement status to `delivered` only when the required checks pass and the requested
 delivery evidence exists. Otherwise leave the accurate status and report the blocker.
 

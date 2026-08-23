@@ -8,11 +8,9 @@ describe('JSON Formatter - Level 1 core/common', () => {
   it('formats a representative JSON object after the primary user action', () => {
     render(<JsonFormatter />);
     fireEvent.change(screen.getByLabelText('JSON input'), { target: { value: '{"ok":true}' } });
-    fireEvent.click(screen.getByRole('button', { name: 'Format JSON' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Format' }));
 
-    expect(screen.getByText('Formatted output').nextElementSibling).toHaveTextContent(
-      '{ "ok": true }',
-    );
+    expect(screen.getByLabelText('JSON output editor')).toHaveTextContent('{ "ok": true }');
   });
 
   it('formats a valid JSON array', () => {
@@ -29,10 +27,11 @@ describe('JSON Formatter - Level 1 core/common', () => {
 
   it('shows a clear error for empty input', () => {
     render(<JsonFormatter />);
-    fireEvent.click(screen.getByRole('button', { name: 'Format JSON' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Format' }));
 
-    expect(screen.getByRole('alert')).toHaveTextContent(
-      'Invalid JSON. Check commas, quotes, and brackets.',
-    );
+    const alert = screen.getByRole('alert');
+
+    expect(alert).toHaveTextContent('Invalid JSON:');
+    expect(alert).toHaveTextContent('Check commas, quotes, and brackets.');
   });
 });
