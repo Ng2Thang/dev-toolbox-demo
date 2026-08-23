@@ -6,6 +6,12 @@
 2. Keep timestamp conversion browser-local, add explicit seconds/milliseconds selection and reverse date conversion, and use the existing validated saved-run API only for successful runs.
 3. Generate the three focused timestamp test levels, run scoped formatting and the quality gate, then review the diff and prepare PR/preview evidence if Git metadata and connections are available.
 
+## REQ-004 delivery evidence
+
+- Approved Stitch reference: `e9c4c707ccbe45369e244a11ecb6ba3c` (Dev Toolbox, `/tools/timestamp`).
+- Full `npm run check` passed: format, lint, strict typecheck, 60 tests, and production build.
+- Pull request: #8. Vercel preview `dpl_Dn1DtPtFKaQ8cYhz9DVRPPzFEtDd` is Ready; the route is SSO-gated for public browser validation.
+
 ## README repository-audit plan
 
 1. Inspect repository guidance, the current implementation, configuration, quality commands, and README for documentation drift.
