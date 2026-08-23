@@ -26,13 +26,13 @@ acceptance criteria.
 
 ## Current requirements
 
-| Requirement                                                | Feature                    | Route              | Status          | UI approval    | Owner      | Delivery evidence | Blocker / next action                                                          |
-| ---------------------------------------------------------- | -------------------------- | ------------------ | --------------- | -------------- | ---------- | ----------------- | ------------------------------------------------------------------------------ |
-| [REQ-001](../requirements/001-toolbox-home.md)             | Toolbox Home and Discovery | `/`                | `design-review` | Pending        | Unassigned | ?                 | Obtain explicit approval for Stitch screen `aed00344229b443998ebece1022763ee`. |
-| [REQ-002](../requirements/002-jwt-decoder.md)              | JWT Decoder                | `/tools/jwt`       | `implementing`  | 2026-08-23     | Unassigned | Check passed; 60 tests passed | Create PR and validate Vercel Preview for Stitch screen `a77dc8152e854a5aafa4f9d9827b715c`. |
-| [REQ-003](../requirements/003-json-formatter.md)           | JSON Formatter             | `/tools/json`      | `implementing`  | 2026-08-20     | Unassigned | ?                 | Complete implementation, checks, PR, and preview evidence.                     |
-| [REQ-004](../requirements/004-unix-timestamp-converter.md) | Unix Timestamp Converter   | `/tools/timestamp` | `design-review` | Pending        | Unassigned | ?                 | Obtain explicit approval for Stitch screen `e9c4c707ccbe45369e244a11ecb6ba3c`. |
-| [REQ-0XX](../requirements/0XX-local-only-toolbox.md)       | Local-only Dev Toolbox     | `/`                | `design-draft`  | Not applicable | Unassigned | ?                 | Finish the brief and create the replacement shared-shell Stitch design.        |
+| Requirement                                                | Feature                    | Route              | Status          | UI approval    | Owner      | Delivery evidence             | Blocker / next action                                                                                              |
+| ---------------------------------------------------------- | -------------------------- | ------------------ | --------------- | -------------- | ---------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| [REQ-001](../requirements/001-toolbox-home.md)             | Toolbox Home and Discovery | `/`                | `design-review` | Pending        | Unassigned | ?                             | Obtain explicit approval for Stitch screen `aed00344229b443998ebece1022763ee`.                                     |
+| [REQ-002](../requirements/002-jwt-decoder.md)              | JWT Decoder                | `/tools/jwt`       | `implementing`  | 2026-08-23     | Unassigned | Check passed; 60 tests passed | Create PR and validate Vercel Preview for Stitch screen `a77dc8152e854a5aafa4f9d9827b715c`.                        |
+| [REQ-003](../requirements/003-json-formatter.md)           | JSON Formatter             | `/tools/json`      | `implementing`  | 2026-08-20     | Unassigned | ?                             | Complete implementation, checks, PR, and preview evidence.                                                         |
+| [REQ-004](../requirements/004-unix-timestamp-converter.md) | Unix Timestamp Converter   | `/tools/timestamp` | `delivered`     | 2026-08-23     | Unassigned | PR #8; preview Ready          | Preview `dpl_Dn1DtPtFKaQ8cYhz9DVRPPzFEtDd` is SSO-gated; manual browser validation needs authorized Vercel access. |
+| [REQ-0XX](../requirements/0XX-local-only-toolbox.md)       | Local-only Dev Toolbox     | `/`                | `design-draft`  | Not applicable | Unassigned | ?                             | Finish the brief and create the replacement shared-shell Stitch design.                                            |
 
 ## Update template
 
