@@ -28,6 +28,13 @@ export const tools: readonly ToolDefinition[] = [
     category: 'Developer',
     icon: 'TS',
   },
+  {
+    href: '/tools/uuid',
+    label: 'UUID Generator',
+    description: 'Generate UUID v1, v4, and v7 values locally.',
+    category: 'Developer',
+    icon: 'ID',
+  },
 ];
 
 const shellNavigation = [{ href: '/', label: 'Explore', icon: 'EX' }];
