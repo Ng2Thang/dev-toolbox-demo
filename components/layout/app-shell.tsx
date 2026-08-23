@@ -36,6 +36,11 @@ export function AppShell({ children }: { children: ReactNode }) {
           })}
         </nav>
         <div className="side-footer">
+          <button className="command-palette" type="button">
+            <span>⌕</span>
+            <span>Command palette</span>
+            <kbd>⌘K</kbd>
+          </button>
           <div className="side-footer-item">
             <span>⚙</span>
             <span>Settings</span>
