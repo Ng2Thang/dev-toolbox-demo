@@ -1,0 +1,6 @@
+interface:
+  display_name: 'Manual Vercel Deploy'
+  short_description: 'Safely create an on-demand preview'
+  default_prompt: 'Use $manual-vercel-deploy to deploy and validate the current branch as a preview.'
+policy:
+  allow_implicit_invocation: false
