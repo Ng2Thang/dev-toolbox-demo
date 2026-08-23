@@ -186,3 +186,10 @@ Plan:
 1. Add a repository-local Codex rule for branch validation, current full-suite test reporting,
    and a visible warning for PRs larger than 2,000 changed lines.
 2. Keep it separate from existing draft documentation so Codex discovers it from `.codex/rules`.
+
+## REQ-002 JWT Decoder delivery plan
+
+1. Use the approved Dev Toolbox Stitch reference for `/tools/jwt` as the visual contract.
+2. Align the existing thin route and browser-only decoder with decode, clear, copy, save, empty, and validation states.
+3. Add focused unit and client tests, format changed files, run `npm run check`, and review the diff for scope and secrets.
+4. Create a feature-branch PR and validate its Vercel Preview if Git metadata and service connections are available; production remains out of scope.

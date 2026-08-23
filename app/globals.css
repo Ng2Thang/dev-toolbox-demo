@@ -1020,3 +1020,73 @@ summary {
     margin-left: 0;
   }
 }
+
+.jwt-decoder {
+  gap: 16px;
+}
+
+.jwt-decoder-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.jwt-decoder-header h1 {
+  margin-bottom: 8px;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 36px;
+}
+
+.jwt-decoder-header > div > p:last-child {
+  max-width: 620px;
+  margin-bottom: 0;
+  color: #c2c6d6;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.jwt-local-badge {
+  flex: none;
+  border: 1px solid #424754;
+  border-radius: 999px;
+  background: #33343c;
+  color: #c2c6d6;
+  font:
+    10px 'Geist Mono',
+    monospace;
+  padding: 4px 8px;
+}
+
+.jwt-result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.jwt-decoder .tool-empty-state {
+  padding: 18px;
+}
+
+.jwt-decoder .tool-empty-state p {
+  margin: 8px 0 0;
+  font-size: 13px;
+}
+
+@media (max-width: 800px) {
+  .jwt-decoder-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .jwt-result-actions {
+    justify-content: stretch;
+  }
+
+  .jwt-result-actions .btn {
+    flex: 1;
+  }
+}
