@@ -1,0 +1,7 @@
+interface:
+  display_name: "Repository Test Report"
+  short_description: "Run tests and publish a clear report"
+  default_prompt: "Use $repo-test-report to run this repository's tests and export a report."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,11 @@
+prefix_rule(
+    pattern = ["git", "commit"],
+    decision = "forbidden",
+    justification = "Direct git commit is prohibited. Use ./scripts/commit.sh so the commit message is validated.",
+)
+
+prefix_rule(
+    pattern = ["./scripts/commit.sh"],
+    decision = "allow",
+    justification = "Commit wrapper validates commit message format before creating the commit.",
+)
