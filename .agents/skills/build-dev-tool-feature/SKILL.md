@@ -97,13 +97,20 @@ feature unless the user explicitly asks for a full-repository format.
 Fix failures and rerun until green or a real external blocker remains. Review the complete diff for
 secrets, temporary files, unrelated changes, requirement coverage, and migration safety.
 
-Create a feature branch and commit, then run `npm run test:report` against that committed `HEAD`. Include its full-project result, tested commit SHA, and report paths in the `## Test Report` section of the pull-request template before opening a GitHub pull request and validating the Vercel
-Preview when those connections are available. Before opening the pull request, read
-`.github/pull_request_template.md` and use its structure, completing every applicable field with
-evidence from the requirement and verification. Do not replace it with an ad-hoc PR body. If the
-template is unavailable, report that delivery blocker. Never promote to production as part of this
-skill.
+Create a feature branch and commit, then run `npm run test:report` against that committed `HEAD`.
+Include its full-project result, tested commit SHA, and report paths in the `## Test Report`
+section of the pull-request template before opening a GitHub pull request and validating the Vercel
+Preview when those connections are available.
 
+After the pull request is created or updated, add one PR conversation comment with a compact report
+summary: tested commit SHA, passed/failed/skipped totals, the Markdown and JSON report paths, and
+concise failures or a passing result. Use a normal PR comment (for example, `gh pr comment`), not a
+line-level review comment.
+
+Before opening the pull request, read `.github/pull_request_template.md` and use its structure,
+completing every applicable field with evidence from the requirement and verification. Do not replace
+it with an ad-hoc PR body. If the template is unavailable, report that delivery blocker. Never
+promote to production as part of this skill.
 Set the requirement status to `delivered` only when the required checks pass and the requested
 delivery evidence exists. Otherwise leave the accurate status and report the blocker.
 
