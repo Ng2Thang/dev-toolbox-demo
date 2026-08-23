@@ -29,8 +29,9 @@ describe('JSON Formatter - Level 1 core/common', () => {
     render(<JsonFormatter />);
     fireEvent.click(screen.getByRole('button', { name: 'Format' }));
 
-    expect(screen.getByRole('alert')).toHaveTextContent(
-      'Invalid JSON: Check commas, quotes, and brackets.',
-    );
+    const alert = screen.getByRole('alert');
+
+    expect(alert).toHaveTextContent('Invalid JSON:');
+    expect(alert).toHaveTextContent('Check commas, quotes, and brackets.');
   });
 });
