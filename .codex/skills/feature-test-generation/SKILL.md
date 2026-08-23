@@ -1,6 +1,6 @@
 ---
 name: feature-test-generation
-description: "Generate or update focused Dev Toolbox tests from a feature requirement, approved UI reference, and implementation. Use for feature test coverage; not for visual-regression testing or end-to-end browser automation."
+description: 'Generate or update focused Dev Toolbox tests from a feature requirement, approved UI reference, and implementation. Use for feature test coverage; not for visual-regression testing or end-to-end browser automation.'
 ---
 
 # Feature Test Generation
@@ -48,4 +48,4 @@ Read [the Dev Toolbox utility guide](references/dev-toolbox-utility-testing.md) 
 
 Follow the existing local test style and naming. Keep fixtures small, deterministic, and adjacent to the tests that use them. Restore global mocks after each test and ensure invalid inputs prove that persistence is not attempted.
 
-Run the three narrow level files first, then `npm test`. For feature changes, run the repository quality gate required by `ARCHITECTURE.md`. Report the tiered traceability matrix, the three test files and case count in each, commands run, and any criterion intentionally not automated with its reason.
+Run the three narrow level files first, then `npm run test:report`. This command runs the complete repository suite and writes timestamped Markdown and JSON reports under `docs/test-reports/`; retain the report path, tested commit SHA, totals, and failures for PR evidence. For feature changes, run the repository quality gate required by `ARCHITECTURE.md`. Report the tiered traceability matrix, the three test files and case count in each, commands run, the overall-project report path and summary, and any criterion intentionally not automated with its reason.

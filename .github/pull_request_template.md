@@ -29,6 +29,14 @@ Describe the user or delivery outcome and the reason for the change.
 - [ ] `npm run check`
 - [ ] Desktop and narrow preview validation, when UI changes
 
+## Test Report
+
+- Command: `npm run test:report`
+- Overall report: `docs/test-reports/<timestamp>-test-report.md`
+- Tested commit SHA: N/A
+- Total tests (passed/failed/skipped): N/A
+- Result and failures: N/A
+
 ## Database impact
 
 - Migration: None

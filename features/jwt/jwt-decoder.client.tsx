@@ -150,7 +150,7 @@ export function JwtDecoder() {
               onClick={() => void handleSave()}
               type="button"
             >
-              {saveState === 'saving' ? 'Saving�' : 'Save run'}
+              {saveState === 'saving' ? 'Saving...' : 'Save run'}
             </button>
           </div>
         </div>

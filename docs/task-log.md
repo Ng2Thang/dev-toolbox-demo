@@ -193,3 +193,15 @@ Plan:
 2. Align the existing thin route and browser-only decoder with decode, clear, copy, save, empty, and validation states.
 3. Add focused unit and client tests, format changed files, run `npm run check`, and review the diff for scope and secrets.
 4. Create a feature-branch PR and validate its Vercel Preview if Git metadata and service connections are available; production remains out of scope.
+
+## Full-project test report workflow
+
+1. Add a reusable command that runs the complete Vitest suite and saves timestamped Markdown and JSON reports under `docs/test-reports/`.
+2. Require feature test generation to run that command and report its project-wide totals, categories, failures, artifact paths, and tested commit.
+3. Require the feature delivery workflow to regenerate the report after committing and include its evidence in the PR template's Test Report section.
+
+## REQ-002 JWT Decoder regeneration plan
+
+1. Return REQ-002 to `design-draft`, regenerate its focused Stitch screen for `/tools/jwt`, and record the new screen metadata.
+2. Keep application code unchanged while the regenerated screen is in `design-review`; wait for explicit approval.
+3. After approval, align the existing JWT feature with the new visual contract, invoke `feature-test-generation`, generate the full-project test report, and update existing PR #6 only.
