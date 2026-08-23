@@ -30,10 +30,12 @@ export const tools: readonly ToolDefinition[] = [
   },
 ];
 
+const shellNavigation = [{ href: '/', label: 'Explore', icon: 'EX' }];
+
+const shellFooterNavigation = [{ href: '/history', label: 'Saved runs', icon: 'HR' }];
+
 export const primaryNavigation = [
-  { href: '/', label: 'Explore', icon: 'EX' },
-  { href: '/tools/jwt', label: 'JWT Decoder', icon: 'JWT' },
-  { href: '/tools/json', label: 'JSON Formatter', icon: '{}' },
-  { href: '/tools/timestamp', label: 'Unix Timestamp', icon: 'TS' },
-  { href: '/history', label: 'Saved runs', icon: 'HR' },
+  ...shellNavigation,
+  ...tools.map(({ href, label, icon }) => ({ href, label, icon })),
+  ...shellFooterNavigation,
 ] as const;

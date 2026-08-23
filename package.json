@@ -12,6 +12,7 @@
     "format:check": "prettier --check \"app/**/*.{ts,tsx,css}\" \"components/**/*.{ts,tsx}\" \"features/**/*.{ts,tsx}\" \"lib/**/*.{ts,tsx}\" \"test/**/*.{ts,tsx}\" eslint.config.mjs prettier.config.mjs vitest.config.mts package.json",
     "typecheck": "tsc --noEmit --incremental false",
     "test": "vitest run",
+    "test:report": "node scripts/test-report.mjs",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "doctor": "node scripts/doctor.mjs",

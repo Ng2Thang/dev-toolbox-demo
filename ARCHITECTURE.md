@@ -65,9 +65,11 @@ wrap themselves in another shell. The group does not affect URLs.
 | `/tools/*` | matching feature folder | Server page + interactive client component |
 | `/history` | `features/runs` repository | Dynamic server page |
 | `/api/runs` | `features/runs` | Route handler |
-
 Add a tool by updating `lib/tools.ts`, creating a focused `features/<tool>/` folder, and adding
-its thin route page beneath `app/(toolbox)/tools/`.
+its thin route page beneath `app/(toolbox)/tools/`. `lib/tools.ts` is the canonical tool registry:
+each registered tool must appear on Home under **Popular tools** and in the AppShell sidebar. Keep
+the registry in insertion order (first added, first displayed); do not duplicate tool lists in
+individual screens or layout components.
 
 ## Feature conventions
 
