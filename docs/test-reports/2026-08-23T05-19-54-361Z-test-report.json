@@ -1,0 +1,111 @@
+{
+  "timestamp": "2026-08-23T05:19:59.863Z",
+  "repository": "dev-toolbox-demo",
+  "branch": "feat/req-002-jwt-decoder",
+  "commit": "b611c1a7bb26",
+  "command": "vitest run --reporter=json --outputFile <generated-file>",
+  "success": false,
+  "durationMs": 5498,
+  "files": {
+    "passed": 12,
+    "failed": 2,
+    "skipped": 0
+  },
+  "tests": {
+    "passed": 54,
+    "failed": 4,
+    "skipped": 0,
+    "total": 58
+  },
+  "categories": [
+    {
+      "category": "Feature: tools",
+      "passedFiles": 1,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 1,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "Shared libraries",
+      "passedFiles": 1,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 3,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "Feature: json",
+      "passedFiles": 2,
+      "failedFiles": 2,
+      "skippedFiles": 0,
+      "passedTests": 14,
+      "failedTests": 4,
+      "skippedTests": 0
+    },
+    {
+      "category": "Feature: jwt",
+      "passedFiles": 3,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 15,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "Feature: runs",
+      "passedFiles": 1,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 2,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "Feature: timestamp",
+      "passedFiles": 3,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 15,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "API/routes",
+      "passedFiles": 1,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 4,
+      "failedTests": 0,
+      "skippedTests": 0
+    }
+  ],
+  "failedOrSkipped": [
+    {
+      "file": "features/json/json.level-1.test.tsx",
+      "name": "JSON Formatter - Level 1 core/common > formats a representative JSON object after the primary user action",
+      "status": "failed",
+      "message": "TestingLibraryElementError: Unable to find an accessible element with the role \"button\" and name \"Format JSON\""
+    },
+    {
+      "file": "features/json/json.level-1.test.tsx",
+      "name": "JSON Formatter - Level 1 core/common > shows a clear error for empty input",
+      "status": "failed",
+      "message": "TestingLibraryElementError: Unable to find an accessible element with the role \"button\" and name \"Format JSON\""
+    },
+    {
+      "file": "features/json/json.level-2.test.tsx",
+      "name": "JSON Formatter - Level 2 realistic/intermediate > retains invalid input and succeeds after the user corrects it",
+      "status": "failed",
+      "message": "TestingLibraryElementError: Unable to find an accessible element with the role \"button\" and name \"Format JSON\""
+    },
+    {
+      "file": "features/json/json.level-2.test.tsx",
+      "name": "JSON Formatter - Level 2 realistic/intermediate > clears input, formatted output, and an existing error",
+      "status": "failed",
+      "message": "TestingLibraryElementError: Unable to find an accessible element with the role \"button\" and name \"Format JSON\""
+    }
+  ]
+}

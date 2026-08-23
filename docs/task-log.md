@@ -1,5 +1,23 @@
 # REQ-001 task log
 
+## README repository-audit plan
+
+1. Inspect repository guidance, the current implementation, configuration, quality commands, and README for documentation drift.
+2. Replace the stale README with an accurate overview of the implemented tools, optional saved-run persistence, local setup, commands, repository layout, delivery workflow, and security boundaries.
+3. Review the documentation diff and run a non-mutating format check on the changed Markdown files.
+
+## README skills-and-agents follow-up plan
+
+1. Inventory repository-local skills and distinguish the workflows that apply to this Next.js project from unrelated templates.
+2. Document the delivery and design-support skills, agent handoff, and explicit Stitch UI-approval gate in the README.
+3. Format the updated Markdown and review the documentation-only diff.
+
+## README and architecture alignment plan
+
+1. Compare the README against the architecture's route model, feature ownership, saved-run flow, security boundaries, repository map, and quality commands.
+2. Add the missing route and client/server ownership summary, saved-run flow, formatting command, and `.codex/skills/` map entry without duplicating the architecture as a second source of truth.
+3. Format the Markdown and review the documentation diff for accuracy and scope.
+
 ## REQ-002 JWT Decoder Stitch design
 
 1. Generated and inspected the desktop JWT Decoder screen in the Dev Toolbox Stitch project for `/tools/jwt`.
@@ -205,3 +223,19 @@ Plan:
 1. Return REQ-002 to `design-draft`, regenerate its focused Stitch screen for `/tools/jwt`, and record the new screen metadata.
 2. Keep application code unchanged while the regenerated screen is in `design-review`; wait for explicit approval.
 3. After approval, align the existing JWT feature with the new visual contract, invoke `feature-test-generation`, generate the full-project test report, and update existing PR #6 only.
+
+## REQ-002 approved implementation plan
+
+1. Use the approved `JWT Decoder - Refined` Stitch screen (`a77dc8152e854a5aafa4f9d9827b715c`) as the visual contract for `/tools/jwt`.
+2. Preserve browser-local JWT parsing in `lib/jwt.ts`, client interaction in `features/jwt/`, and the existing validated saved-run API; no migration is required.
+3. Run the existing three-level JWT suite, scoped formatting, the quality gate, then review the diff and prepare PR/preview evidence.
+
+## REQ-002 quality-gate evidence
+
+Scoped JWT formatting passed. The full repository gate passed: formatting, lint, typecheck, 60 Vitest tests, and the production compilation. Next: commit REQ-002 evidence, generate the post-commit test report, open or update the pull request, and validate its Vercel Preview.
+
+## Manual Vercel deployment controls
+
+1. Disable Git-triggered Vercel deployments with `git.deploymentEnabled: false` in `vercel.json`.
+2. Add an explicit-only manual deployment skill that validates a ready preview target and refuses production deployment or promotion.
+3. Validate the skill structure and configuration, then commit and update the active PR without staging unrelated local changes.
