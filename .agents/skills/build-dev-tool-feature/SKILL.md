@@ -70,7 +70,7 @@ as the contract.
 Implement only the layers the feature needs:
 
 1. Add the thin App Router page and feature module.
-2. Add the tool to `lib/tools.ts` when it belongs in navigation.
+2. Register every new Dev Toolbox tool in `lib/tools.ts`. Append it to preserve first-added, first-displayed order; the registry drives both Home **Popular tools** and the AppShell sidebar.
 3. Keep pure transformation logic separate from the client component.
 4. Use the existing saved-run API when the feature only needs run history.
 5. Add Zod validation, a server-only repository, and API handling for new server data.
