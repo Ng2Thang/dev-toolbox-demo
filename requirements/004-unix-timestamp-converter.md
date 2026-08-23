@@ -1,11 +1,11 @@
 ---
 id: REQ-004
-status: design-review
+status: implementing
 route: /tools/timestamp
 stitch_project: Dev Toolbox
 stitch_screen_id: e9c4c707ccbe45369e244a11ecb6ba3c
 stitch_screen_title: Unix Timestamp Converter - Refined
-ui_approved_at:
+ui_approved_at: 2026-08-23
 ---
 
 # REQ-004 - Unix Timestamp Converter

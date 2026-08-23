@@ -1,5 +1,11 @@
 # REQ-001 task log
 
+## REQ-004 approved implementation plan
+
+1. Use the approved Dev Toolbox Stitch screen `e9c4c707ccbe45369e244a11ecb6ba3c` as the visual contract for `/tools/timestamp`.
+2. Keep timestamp conversion browser-local, add explicit seconds/milliseconds selection and reverse date conversion, and use the existing validated saved-run API only for successful runs.
+3. Generate the three focused timestamp test levels, run scoped formatting and the quality gate, then review the diff and prepare PR/preview evidence if Git metadata and connections are available.
+
 ## README repository-audit plan
 
 1. Inspect repository guidance, the current implementation, configuration, quality commands, and README for documentation drift.
