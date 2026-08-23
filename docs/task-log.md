@@ -205,3 +205,13 @@ Plan:
 1. Return REQ-002 to `design-draft`, regenerate its focused Stitch screen for `/tools/jwt`, and record the new screen metadata.
 2. Keep application code unchanged while the regenerated screen is in `design-review`; wait for explicit approval.
 3. After approval, align the existing JWT feature with the new visual contract, invoke `feature-test-generation`, generate the full-project test report, and update existing PR #6 only.
+
+## REQ-002 approved implementation plan
+
+1. Use the approved `JWT Decoder - Refined` Stitch screen (`a77dc8152e854a5aafa4f9d9827b715c`) as the visual contract for `/tools/jwt`.
+2. Preserve browser-local JWT parsing in `lib/jwt.ts`, client interaction in `features/jwt/`, and the existing validated saved-run API; no migration is required.
+3. Run the existing three-level JWT suite, scoped formatting, the quality gate, then review the diff and prepare PR/preview evidence.
+
+## REQ-002 quality-gate evidence
+
+Scoped JWT formatting passed. The full repository gate passed: formatting, lint, typecheck, 60 Vitest tests, and the production compilation. Next: commit REQ-002 evidence, generate the post-commit test report, open or update the pull request, and validate its Vercel Preview.
