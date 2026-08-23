@@ -1,0 +1,4 @@
+interface:
+  display_name: "Stitch Screen to Feature"
+  short_description: "Build a Dev Toolbox feature from a Stitch screen"
+  default_prompt: "Use $stitch-screen-to-feature to inspect a Stitch screen ID and implement it as a Dev Toolbox feature."

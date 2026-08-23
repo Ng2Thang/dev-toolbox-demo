@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dev Toolbox - JWT Decoder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed": "#07006c",
+                        "on-tertiary-container": "#461f00",
+                        "on-surface-variant": "#c2c6d6",
+                        "surface": "#12131a",
+                        "surface-tint": "#adc6ff",
+                        "on-error": "#690005",
+                        "on-primary-fixed-variant": "#004395",
+                        "primary": "#adc6ff",
+                        "outline-variant": "#424754",
+                        "secondary-fixed": "#e1e0ff",
+                        "primary-container": "#4d8eff",
+                        "on-secondary-fixed-variant": "#2f2ebe",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-secondary-container": "#b0b2ff",
+                        "tertiary": "#ffb786",
+                        "error-container": "#93000a",
+                        "on-secondary": "#1000a9",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#1e1f26",
+                        "tertiary-fixed": "#ffdcc6",
+                        "on-primary": "#002e6a",
+                        "on-surface": "#e3e1ec",
+                        "tertiary-fixed-dim": "#ffb786",
+                        "surface-container-high": "#292931",
+                        "surface-container-lowest": "#0d0e15",
+                        "on-tertiary": "#502400",
+                        "secondary": "#c0c1ff",
+                        "secondary-container": "#3131c0",
+                        "inverse-surface": "#e3e1ec",
+                        "surface-container-highest": "#33343c",
+                        "on-primary-container": "#00285d",
+                        "inverse-on-surface": "#2f3038",
+                        "error": "#ffb4ab",
+                        "tertiary-container": "#df7412",
+                        "primary-fixed": "#d8e2ff",
+                        "surface-bright": "#383941",
+                        "on-background": "#e3e1ec",
+                        "background": "#12131a",
+                        "on-primary-fixed": "#001a42",
+                        "surface-variant": "#33343c",
+                        "outline": "#8c909f",
+                        "on-tertiary-fixed": "#311400",
+                        "surface-dim": "#12131a",
+                        "on-tertiary-fixed-variant": "#723600",
+                        "secondary-fixed-dim": "#c0c1ff",
+                        "inverse-primary": "#005ac2",
+                        "surface-container-low": "#1a1b22",
+                        "success": "#81c995",
+                        "warning": "#fdd663"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "md": "16px",
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "margin": "24px",
+                        "sm": "8px",
+                        "xl": "48px"
+                    },
+                    fontFamily: {
+                        "headline-lg": ["Geist"],
+                        "label-caps": ["Geist"],
+                        "body-sm": ["Geist"],
+                        "body-md": ["Geist"],
+                        "code-md": ["JetBrains Mono"],
+                        "headline-md": ["Geist"]
+                    },
+                    fontSize: {
+                        "headline-lg": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "code-md": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #424754;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background-color: #8c909f;
+        }
+        
+        .jwt-header-part { color: #ff7b72; }
+        .jwt-payload-part { color: #d2a8ff; }
+        .jwt-signature-part { color: #79c0ff; }
+        
+        .json-key { color: #79c0ff; }
+        .json-string { color: #a5d6ff; }
+        .json-number { color: #d2a8ff; }
+        .json-boolean { color: #ff7b72; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-x-hidden min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="w-[240px] h-screen fixed left-0 top-0 border-r border-outline-variant bg-surface-container flex flex-col p-md z-50">
+<div class="mb-lg"><div class="flex items-center gap-sm mb-xs"><div class="w-8 h-8 bg-primary rounded flex items-center justify-center"><span class="material-symbols-outlined text-on-primary">terminal</span></div><h1 class="font-headline-md text-headline-md font-bold text-on-surface">Dev Toolbox</h1></div><p class="font-body-sm text-body-sm text-on-surface-variant">Utility Suite</p></div>
+<button class="w-full mb-md px-sm py-sm border border-outline-variant rounded bg-surface text-on-surface hover:bg-surface-container-high transition-colors text-left flex items-center justify-between font-body-sm">
+<span class="">Command Palette</span>
+<span class="text-on-surface-variant font-label-caps opacity-70">⌘K</span>
+</button>
+<div class="flex-1 flex flex-col gap-sm overflow-y-auto custom-scrollbar pr-sm">
+<a class="flex items-center gap-sm px-sm py-xs rounded hover:bg-surface-container-high transition-colors text-on-surface-variant font-body-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+                Text
+            </a>
+<a class="flex items-center gap-sm px-sm py-xs rounded hover:bg-surface-container-high transition-colors text-primary font-bold" href="#">
+<span class="material-symbols-outlined text-[18px]">enhanced_encryption</span>
+                JWT Decoder
+            </a>
+<a class="flex items-center gap-sm px-sm py-xs rounded hover:bg-surface-container-high transition-colors text-on-surface-variant font-body-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">data_object</span>
+                JSON
+            </a>
+<a class="flex items-center gap-sm px-sm py-xs rounded hover:bg-surface-container-high transition-colors text-on-surface-variant font-body-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">settings_suggest</span>
+                Generators
+            </a>
+<a class="flex items-center gap-sm px-sm py-xs rounded hover:bg-surface-container-high transition-colors text-on-surface-variant font-body-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+                Developer
+            </a>
+</div>
+<div class="mt-auto pt-md border-t border-outline-variant flex flex-col gap-sm">
+<a class="flex items-center gap-sm px-sm py-xs rounded hover:bg-surface-container-high transition-colors text-on-surface-variant font-body-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-sm px-sm py-xs rounded hover:bg-surface-container-high transition-colors text-on-surface-variant font-body-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">dark_mode</span>
+                Dark Mode
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-[240px] flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center h-16 px-lg sticky top-0 z-40 bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-lg h-full">
+<a class="h-full flex items-center text-on-surface-variant hover:text-on-surface px-sm transition-colors font-label-caps" href="#">
+                    Favorites
+                </a>
+<a class="h-full flex items-center text-primary border-b-2 border-primary hover:text-on-surface px-sm transition-colors font-label-caps" href="#">
+                    Recent
+                </a>
+</div>
+<div class="flex items-center gap-sm">
+<button aria-label="Favorite" class="p-xs text-on-surface-variant hover:text-on-surface transition-colors rounded hover:bg-surface-container-high">
+<span class="material-symbols-outlined">star</span>
+</button>
+<button aria-label="Copy Link" class="p-xs text-on-surface-variant hover:text-on-surface transition-colors rounded hover:bg-surface-container-high">
+<span class="material-symbols-outlined">content_copy</span>
+</button>
+<button aria-label="Clear" class="p-xs text-on-surface-variant hover:text-on-surface transition-colors rounded hover:bg-surface-container-high">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</header>
+<!-- Tool Canvas -->
+<main class="flex-1 p-lg overflow-y-auto custom-scrollbar relative flex flex-col">
+<!-- Page Header -->
+<div class="mb-lg flex items-center gap-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs flex items-center gap-sm">
+            JWT Decoder
+            <span class="px-xs py-[2px] bg-surface-container-high text-on-surface-variant border border-outline-variant rounded text-[10px] font-bold uppercase tracking-wider">Local-only</span>
+</h2>
+<p class="text-on-surface-variant font-body-sm">Decode JSON Web Tokens locally in your browser. No data is sent to a server.</p>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-lg">
+<!-- Input Workspace -->
+<div class="bg-surface-container border border-outline-variant rounded-lg p-md flex flex-col">
+<div class="flex justify-between items-center mb-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider" for="jwt-input">Encoded token</label>
+<span class="font-body-sm text-success text-xs">3 segments detected</span>
+</div>
+<div class="flex-1 relative flex mb-md h-[120px]">
+<textarea class="flex-1 bg-surface-container-lowest border border-outline-variant focus:border-primary rounded p-sm font-code-md text-code-md custom-scrollbar resize-y outline-none break-all text-on-surface" id="jwt-input" placeholder="Paste your JWT here...">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMiwiZXhwIjoxNTE2MjQyNjIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c</textarea>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-sm">
+<button class="px-md py-sm bg-primary text-on-primary font-bold rounded hover:bg-primary/90 transition-colors font-body-sm flex items-center gap-xs">
+                    Decode <span class="opacity-70 font-normal text-xs ml-1">⌘↵</span>
+</button>
+<button class="px-md py-sm border border-outline-variant rounded hover:bg-surface-container-high transition-colors font-body-sm text-on-surface-variant">Clear</button>
+</div>
+<div class="flex items-center gap-sm">
+<button class="px-md py-sm border border-outline-variant rounded hover:bg-surface-container-high transition-colors font-body-sm text-primary flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">save</span> Save Run
+                </button>
+<span class="text-xs text-on-surface-variant opacity-70">Saved to local storage</span>
+</div>
+</div>
+<!-- Example error (hidden by default in success state) -->
+<p class="hidden text-error text-xs mt-sm font-body-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">error</span>
+            Requires three base64url segments separated by dots.
+        </p>
+</div>
+<!-- Decoded Results -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md flex-1">
+<!-- Header -->
+<div class="bg-surface-container border border-outline-variant rounded-lg overflow-hidden flex flex-col h-full">
+<div class="bg-surface-container-high px-md py-sm border-b border-outline-variant flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Header: Algorithm &amp; Token Type</span>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors" title="Copy Header"><span class="material-symbols-outlined text-[16px]">content_copy</span></button>
+</div>
+<div class="flex flex-1 overflow-hidden bg-surface-container-lowest">
+<div class="w-[32px] bg-surface-container-lowest text-outline-variant font-code-md text-code-md py-sm text-right pr-sm select-none border-r border-outline-variant flex-shrink-0">
+                    1<br/>2<br/>3<br/>4
+                </div>
+<div class="p-sm flex-1 overflow-auto custom-scrollbar">
+<pre class="font-code-md text-code-md m-0"><span class="text-on-surface-variant">{</span>
+  <span class="json-key">"alg"</span>: <span class="json-string">"HS256"</span>,
+  <span class="json-key">"typ"</span>: <span class="json-string">"JWT"</span>
+<span class="text-on-surface-variant">}</span></pre>
+</div>
+</div>
+</div>
+<!-- Payload -->
+<div class="bg-surface-container border border-outline-variant rounded-lg overflow-hidden flex flex-col h-full">
+<div class="bg-surface-container-high px-md py-sm border-b border-outline-variant flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Payload: Data</span>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors" title="Copy Payload"><span class="material-symbols-outlined text-[16px]">content_copy</span></button>
+</div>
+<div class="flex flex-1 overflow-hidden bg-surface-container-lowest">
+<div class="w-[32px] bg-surface-container-lowest text-outline-variant font-code-md text-code-md py-sm text-right pr-sm select-none border-r border-outline-variant flex-shrink-0">
+                    1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7
+                </div>
+<div class="p-sm flex-1 overflow-auto custom-scrollbar">
+<pre class="font-code-md text-code-md m-0"><span class="text-on-surface-variant">{</span>
+  <span class="json-key">"sub"</span>: <span class="json-string">"1234567890"</span>,
+  <span class="json-key">"name"</span>: <span class="json-string">"John Doe"</span>,
+  <span class="json-key">"admin"</span>: <span class="json-boolean">true</span>,
+  <span class="json-key">"iat"</span>: <span class="json-number">1516239022</span>,
+  <span class="json-key">"exp"</span>: <span class="json-number">1516242622</span>
+<span class="text-on-surface-variant">}</span></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="mt-xl pt-md border-t border-outline-variant flex items-center justify-between font-body-sm text-on-surface-variant">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+        This tool runs entirely in your browser. Tokens never leave your machine.
+    </div>
+<div class="flex items-center gap-md">
+<a class="hover:text-on-surface transition-colors hover:underline" href="#">Documentation</a>
+<a class="hover:text-on-surface transition-colors hover:underline" href="#">Keyboard Shortcuts</a>
+</div>
+</footer>
+</main>
+</div>
+<script>
+        // Basic interaction to populate demo token
+        const demoToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMiwiZXhwIjoxNTE2MjQyNjIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const textarea = document.getElementById('jwt-input');
+            
+            // Highlight parts on paste/input (mock visual for demo)
+            textarea.addEventListener('input', function() {
+                const parts = this.value.split('.');
+                if (parts.length === 3) {
+                     // In a real implementation, you'd parse and format here
+                }
+            });
+            
+            document.querySelector('button:contains("Paste Example")')?.addEventListener('click', () => {
+                textarea.value = demoToken;
+                // Trigger input event manually if needed
+                textarea.dispatchEvent(new Event('input'));
+            });
+        });
+        
+        // Helper to find button by text content for the demo script
+        HTMLElement.prototype.contains = function(text) {
+             return Array.from(document.querySelectorAll('button')).find(el => el.textContent.includes(text));
+        }
+    </script>
+</body></html>

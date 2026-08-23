@@ -36,3 +36,8 @@ and validate the Vercel Preview. Production deployment is never part of this wor
 - Prefer small, reviewable changes.
 - Preserve existing patterns unless the requirement explicitly changes architecture.
 - Stop production deployment if tests/build fail.
+
+
+# Google Stitch Info
+- Project name: Dev Toolbox
+- Project id: 16366908838244426917

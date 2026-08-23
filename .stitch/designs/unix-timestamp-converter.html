@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Unix Timestamp Converter - Dev Toolbox</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#07006c",
+                      "on-tertiary-container": "#461f00",
+                      "on-surface-variant": "#c2c6d6",
+                      "surface": "#12131a",
+                      "surface-tint": "#adc6ff",
+                      "on-error": "#690005",
+                      "on-primary-fixed-variant": "#004395",
+                      "primary": "#adc6ff",
+                      "outline-variant": "#424754",
+                      "secondary-fixed": "#e1e0ff",
+                      "primary-container": "#4d8eff",
+                      "on-secondary-fixed-variant": "#2f2ebe",
+                      "primary-fixed-dim": "#adc6ff",
+                      "on-secondary-container": "#b0b2ff",
+                      "tertiary": "#ffb786",
+                      "error-container": "#93000a",
+                      "on-secondary": "#1000a9",
+                      "on-error-container": "#ffdad6",
+                      "surface-container": "#1e1f26",
+                      "tertiary-fixed": "#ffdcc6",
+                      "on-primary": "#002e6a",
+                      "on-surface": "#e3e1ec",
+                      "tertiary-fixed-dim": "#ffb786",
+                      "surface-container-high": "#292931",
+                      "surface-container-lowest": "#0d0e15",
+                      "on-tertiary": "#502400",
+                      "secondary": "#c0c1ff",
+                      "secondary-container": "#3131c0",
+                      "inverse-surface": "#e3e1ec",
+                      "surface-container-highest": "#33343c",
+                      "on-primary-container": "#00285d",
+                      "inverse-on-surface": "#2f3038",
+                      "error": "#ffb4ab",
+                      "tertiary-container": "#df7412",
+                      "primary-fixed": "#d8e2ff",
+                      "surface-bright": "#383941",
+                      "on-background": "#e3e1ec",
+                      "background": "#12131a",
+                      "on-primary-fixed": "#001a42",
+                      "surface-variant": "#33343c",
+                      "outline": "#8c909f",
+                      "on-tertiary-fixed": "#311400",
+                      "surface-dim": "#12131a",
+                      "on-tertiary-fixed-variant": "#723600",
+                      "secondary-fixed-dim": "#c0c1ff",
+                      "inverse-primary": "#005ac2",
+                      "surface-container-low": "#1a1b22"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "unit": "4px",
+                      "gutter": "16px",
+                      "lg": "24px",
+                      "xs": "4px",
+                      "margin": "24px",
+                      "sm": "8px",
+                      "xl": "48px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "label-caps": [
+                              "Geist"
+                      ],
+                      "body-sm": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ],
+                      "code-md": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-md": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "30px",
+                              {
+                                      "lineHeight": "36px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-caps": [
+                              "11px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "code-md": [
+                              "13px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            font-family: 'Geist', sans-serif;
+        }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row min-h-screen">
+<!-- SideNavBar (from JSON) -->
+<aside class="bg-surface-container w-[240px] h-screen fixed left-0 top-0 border-r border-outline-variant flex flex-col p-md hidden md:flex z-50">
+<div class="mb-lg"><div class="flex items-center gap-sm mb-2"><div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-on-primary"><span class="material-symbols-outlined text-[20px]">terminal</span></div><h1 class="font-headline-md text-headline-md font-bold text-on-surface">Dev Toolbox</h1></div><p class="font-body-sm text-body-sm text-on-surface-variant">Utility Suite</p></div>
+<button class="mb-md w-full py-2 px-3 flex items-center justify-between bg-surface-container-high rounded border border-outline-variant hover:bg-surface-variant transition-colors text-on-surface">
+<span class="font-body-sm text-body-sm">Command Palette (⌘K)</span>
+<span class="material-symbols-outlined text-[16px]">search</span>
+</button>
+<nav class="flex-1 overflow-y-auto">
+<ul class="space-y-1">
+<li class="">
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant font-body-sm hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">edit_note</span>
+<span class="">Text</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant font-body-sm hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">enhanced_encryption</span>
+<span class="">Encode/Decode</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant font-body-sm hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">data_object</span>
+<span class="">JSON</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-primary font-bold bg-surface-container-high hover:bg-surface-variant transition-colors scale-[0.98] duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+<span class="">Unix Timestamp</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant font-body-sm hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+<span class="">Developer</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="mt-auto pt-md border-t border-outline-variant space-y-1">
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant font-body-sm hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="">Settings</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant font-body-sm hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">dark_mode</span>
+<span class="">Dark Mode</span>
+</a>
+</div>
+</aside>
+<div class="flex-1 flex flex-col md:ml-[240px] min-w-0">
+<!-- TopAppBar (from JSON) -->
+<header class="bg-surface border-b border-outline-variant docked full-width top-0 sticky z-40 flex justify-between items-center h-16 px-lg">
+<div class="flex items-center space-x-6">
+<!-- Mobile Menu Button -->
+<button class="md:hidden text-on-surface p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:flex space-x-6">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-4" href="#">Favorites</a>
+<a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1 py-4 hover:text-on-surface transition-colors" href="#">Recent</a>
+</div>
+</div>
+<div class="flex items-center space-x-2">
+<button class="p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded transition-colors opacity-80">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">star</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded transition-colors opacity-80">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">content_copy</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded transition-colors opacity-80">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">delete</span>
+</button>
+</div>
+</header>
+<main class="flex-1 p-gutter md:p-margin max-w-[1200px] w-full mx-auto flex flex-col">
+<div class="mb-lg flex flex-col md:flex-row md:items-start justify-between gap-4">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<h2 class="font-headline-lg text-[28px] font-bold text-on-surface leading-tight">Unix Timestamp Converter</h2>
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-surface-container-high text-on-surface-variant border border-outline-variant">Local-only</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Convert between Unix timestamps and human-readable dates. Inputs auto-detect seconds vs. milliseconds. Results display both Local and UTC time.</p>
+</div>
+</div>
+<!-- Mode Segmented Control -->
+<div class="bg-surface-container border border-outline-variant rounded p-1 inline-flex mb-md">
+<button class="px-4 py-1.5 rounded text-primary bg-surface font-body-sm font-semibold shadow-sm border border-outline-variant/50 transition-colors">Timestamp to Date</button>
+<button class="px-4 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-body-sm transition-colors">Date to Timestamp</button>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-xl flex-1">
+<!-- Main Workspace: Timestamp to Date -->
+<div class="lg:col-span-8 flex flex-col gap-md">
+<div class="bg-surface-container border border-outline-variant rounded-lg p-md">
+<div class="flex flex-col gap-4">
+<!-- Input Area -->
+<div>
+<div class="flex items-center justify-between mb-2">
+<label class="block font-label-caps text-label-caps text-on-surface-variant">Unix Timestamp</label>
+<button class="text-primary hover:text-primary-fixed font-body-sm text-[12px] flex items-center gap-1 transition-colors"><span class="material-symbols-outlined text-[14px]">bolt</span>Use current time</button>
+</div>
+<div class="flex flex-col md:flex-row gap-2">
+<input class="flex-1 bg-surface border border-outline-variant rounded px-3 py-2 font-code-md text-[15px] text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all w-full" type="text" value="1716394200"/>
+<select class="bg-surface border border-outline-variant rounded px-3 py-2 font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary md:w-auto w-full">
+<option value="auto">Auto-detect</option>
+<option selected="" value="s">Seconds (s)</option>
+<option value="ms">Milliseconds (ms)</option>
+</select>
+<div class="flex gap-2">
+<button class="bg-primary hover:bg-primary/90 text-on-primary font-body-md font-semibold px-4 py-2 rounded transition-colors whitespace-nowrap">Convert</button>
+<button class="bg-surface-variant hover:bg-surface-container-highest text-on-surface font-body-md px-4 py-2 rounded border border-outline-variant transition-colors">Clear</button>
+</div>
+</div>
+</div>
+<!-- Results Area -->
+<div class="border border-outline-variant rounded bg-surface overflow-hidden">
+<div class="bg-surface-container-low border-b border-outline-variant px-4 py-2 flex items-center justify-between">
+<h3 class="font-label-caps text-label-caps text-on-surface">Result</h3>
+<div class="flex gap-1">
+<button class="p-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-variant rounded transition-colors" title="Copy All">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-variant rounded transition-colors" title="Save Run">
+<span class="material-symbols-outlined text-[16px]">bookmark_add</span>
+</button>
+</div>
+</div>
+<div class="p-0 flex flex-col">
+<!-- Result Rows -->
+<div class="grid grid-cols-1 md:grid-cols-3 border-b border-outline-variant group hover:bg-surface-container-lowest transition-colors">
+<div class="p-3 border-b md:border-b-0 md:border-r border-outline-variant">
+<span class="font-label-caps text-[10px] text-on-surface-variant block mb-1">Local Time</span>
+<div class="flex justify-between items-start">
+<span class="font-code-md text-[13px] text-on-surface">Wed May 22 2024 12:10:00 GMT-0400</span>
+<button class="text-on-surface-variant opacity-0 group-hover:opacity-100 hover:text-primary transition-all"><span class="material-symbols-outlined text-[16px]">content_copy</span></button>
+</div>
+</div>
+<div class="p-3 border-b md:border-b-0 md:border-r border-outline-variant">
+<span class="font-label-caps text-[10px] text-on-surface-variant block mb-1">UTC Time</span>
+<div class="flex justify-between items-start">
+<span class="font-code-md text-[13px] text-on-surface">Wed, 22 May 2024 16:10:00 GMT</span>
+<button class="text-on-surface-variant opacity-0 group-hover:opacity-100 hover:text-primary transition-all"><span class="material-symbols-outlined text-[16px]">content_copy</span></button>
+</div>
+</div>
+<div class="p-3">
+<span class="font-label-caps text-[10px] text-on-surface-variant block mb-1">ISO 8601</span>
+<div class="flex justify-between items-start">
+<span class="font-code-md text-[13px] text-on-surface">2024-05-22T16:10:00.000Z</span>
+<button class="text-on-surface-variant opacity-0 group-hover:opacity-100 hover:text-primary transition-all"><span class="material-symbols-outlined text-[16px]">content_copy</span></button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 group hover:bg-surface-container-lowest transition-colors bg-surface-container-lowest/50">
+<div class="p-3 border-b md:border-b-0 md:border-r border-outline-variant">
+<span class="font-label-caps text-[10px] text-on-surface-variant block mb-1">Detected Unit</span>
+<span class="font-body-sm text-[13px] text-on-surface">Seconds (10 digits)</span>
+</div>
+<div class="p-3">
+<span class="font-label-caps text-[10px] text-on-surface-variant block mb-1">Relative</span>
+<span class="font-body-sm text-[13px] text-primary">2 hours ago</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Empty/Error State Mockup (hidden by default) -->
+<!--
+<div class="bg-surface-container border border-outline-variant border-dashed rounded-lg p-lg flex flex-col items-center justify-center text-center h-48 opacity-50">
+    <span class="material-symbols-outlined text-[32px] text-on-surface-variant mb-2">schedule</span>
+    <p class="font-body-md text-on-surface-variant">Enter a timestamp to see the conversion.</p>
+</div>
+-->
+</div>
+<!-- Secondary Panel: Date to Timestamp (Subordinate) -->
+<div class="lg:col-span-4 bg-surface-container border border-outline-variant rounded-lg flex flex-col">
+<div class="px-4 py-3 border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
+<h3 class="font-body-md font-semibold text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-on-surface-variant">calendar_month</span>Date to Timestamp</h3>
+</div>
+<div class="p-md flex-1 flex flex-col gap-4">
+<div class="grid grid-cols-2 gap-3">
+<div class="col-span-2">
+<label class="block font-label-caps text-[10px] text-on-surface-variant mb-1">Date</label>
+<input class="w-full bg-surface border border-outline-variant rounded px-2 py-1.5 font-code-md text-[13px] text-on-surface focus:outline-none focus:border-primary transition-all" type="date" value="2024-05-22"/>
+</div>
+<div>
+<label class="block font-label-caps text-[10px] text-on-surface-variant mb-1">Time</label>
+<input class="w-full bg-surface border border-outline-variant rounded px-2 py-1.5 font-code-md text-[13px] text-on-surface focus:outline-none focus:border-primary transition-all" type="time" value="12:10"/>
+</div>
+<div>
+<label class="block font-label-caps text-[10px] text-on-surface-variant mb-1">Timezone</label>
+<select class="w-full bg-surface border border-outline-variant rounded px-2 py-1.5 font-code-md text-[13px] text-on-surface focus:outline-none focus:border-primary transition-all">
+<option>Local (EDT)</option>
+<option>UTC</option>
+</select>
+</div>
+</div>
+<button class="w-full bg-surface-variant hover:bg-surface-container-highest text-on-surface font-body-sm py-1.5 rounded border border-outline-variant transition-colors mt-2">Generate Timestamp</button>
+<div class="mt-auto pt-4 border-t border-outline-variant flex flex-col gap-2">
+<div class="bg-surface border border-outline-variant p-2 rounded flex justify-between items-center group relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-0.5 bg-primary"></div>
+<div class="flex flex-col pl-2">
+<span class="font-label-caps text-[10px] text-primary mb-0.5">Seconds</span>
+<span class="font-code-md text-[14px] text-on-surface font-semibold">1716394200</span>
+</div>
+<button class="text-on-surface-variant opacity-0 group-hover:opacity-100 hover:text-primary transition-all"><span class="material-symbols-outlined text-[16px]">content_copy</span></button>
+</div>
+<div class="bg-surface border border-outline-variant p-2 rounded flex justify-between items-center group">
+<div class="flex flex-col pl-2">
+<span class="font-label-caps text-[10px] text-on-surface-variant mb-0.5">Milliseconds</span>
+<span class="font-code-md text-[14px] text-on-surface">1716394200000</span>
+</div>
+<button class="text-on-surface-variant opacity-0 group-hover:opacity-100 hover:text-primary transition-all"><span class="material-symbols-outlined text-[16px]">content_copy</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Help Strip -->
+<footer class="mt-auto border-t border-outline-variant py-4 bg-surface-container-lowest">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4 text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">info</span>
+<span class="font-body-sm text-[12px]">Timestamps are Unix Epoch (seconds since Jan 1, 1970 UTC).</span>
+</div>
+<div class="flex gap-4">
+<a class="font-body-sm text-[12px] hover:text-primary transition-colors" href="#">Documentation</a>
+<a class="font-body-sm text-[12px] hover:text-primary transition-colors" href="#">Keyboard Shortcuts</a>
+<a class="font-body-sm text-[12px] hover:text-primary transition-colors" href="#">Report Issue</a>
+</div>
+</div>
+</footer>
+</main>
+</div>
+</body></html>
