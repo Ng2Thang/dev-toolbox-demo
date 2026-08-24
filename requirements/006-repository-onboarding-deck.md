@@ -1,9 +1,12 @@
 ---
 id: REQ-006
 title: Repository onboarding deck
-status: blocked
+status: design-review
 route: Documentation
-ui_approval: Not applicable
+stitch_project: Dev Toolbox
+stitch_screen_id: 38d25ced2eca46f9a249ca658e5672c0
+stitch_screen_title: Onboarding Storyboard - Extended
+ui_approval: Pending
 owner: Codex
 ---
 
@@ -54,9 +57,17 @@ Codex-enabled engineering workflow used to build it.
 - Story-driven refactor: 15-slide narrative and `human-codex-collaboration.png`; Chromium verified
   slide count, illustration loading, navigation, and a clean browser console. Committed and pushed
   as `0426b41`.
+- Stitch design review: generic six-frame presentation storyboard with replaceable empty image
+  areas, saved as `.stitch/designs/onboarding-storyboard.html` and `.png`. No repository-specific
+  architecture, routes, source paths, requirements, pull requests, credentials, or screenshots
+  were sent to Stitch.
 - Blocker: `npm run check` currently fails at `format:check` because 69 pre-existing application
   files do not match the configured Prettier version. This documentation-only requirement does
   not modify those files; repository formatting-baseline ownership is needed to clear the gate.
-- Pull-request blocker: the configured GitHub CLI account has an invalid token. Re-authenticate
-  with `gh auth refresh -h github.com` before creating the PR. A Vercel Preview is not applicable
-  because this change is static repository documentation and does not alter the deployed app.
+- Pull request: PR #11. A Vercel Preview is not applicable because this change is static repository
+  documentation and does not alter the deployed app.
+
+## Design-review gate
+
+The extended Stitch storyboard is the latest visual reference. Do not adapt the 15-slide HTML deck
+to this direction until the user explicitly approves this UI.

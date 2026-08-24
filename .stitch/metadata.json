@@ -27,6 +27,13 @@
       "route": "/tools/uuid",
       "deviceType": "DESKTOP",
       "artifactBasename": "uuid-generator"
+    },
+    {
+      "id": "38d25ced2eca46f9a249ca658e5672c0",
+      "title": "Onboarding Storyboard - Extended",
+      "route": "Documentation",
+      "deviceType": "DESKTOP",
+      "artifactBasename": "onboarding-storyboard"
     }
   ]
 }

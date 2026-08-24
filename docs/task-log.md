@@ -364,3 +364,17 @@ both illustration assets loaded at 1536-pixel natural width, next-slide navigati
 document title to `2/15`, and no page errors were reported. The fully revealed animation state was
 visually reviewed. The deck retains keyboard, button, print, responsive, and reduced-motion paths.
 The story-driven deck and second generated illustration were committed and pushed as `0426b41`.
+
+## REQ-006 Stitch storyboard review
+
+1. Keep the deliverable as standalone documentation; do not add an `/onboarding` app route.
+2. Generate only generic layout patterns in Stitch, using empty replaceable image areas and no
+   repository-specific internal details.
+3. Save the latest six-frame HTML/PNG evidence and record its screen ID in Stitch metadata.
+4. Pause at `design-review`; after explicit approval, apply the visual direction to the existing
+   15-slide HTML deck and generate additional local illustration assets only where they improve
+   explanation.
+
+Stitch generated screen `38d25ced2eca46f9a249ca658e5672c0`, “Onboarding Storyboard -
+Extended”. Visual and source inspection confirmed Frames 1–6, the requested empty image
+placeholders, generic diagrams, and the reference footer.
