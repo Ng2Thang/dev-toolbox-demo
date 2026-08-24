@@ -16,6 +16,11 @@ Use this checklist only after the requirement status is `design-approved`.
 - Test pure transformations, validation, empty input, and boundary cases.
 - Test visible success and error states for interactive components.
 - Test invalid route payloads before repository calls when an API changes.
+- Run Playwright E2E coverage for the primary browser journey and relevant error states.
+- Use `$playwright-e2e-testing` to organize browser coverage into evidence-backed Levels 1–3.
+- Include a traceability matrix that records the selected journeys and any inapplicable Level 3
+  risk category; do not use one case per level as the default coverage target.
+- Review Playwright failure screenshots and traces before delivery.
 - Build an explicit list of feature-related changed files: its route, feature folder, tests, and
   only shared files intentionally edited for the requirement.
 - Run `npx prettier --write <paths>`, then `npx prettier --check <paths>`, then `npm run check`.

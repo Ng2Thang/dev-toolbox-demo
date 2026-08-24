@@ -39,6 +39,13 @@ Help developers discover and open the available local developer utilities from a
 
 - Local-only discovery backed by the typed tool registry; no new persistence.
 
+## Traceability note
+
+The existing Home implementation predates the repository requirement to retain
+Stitch design artifacts. It remains in `design-review`: export the referenced
+Stitch screen into `.stitch/designs/`, register it in `.stitch/metadata.json`,
+and obtain explicit UI approval before recording delivery evidence.
+
 ## Acceptance criteria
 
 1. The home route presents the shared Dev Toolbox shell and all registered tools.

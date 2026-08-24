@@ -78,11 +78,13 @@ Implement only the layers the feature needs:
 7. After all required implementation layers are in place, invoke `$feature-test-generation` with
    the current requirement, approved Stitch reference, and implementation. It owns the focused
    tiered feature suite, including applicable domain, component, and route coverage.
-8. Preserve the client/server and security boundaries in `ARCHITECTURE.md`.
+8. Invoke `$playwright-e2e-testing` with the current requirement and implementation. It owns
+   Level 1–3 browser coverage for observable user journeys and must not duplicate unit coverage.
+9. Preserve the client/server and security boundaries in `ARCHITECTURE.md`.
 
 Set the requirement status to `implementing` when code work begins.
 
-## 5. Verify and deliver
+## 5. Verify
 
 Before formatting, run `$feature-test-generation` when the feature's tests have not already been
 generated in this implementation pass. Treat its tiered traceability matrix and generated test
@@ -94,8 +96,12 @@ only shared files deliberately changed for that requirement (for example `lib/to
 `app/globals.css`). Run `npx prettier --write <paths>`, then `npx prettier --check <paths>`, before
 running `npm run check`. Do not use the repository-wide `npm run format` command for a focused
 feature unless the user explicitly asks for a full-repository format.
-Fix failures and rerun until green or a real external blocker remains. Review the complete diff for
-secrets, temporary files, unrelated changes, requirement coverage, and migration safety.
+Run `npm run test:e2e` to exercise the primary browser journey and relevant error states with
+Playwright. Review any failure screenshots and traces. Fix failures and rerun until green or a
+real external blocker remains. Review the complete diff for secrets, temporary files, unrelated
+changes, requirement coverage, and migration safety.
+
+## 6. Deliver
 
 Create a feature branch and commit, then run `npm run test:report` against that committed `HEAD`.
 Include its full-project result, tested commit SHA, and report paths in the `## Test Report`

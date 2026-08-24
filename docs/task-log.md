@@ -1,5 +1,40 @@
 # REQ-001 task log
 
+## Repository structure documentation alignment
+
+1. Reconcile the README and architecture maps with the E2E, Stitch, Codex rules,
+   CI, and design-system paths that now exist in the repository.
+2. Confirm the documented `npm run format` command and include the delivered UUID
+   Generator in the README inventory.
+3. Make root `DESIGN.md` the canonical design-system document and record that the
+   existing Home implementation still needs retained Stitch evidence and approval.
+
+## Playwright E2E testing plan
+
+1. Add Playwright Chromium configuration and deterministic smoke coverage for navigation and the
+   JWT, JSON, timestamp, and UUID tool journeys.
+2. Add local scripts, CI browser installation and execution, and ignored failure artifacts.
+3. Align architecture, README, delivery skills, checklist, and PR evidence with the separate
+   verification and delivery workflow.
+4. Add the `playwright-e2e-testing` skill under `.codex/skills/`, define feature-owned Level 1–3
+   browser coverage, and invoke it after `$feature-test-generation` in the delivery flow.
+5. Migrate the existing flat smoke test to feature-owned specs for Home and the four local tools;
+   use mocked save-run responses and reserve Saved runs browser coverage for a dedicated persistence
+   test environment.
+6. Expand each implemented tool's browser coverage with independent valid journeys, all applicable
+   common recovery categories, and at least two documented resilience risks per feature.
+
+## Stitch design artifact naming update
+
+1. Rename the UUID Generator HTML and PNG evidence from its opaque Stitch ID to
+   the feature-based `uuid-generator` basename, while retaining the screen ID
+   in `.stitch/metadata.json`.
+2. Update the `stitch::generate-design` skill so all future feature assets use
+   descriptive kebab-case names, edits overwrite the matching pair, and
+   variants use stable `-variant-N` suffixes.
+3. Review the metadata, artifact directory, and documentation diff to confirm
+   the UUID design remains traceable without ID-named files.
+
 ## REQ-005 UUID Generator design plan
 
 1. Use the confirmed browser-local UUID Generator brief to create and inspect a focused Dev Toolbox Stitch screen for `/tools/uuid`.

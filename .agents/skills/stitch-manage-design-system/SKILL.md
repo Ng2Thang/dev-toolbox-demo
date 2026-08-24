@@ -50,7 +50,7 @@ The `DESIGN.md` file should follow the structure defined in the `design-md` skil
 
 ## 🚀 Create or Update Design System in Stitch
 
-After generating `.stitch/DESIGN.md`, make sure to also create or update the
+After generating the root `DESIGN.md`, make sure to also create or update the
 design system in Stitch.
 
 **Two-step design system creation:**
@@ -118,7 +118,7 @@ Use `apply_design_system` to apply a design system to existing screens.
 
 ## 📋 Update Project Metadata
 
-After writing `.stitch/DESIGN.md`, also create or update `.stitch/metadata.json`
+After writing the root `DESIGN.md`, also create or update `.stitch/metadata.json`
 to track the `projectId`, `title`, all known screens, and design system summary.
 See [examples/metadata.json](examples/metadata.json) for the format.
 
