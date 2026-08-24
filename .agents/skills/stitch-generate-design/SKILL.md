@@ -332,6 +332,32 @@ Download the variant HTML and screenshot urls from `outputComponents` to the
 
 --------------------------------------------------------------------------------
 
+## 5. Verify
+
+For Stitch-backed work that includes application implementation, verify both
+the focused automated tests and the delivered browser experience:
+
+- Run the relevant unit, component, and API tests with `npm run test`.
+- Run Playwright end-to-end tests with `npm run test:e2e`, covering the primary
+  user journey and important error states.
+- Use deterministic mocked network responses for ordinary browser tests; use a
+  dedicated test environment for any real persistence integration coverage.
+- Review Playwright screenshots and traces for failures, correct regressions,
+  then run `npm run check` before delivery.
+
+## 6. Deliver
+
+- Review the final diff for requirement coverage, generated Stitch artifacts,
+  and accidental secrets or local configuration.
+- Commit the implementation, focused tests, Playwright E2E coverage, and the
+  matching `.stitch/designs/` HTML and PNG evidence together.
+- Open the pull request and include the verification results, including unit
+  and Playwright E2E evidence.
+- Validate the Vercel Preview with the relevant browser smoke journey, then
+  report the preview URL and any remaining risks. Do not promote to production.
+
+--------------------------------------------------------------------------------
+
 ## 💡 Tips
 
 - **Be structural**: Break the page down into header, hero, features, and
