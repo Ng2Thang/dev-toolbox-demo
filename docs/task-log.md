@@ -312,3 +312,19 @@ Scoped JWT formatting passed. The full repository gate passed: formatting, lint,
 1. Disable Git-triggered Vercel deployments with `git.deploymentEnabled: false` in `vercel.json`.
 2. Add an explicit-only manual deployment skill that validates a ready preview target and refuses production deployment or promotion.
 3. Validate the skill structure and configuration, then commit and update the active PR without staging unrelated local changes.
+
+## REQ-006 repository onboarding deck
+
+Plan:
+
+1. Create a Git-informed, self-contained slide deck that introduces Dev Toolbox to new team members.
+2. Explain the repository's Codex operating model, skills, rules, architecture, delivery workflow, and recent Git milestones before the application walkthrough.
+3. Keep the deck as reviewable documentation under `docs/onboarding/`; do not change application code, database schema, or deployment configuration.
+4. Verify the source facts against repository documents and Git history, review for secrets, then commit and create a pull request.
+
+Validation: the deck has 11 slides, one initially active slide, and no credential markers.
+`git diff --check` passed. With the repository's required Node 22+ runtime (Node 24.14.0), ESLint,
+TypeScript, 75 Vitest tests, and the production build passed. `npm run check` remains blocked at
+the initial Prettier check by 69 existing, out-of-scope application files; active Node 20.19.1 is
+also below the repository's documented Node 22 minimum. The requirement is recorded as `blocked`
+until the formatting baseline has an owner.

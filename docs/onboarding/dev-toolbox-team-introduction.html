@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Dev Toolbox repository onboarding presentation" />
+    <title>Dev Toolbox — Team Introduction</title>
+    <style>
+      :root {
+        --ink: #182237;
+        --muted: #667085;
+        --paper: #f8fafc;
+        --line: #dbe3ed;
+        --navy: #101828;
+        --blue: #155eef;
+        --cyan: #06b6d4;
+        --mint: #dbf9ef;
+        --amber: #fff3d6;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-width: 320px;
+        background: #e8edf3;
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      main { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+      .deck {
+        position: relative;
+        overflow: hidden;
+        width: min(1280px, 100%);
+        aspect-ratio: 16 / 9;
+        min-height: 560px;
+        background: var(--paper);
+        border: 1px solid #d0d9e5;
+        border-radius: 20px;
+        box-shadow: 0 22px 60px rgb(16 24 40 / 18%);
+      }
+      .slide {
+        display: none;
+        height: 100%;
+        padding: clamp(32px, 5vw, 72px);
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      .slide.active { display: flex; }
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--blue);
+        font-size: 0.9rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 { max-width: 850px; font-size: clamp(3rem, 7vw, 6.6rem); line-height: 0.96; letter-spacing: -0.065em; }
+      h2 { max-width: 950px; font-size: clamp(2.2rem, 4.5vw, 4.35rem); line-height: 1.02; letter-spacing: -0.055em; }
+      h3 { margin-bottom: 10px; font-size: clamp(1rem, 1.7vw, 1.35rem); }
+      .lead { max-width: 760px; color: #475467; font-size: clamp(1.1rem, 2.1vw, 1.55rem); line-height: 1.5; }
+      .accent { color: var(--blue); }
+      .rule { width: 84px; height: 8px; margin-bottom: 28px; background: linear-gradient(90deg, var(--blue), var(--cyan)); border-radius: 999px; }
+      .footer { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: 0.9rem; }
+      .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+      .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .card { padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
+      .card p { margin-bottom: 0; color: #475467; line-height: 1.45; }
+      ul { display: grid; gap: 14px; margin: 0; padding-left: 1.25rem; color: #344054; font-size: clamp(1.05rem, 1.8vw, 1.35rem); line-height: 1.35; }
+      .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; }
+      .node { padding: 13px 17px; border-radius: 12px; background: #fff; border: 1px solid var(--line); font-weight: 750; }
+      .node.primary { background: var(--navy); border-color: var(--navy); color: white; }
+      .arrow { color: var(--blue); font-size: 1.5rem; font-weight: 900; }
+      table { width: 100%; border-collapse: collapse; font-size: clamp(0.9rem, 1.5vw, 1.12rem); }
+      th, td { padding: 13px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+      th { color: var(--muted); font-size: 0.78em; letter-spacing: 0.08em; text-transform: uppercase; }
+      .tag { display: inline-block; padding: 5px 9px; border-radius: 99px; background: var(--mint); color: #087443; font-size: 0.8em; font-weight: 800; }
+      .tag.amber { background: var(--amber); color: #9a6500; }
+      .code { padding: 20px 24px; overflow: auto; border-radius: 14px; background: var(--navy); color: #d0d5dd; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: clamp(0.87rem, 1.4vw, 1.1rem); line-height: 1.6; white-space: pre; }
+      .citation { color: var(--muted); font-size: 0.92rem; }
+      .citation a { color: var(--blue); }
+      .controls { position: absolute; right: 22px; bottom: 18px; display: flex; gap: 8px; }
+      button { width: 42px; height: 36px; border: 1px solid #b8c6d9; border-radius: 9px; background: white; color: var(--navy); cursor: pointer; font-size: 1.1rem; }
+      button:hover { border-color: var(--blue); color: var(--blue); }
+      .progress { position: absolute; bottom: 0; left: 0; width: 100%; height: 5px; background: #e3eaf3; }
+      .progress > span { display: block; height: 100%; background: linear-gradient(90deg, var(--blue), var(--cyan)); transition: width 180ms ease; }
+      @media (max-width: 760px) {
+        main { padding: 0; }
+        .deck { min-height: 100vh; border: 0; border-radius: 0; aspect-ratio: auto; }
+        .slide { padding: 32px 28px 66px; overflow-y: auto; }
+        .grid, .grid.three { grid-template-columns: 1fr; }
+        h1 { font-size: clamp(3rem, 18vw, 5rem); }
+      }
+      @media print { body { background: white; } main { display: block; padding: 0; } .deck { width: 100%; box-shadow: none; border: 0; border-radius: 0; } .slide { display: flex; min-height: 100vh; page-break-after: always; } .controls, .progress { display: none; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="deck" aria-label="Dev Toolbox team introduction slides">
+        <article class="slide active">
+          <div>
+            <p class="eyebrow">Team introduction</p>
+            <div class="rule"></div>
+            <h1>Dev<br /><span class="accent">Toolbox</span></h1>
+            <p class="lead">Small developer utilities, delivered through a traceable Codex workflow.</p>
+          </div>
+          <div class="footer"><span>Repository onboarding</span><span>August 2026</span></div>
+        </article>
+
+        <article class="slide">
+          <div>
+            <p class="eyebrow">01 / Product</p>
+            <h2>What are we building?</h2>
+            <div class="grid three">
+              <div class="card"><h3>Browser-first tools</h3><p>JWT decoding, JSON formatting, timestamp conversion, and UUID generation run locally in the browser.</p></div>
+              <div class="card"><h3>Optional history</h3><p>Successful runs may be persisted to Supabase and shown at <code>/history</code>.</p></div>
+              <div class="card"><h3>Agentic demo</h3><p>Each feature is intended to be traceable from requirement and design through tests, PR, and preview.</p></div>
+            </div>
+          </div>
+          <div class="footer"><span>README.md</span><span>2 / 11</span></div>
+        </article>
+
+        <article class="slide">
+          <div>
+            <p class="eyebrow">02 / Codex</p>
+            <h2>Codex is the coding agent in our delivery loop.</h2>
+            <p class="lead">It can read repository context, use approved tools, implement scoped work, run checks, and prepare delivery evidence. People retain control of scope, approvals, and review.</p>
+            <div class="flow"><span class="node primary">Team request</span><span class="arrow">→</span><span class="node">Codex works in repo context</span><span class="arrow">→</span><span class="node">Reviewable change</span></div>
+          </div>
+          <div class="footer"><span class="citation">General product context: <a href="https://developers.openai.com/">OpenAI Developers — Codex</a></span><span>3 / 11</span></div>
+        </article>
+
+        <article class="slide">
+          <div>
+            <p class="eyebrow">03 / Skills</p>
+            <h2>Skills make repeatable work explicit.</h2>
+            <div class="grid">
+              <div class="card"><h3>Delivery skills</h3><p><code>build-dev-tool-feature</code> guides a new feature from brief through design approval, implementation, tests, PR, and preview.</p></div>
+              <div class="card"><h3>Design skills</h3><p>Stitch generation and design-system workflows provide a reviewable visual contract before application work begins.</p></div>
+              <div class="card"><h3>Test skills</h3><p>Feature-test and Playwright workflows generate focused evidence for behavior, validation, and browser journeys.</p></div>
+              <div class="card"><h3>Why it matters</h3><p>Skills encode team conventions so the agent follows the same delivery path each time.</p></div>
+            </div>
+          </div>
+          <div class="footer"><span>.agents/skills/ and .codex/skills/</span><span>4 / 11</span></div>
+        </article>
+
+        <article class="slide">
+          <div>
+            <p class="eyebrow">04 / Rules</p>
+            <h2>Rules provide the guardrails.</h2>
+            <table>
+              <thead><tr><th>Source</th><th>What it controls</th></tr></thead>
+              <tbody>
+                <tr><td><code>AGENTS.md</code></td><td>Delivery contract: inspect, plan, implement, verify, PR, and preview.</td></tr>
+                <tr><td><code>ARCHITECTURE.md</code></td><td>Route ownership, client/server boundaries, persistence, security, and quality conventions.</td></tr>
+                <tr><td><code>.codex/rules/</code></td><td>Execution and pull-request constraints, including branch and commit conventions.</td></tr>
+                <tr><td><code>requirements/</code></td><td>Feature scope, acceptance criteria, status, and UI approval.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="footer"><span>Repository-local instructions, not hidden behavior</span><span>5 / 11</span></div>
+        </article>
+
+        <article class="slide">
+          <div>
+            <p class="eyebrow">05 / Delivery</p>
+            <h2>Every feature follows a visible loop.</h2>
+            <div class="flow">
+              <span class="node primary">Requirement</span><span class="arrow">→</span><span class="node">Architecture review</span><span class="arrow">→</span><span class="node">Plan</span><span class="arrow">→</span><span class="node">Stitch design</span><span class="arrow">→</span><span class="node">Explicit approval</span><span class="arrow">→</span><span class="node">Implement</span><span class="arrow">→</span><span class="node">Check</span><span class="arrow">→</span><span class="node">PR + preview</span>
+            </div>
+            <p class="lead">Production deployment is outside this workflow. New database work uses a new immutable migration; secrets never enter client code or commits.</p>
+          </div>
+          <div class="footer"><span>AGENTS.md</span><span>6 / 11</span></div>
+        </article>
+
+        <article class="slide">
+          <div>
+            <p class="eyebrow">06 / Architecture</p>
+            <h2>Simple routes, focused feature ownership.</h2>
+            <div class="code">Browser tool UI  →  feature-owned browser logic
+                         │ optional saved run
+                         ▼
+                   POST /api/runs
+                         ▼
+        Zod validation  →  server-only repository  →  Supabase / Postgres</div>
+            <p class="lead">Route pages stay thin. <code>lib/tools.ts</code> is the canonical registry for tools and navigation.</p>
+          </div>
+          <div class="footer"><span>ARCHITECTURE.md</span><span>7 / 11</span></div>
+        </article>
+
+        <article class="slide">
+          <div>
+            <p class="eyebrow">07 / Repository map</p>
+            <h2>Where work belongs.</h2>
+            <div class="grid three">
+              <div class="card"><h3>App and UI</h3><p><code>app/</code> routes and layouts<br /><code>components/</code> shared presentation<br /><code>features/</code> owned behavior</p></div>
+              <div class="card"><h3>Data and tests</h3><p><code>lib/</code> shared utilities<br /><code>supabase/migrations/</code> history<br /><code>e2e/</code> browser journeys</p></div>
+              <div class="card"><h3>Delivery evidence</h3><p><code>requirements/</code> scope<br /><code>docs/</code> status and reports<br /><code>.stitch/</code> reviewed designs</p></div>
+            </div>
+          </div>
+          <div class="footer"><span>README.md repository map</span><span>8 / 11</span></div>
+        </article>
+
+        <article class="slide">
+          <div>
+            <p class="eyebrow">08 / Git story</p>
+            <h2>One week of visible delivery.</h2>
+            <div class="grid">
+              <div class="card"><h3>August 19–20</h3><p>Repository foundation, quality gates, requirements, and agent workflow were established.</p></div>
+              <div class="card"><h3>August 23</h3><p>JWT delivery evidence and manual-preview controls; Unix Timestamp Converter delivered in PR #8; UUID Generator delivered in PR #9.</p></div>
+              <div class="card"><h3>August 24</h3><p>Playwright browser coverage merged in PR #10, followed by stronger Stitch-delivery and repository-structure guidance.</p></div>
+              <div class="card"><h3>Read history correctly</h3><p>Git records delivery events. Requirements and feature status are the source of truth for present scope and state.</p></div>
+            </div>
+          </div>
+          <div class="footer"><span>Local Git history on main</span><span>9 / 11</span></div>
+        </article>
+
+        <article class="slide">
+          <div>
+            <p class="eyebrow">09 / Today</p>
+            <h2>Current work at a glance.</h2>
+            <table>
+              <thead><tr><th>State</th><th>Work</th></tr></thead>
+              <tbody>
+                <tr><td><span class="tag">Delivered</span></td><td>Unix Timestamp Converter; UUID Generator</td></tr>
+                <tr><td><span class="tag amber">Implementing</span></td><td>JWT Decoder; JSON Formatter; repository onboarding deck</td></tr>
+                <tr><td><span class="tag amber">Design review / draft</span></td><td>Toolbox Home; local-only toolbox</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="footer"><span>docs/FEATURE_STATUS.md</span><span>10 / 11</span></div>
+        </article>
+
+        <article class="slide">
+          <div>
+            <p class="eyebrow">10 / Your first contribution</p>
+            <h2>Start small. Keep it traceable.</h2>
+            <ul>
+              <li>Read <code>README.md</code>, <code>AGENTS.md</code>, and <code>ARCHITECTURE.md</code>.</li>
+              <li>Choose a requirement and check its status and UI-approval state.</li>
+              <li>Run <code>npm ci</code>, then <code>npm run dev</code>; configure persistence only when it is needed.</li>
+              <li>Follow the relevant skill, preserve feature boundaries, and run <code>npm run check</code>.</li>
+              <li>Review scope and secrets, then deliver through a pull request and Vercel Preview.</li>
+            </ul>
+          </div>
+          <div class="footer"><span>Questions? Start with the requirement.</span><span>11 / 11</span></div>
+        </article>
+
+        <div class="controls" aria-label="Slide controls"><button type="button" id="previous" aria-label="Previous slide">←</button><button type="button" id="next" aria-label="Next slide">→</button></div>
+        <div class="progress" aria-hidden="true"><span></span></div>
+      </section>
+    </main>
+    <script>
+      const slides = [...document.querySelectorAll('.slide')];
+      const progress = document.querySelector('.progress span');
+      let index = 0;
+      function render(nextIndex) {
+        index = (nextIndex + slides.length) % slides.length;
+        slides.forEach((slide, slideIndex) => slide.classList.toggle('active', slideIndex === index));
+        progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+        document.title = `${index + 1}/${slides.length} — Dev Toolbox Team Introduction`;
+      }
+      document.querySelector('#previous').addEventListener('click', () => render(index - 1));
+      document.querySelector('#next').addEventListener('click', () => render(index + 1));
+      document.addEventListener('keydown', (event) => {
+        if (['ArrowRight', ' ', 'PageDown'].includes(event.key)) { event.preventDefault(); render(index + 1); }
+        if (['ArrowLeft', 'PageUp'].includes(event.key)) { event.preventDefault(); render(index - 1); }
+        if (event.key === 'Home') { event.preventDefault(); render(0); }
+        if (event.key === 'End') { event.preventDefault(); render(slides.length - 1); }
+      });
+      render(0);
+    </script>
+  </body>
+</html>
