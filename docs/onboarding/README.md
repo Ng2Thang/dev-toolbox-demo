@@ -4,6 +4,10 @@ Presentation source for the repository onboarding deck. Open
 [`dev-toolbox-team-introduction.html`](dev-toolbox-team-introduction.html) in a browser, then use
 the arrow keys, spacebar, or on-screen controls to navigate.
 
+The visual deck includes an original hero illustration in `assets/codex-toolbox-hero.png`,
+progressive visual reveals, and a reduced-motion fallback. The illustration was generated with
+the built-in OpenAI image-generation workflow for this repository; it contains no text or logos.
+
 ## Slide outline
 
 ---

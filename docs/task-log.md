@@ -334,3 +334,9 @@ Delivery update: commit `88b580e` was created through `scripts/commit.sh` and pu
 status` reports that the configured GitHub token is invalid. Re-authenticate with
 `gh auth refresh -h github.com`; no Vercel Preview is applicable for this static documentation-only
 change.
+
+## REQ-006 visual deck refactor
+
+1. Add an original illustrated hero, animated progressive reveals, and a reduced-motion fallback.
+2. Replace text-heavy product and skills summaries with tool cards and workflow lanes.
+3. Add a concrete UUID Generator delivery example to make the repository workflow tangible.

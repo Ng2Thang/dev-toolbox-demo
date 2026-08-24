@@ -36,6 +36,8 @@ Codex-enabled engineering workflow used to build it.
 - Content names the repository-local guidance and reflects the current feature status and Git
   timeline.
 - The deck links to official OpenAI documentation for general Codex information.
+- The refactored deck uses repository-specific visual examples, an original project-bound
+  illustration, and motion that respects `prefers-reduced-motion`.
 
 ## Delivery evidence and blocker
 

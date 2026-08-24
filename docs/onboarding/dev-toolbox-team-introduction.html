@@ -47,6 +47,7 @@
         gap: 24px;
       }
       .slide.active { display: flex; }
+      .slide.active .reveal { animation: rise-in 620ms cubic-bezier(.2,.8,.2,1) both; animation-delay: var(--delay, 0ms); }
       .eyebrow {
         margin: 0 0 12px;
         color: var(--blue);
@@ -60,6 +61,8 @@
       h2 { max-width: 950px; font-size: clamp(2.2rem, 4.5vw, 4.35rem); line-height: 1.02; letter-spacing: -0.055em; }
       h3 { margin-bottom: 10px; font-size: clamp(1rem, 1.7vw, 1.35rem); }
       .lead { max-width: 760px; color: #475467; font-size: clamp(1.1rem, 2.1vw, 1.55rem); line-height: 1.5; }
+      .hero { display: grid; grid-template-columns: 0.9fr 1.1fr; align-items: center; gap: clamp(16px, 3vw, 48px); }
+      .hero-art { width: 100%; max-height: 63vh; object-fit: contain; filter: drop-shadow(0 28px 32px rgb(16 24 40 / 14%)); animation: float 5s ease-in-out infinite; }
       .accent { color: var(--blue); }
       .rule { width: 84px; height: 8px; margin-bottom: 28px; background: linear-gradient(90deg, var(--blue), var(--cyan)); border-radius: 999px; }
       .footer { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: 0.9rem; }
@@ -80,6 +83,22 @@
       .code { padding: 20px 24px; overflow: auto; border-radius: 14px; background: var(--navy); color: #d0d5dd; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: clamp(0.87rem, 1.4vw, 1.1rem); line-height: 1.6; white-space: pre; }
       .citation { color: var(--muted); font-size: 0.92rem; }
       .citation a { color: var(--blue); }
+      .tool-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+      .tool { min-height: 145px; padding: 20px; border-radius: 16px; color: white; background: linear-gradient(145deg, #172554, #155eef); box-shadow: 0 14px 25px rgb(21 94 239 / 18%); }
+      .tool:nth-child(2) { background: linear-gradient(145deg, #064e62, #0891b2); }
+      .tool:nth-child(3) { background: linear-gradient(145deg, #134e4a, #0f766e); }
+      .tool:nth-child(4) { background: linear-gradient(145deg, #312e81, #6366f1); }
+      .glyph { display: block; margin-bottom: 16px; font-family: ui-monospace, monospace; font-size: 2.1rem; font-weight: 800; }
+      .tool strong { display: block; font-size: 1.05rem; }
+      .lanes { display: grid; gap: 11px; }
+      .lane { display: grid; grid-template-columns: 170px 1fr; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: white; }
+      .lane > strong { display: grid; place-items: center; min-height: 62px; padding: 10px; background: #edf4ff; color: #155eef; }
+      .lane > span { display: grid; align-items: center; padding: 12px 18px; color: #475467; }
+      .example { display: grid; grid-template-columns: 1fr 62px 1fr 62px 1fr; gap: 12px; align-items: stretch; }
+      .example .card { display: flex; flex-direction: column; justify-content: center; }
+      .example-arrow { display: grid; place-items: center; color: var(--blue); font-size: 2.2rem; font-weight: 800; }
+      @keyframes rise-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
       .controls { position: absolute; right: 22px; bottom: 18px; display: flex; gap: 8px; }
       button { width: 42px; height: 36px; border: 1px solid #b8c6d9; border-radius: 9px; background: white; color: var(--navy); cursor: pointer; font-size: 1.1rem; }
       button:hover { border-color: var(--blue); color: var(--blue); }
@@ -89,9 +108,11 @@
         main { padding: 0; }
         .deck { min-height: 100vh; border: 0; border-radius: 0; aspect-ratio: auto; }
         .slide { padding: 32px 28px 66px; overflow-y: auto; }
-        .grid, .grid.three { grid-template-columns: 1fr; }
+        .grid, .grid.three, .hero, .tool-row, .example { grid-template-columns: 1fr; }
+        .example-arrow { transform: rotate(90deg); }
         h1 { font-size: clamp(3rem, 18vw, 5rem); }
       }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 1ms !important; } }
       @media print { body { background: white; } main { display: block; padding: 0; } .deck { width: 100%; box-shadow: none; border: 0; border-radius: 0; } .slide { display: flex; min-height: 100vh; page-break-after: always; } .controls, .progress { display: none; } }
     </style>
   </head>
@@ -99,11 +120,14 @@
     <main>
       <section class="deck" aria-label="Dev Toolbox team introduction slides">
         <article class="slide active">
-          <div>
-            <p class="eyebrow">Team introduction</p>
-            <div class="rule"></div>
-            <h1>Dev<br /><span class="accent">Toolbox</span></h1>
-            <p class="lead">Small developer utilities, delivered through a traceable Codex workflow.</p>
+          <div class="hero">
+            <div>
+              <p class="eyebrow reveal">Team introduction</p>
+              <div class="rule reveal" style="--delay: 90ms"></div>
+              <h1 class="reveal" style="--delay: 160ms">Dev<br /><span class="accent">Toolbox</span></h1>
+              <p class="lead reveal" style="--delay: 250ms">Small developer utilities, delivered through a traceable Codex workflow.</p>
+            </div>
+            <img class="hero-art reveal" style="--delay: 180ms" src="assets/codex-toolbox-hero.png" alt="Illustration of a modular developer toolbox connected to an abstract AI assistant" />
           </div>
           <div class="footer"><span>Repository onboarding</span><span>August 2026</span></div>
         </article>
@@ -112,13 +136,15 @@
           <div>
             <p class="eyebrow">01 / Product</p>
             <h2>What are we building?</h2>
-            <div class="grid three">
-              <div class="card"><h3>Browser-first tools</h3><p>JWT decoding, JSON formatting, timestamp conversion, and UUID generation run locally in the browser.</p></div>
-              <div class="card"><h3>Optional history</h3><p>Successful runs may be persisted to Supabase and shown at <code>/history</code>.</p></div>
-              <div class="card"><h3>Agentic demo</h3><p>Each feature is intended to be traceable from requirement and design through tests, PR, and preview.</p></div>
+            <div class="tool-row">
+              <div class="tool reveal"><span class="glyph">&lt;/&gt;</span><strong>JWT Decoder</strong></div>
+              <div class="tool reveal" style="--delay: 90ms"><span class="glyph">{ }</span><strong>JSON Formatter</strong></div>
+              <div class="tool reveal" style="--delay: 180ms"><span class="glyph">◷</span><strong>Timestamp</strong></div>
+              <div class="tool reveal" style="--delay: 270ms"><span class="glyph">⌘</span><strong>UUID Generator</strong></div>
             </div>
+            <p class="lead reveal" style="--delay: 360ms">All core tools run locally in the browser. Successful runs can optionally be stored and viewed in history.</p>
           </div>
-          <div class="footer"><span>README.md</span><span>2 / 11</span></div>
+          <div class="footer"><span>README.md</span><span>2 / 12</span></div>
         </article>
 
         <article class="slide">
@@ -128,21 +154,21 @@
             <p class="lead">It can read repository context, use approved tools, implement scoped work, run checks, and prepare delivery evidence. People retain control of scope, approvals, and review.</p>
             <div class="flow"><span class="node primary">Team request</span><span class="arrow">→</span><span class="node">Codex works in repo context</span><span class="arrow">→</span><span class="node">Reviewable change</span></div>
           </div>
-          <div class="footer"><span class="citation">General product context: <a href="https://developers.openai.com/">OpenAI Developers — Codex</a></span><span>3 / 11</span></div>
+          <div class="footer"><span class="citation">General product context: <a href="https://developers.openai.com/">OpenAI Developers — Codex</a></span><span>3 / 12</span></div>
         </article>
 
         <article class="slide">
           <div>
             <p class="eyebrow">03 / Skills</p>
             <h2>Skills make repeatable work explicit.</h2>
-            <div class="grid">
-              <div class="card"><h3>Delivery skills</h3><p><code>build-dev-tool-feature</code> guides a new feature from brief through design approval, implementation, tests, PR, and preview.</p></div>
-              <div class="card"><h3>Design skills</h3><p>Stitch generation and design-system workflows provide a reviewable visual contract before application work begins.</p></div>
-              <div class="card"><h3>Test skills</h3><p>Feature-test and Playwright workflows generate focused evidence for behavior, validation, and browser journeys.</p></div>
-              <div class="card"><h3>Why it matters</h3><p>Skills encode team conventions so the agent follows the same delivery path each time.</p></div>
+            <div class="lanes">
+              <div class="lane reveal"><strong>Design</strong><span>Generate and manage Stitch visual contracts before implementation.</span></div>
+              <div class="lane reveal" style="--delay: 100ms"><strong>Build</strong><span><code>build-dev-tool-feature</code> turns an approved requirement into a scoped delivery workflow.</span></div>
+              <div class="lane reveal" style="--delay: 200ms"><strong>Prove</strong><span>Feature and Playwright skills produce focused behavior and browser evidence.</span></div>
+              <div class="lane reveal" style="--delay: 300ms"><strong>Release</strong><span>Manual-preview guidance preserves the pull-request and validation handoff.</span></div>
             </div>
           </div>
-          <div class="footer"><span>.agents/skills/ and .codex/skills/</span><span>4 / 11</span></div>
+          <div class="footer"><span>.agents/skills/ and .codex/skills/</span><span>4 / 12</span></div>
         </article>
 
         <article class="slide">
@@ -159,7 +185,7 @@
               </tbody>
             </table>
           </div>
-          <div class="footer"><span>Repository-local instructions, not hidden behavior</span><span>5 / 11</span></div>
+          <div class="footer"><span>Repository-local instructions, not hidden behavior</span><span>5 / 12</span></div>
         </article>
 
         <article class="slide">
@@ -171,7 +197,7 @@
             </div>
             <p class="lead">Production deployment is outside this workflow. New database work uses a new immutable migration; secrets never enter client code or commits.</p>
           </div>
-          <div class="footer"><span>AGENTS.md</span><span>6 / 11</span></div>
+          <div class="footer"><span>AGENTS.md</span><span>6 / 12</span></div>
         </article>
 
         <article class="slide">
@@ -186,12 +212,28 @@
         Zod validation  →  server-only repository  →  Supabase / Postgres</div>
             <p class="lead">Route pages stay thin. <code>lib/tools.ts</code> is the canonical registry for tools and navigation.</p>
           </div>
-          <div class="footer"><span>ARCHITECTURE.md</span><span>7 / 11</span></div>
+          <div class="footer"><span>ARCHITECTURE.md</span><span>7 / 12</span></div>
         </article>
 
         <article class="slide">
           <div>
-            <p class="eyebrow">07 / Repository map</p>
+            <p class="eyebrow">07 / Example delivery</p>
+            <h2>A small change has a clear path.</h2>
+            <div class="example">
+              <div class="card reveal"><h3>Requirement</h3><p>Add a UUID v7 option with browser-local generation.</p></div>
+              <div class="example-arrow reveal" style="--delay: 110ms">→</div>
+              <div class="card reveal" style="--delay: 200ms"><h3>Implementation</h3><p><code>features/uuid/</code> owns behavior; a thin route presents it; the tool registry adds navigation.</p></div>
+              <div class="example-arrow reveal" style="--delay: 310ms">→</div>
+              <div class="card reveal" style="--delay: 400ms"><h3>Evidence</h3><p>Unit, component, and browser tests; then review, pull request, and preview validation.</p></div>
+            </div>
+            <p class="lead reveal" style="--delay: 520ms">This is the pattern behind the delivered UUID Generator feature.</p>
+          </div>
+          <div class="footer"><span>REQ-005 delivery pattern</span><span>8 / 12</span></div>
+        </article>
+
+        <article class="slide">
+          <div>
+            <p class="eyebrow">08 / Repository map</p>
             <h2>Where work belongs.</h2>
             <div class="grid three">
               <div class="card"><h3>App and UI</h3><p><code>app/</code> routes and layouts<br /><code>components/</code> shared presentation<br /><code>features/</code> owned behavior</p></div>
@@ -199,12 +241,12 @@
               <div class="card"><h3>Delivery evidence</h3><p><code>requirements/</code> scope<br /><code>docs/</code> status and reports<br /><code>.stitch/</code> reviewed designs</p></div>
             </div>
           </div>
-          <div class="footer"><span>README.md repository map</span><span>8 / 11</span></div>
+          <div class="footer"><span>README.md repository map</span><span>9 / 12</span></div>
         </article>
 
         <article class="slide">
           <div>
-            <p class="eyebrow">08 / Git story</p>
+            <p class="eyebrow">09 / Git story</p>
             <h2>One week of visible delivery.</h2>
             <div class="grid">
               <div class="card"><h3>August 19–20</h3><p>Repository foundation, quality gates, requirements, and agent workflow were established.</p></div>
@@ -213,12 +255,12 @@
               <div class="card"><h3>Read history correctly</h3><p>Git records delivery events. Requirements and feature status are the source of truth for present scope and state.</p></div>
             </div>
           </div>
-          <div class="footer"><span>Local Git history on main</span><span>9 / 11</span></div>
+          <div class="footer"><span>Local Git history on main</span><span>10 / 12</span></div>
         </article>
 
         <article class="slide">
           <div>
-            <p class="eyebrow">09 / Today</p>
+            <p class="eyebrow">10 / Today</p>
             <h2>Current work at a glance.</h2>
             <table>
               <thead><tr><th>State</th><th>Work</th></tr></thead>
@@ -229,12 +271,12 @@
               </tbody>
             </table>
           </div>
-          <div class="footer"><span>docs/FEATURE_STATUS.md</span><span>10 / 11</span></div>
+          <div class="footer"><span>docs/FEATURE_STATUS.md</span><span>11 / 12</span></div>
         </article>
 
         <article class="slide">
           <div>
-            <p class="eyebrow">10 / Your first contribution</p>
+            <p class="eyebrow">11 / Your first contribution</p>
             <h2>Start small. Keep it traceable.</h2>
             <ul>
               <li>Read <code>README.md</code>, <code>AGENTS.md</code>, and <code>ARCHITECTURE.md</code>.</li>
@@ -244,7 +286,7 @@
               <li>Review scope and secrets, then deliver through a pull request and Vercel Preview.</li>
             </ul>
           </div>
-          <div class="footer"><span>Questions? Start with the requirement.</span><span>11 / 11</span></div>
+          <div class="footer"><span>Questions? Start with the requirement.</span><span>12 / 12</span></div>
         </article>
 
         <div class="controls" aria-label="Slide controls"><button type="button" id="previous" aria-label="Previous slide">←</button><button type="button" id="next" aria-label="Next slide">→</button></div>
