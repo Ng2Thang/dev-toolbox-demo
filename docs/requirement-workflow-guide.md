@@ -4,11 +4,12 @@ This guide describes the path from a feature idea to a delivered Dev Toolbox req
 
 ## Choose the right skill
 
-| Task | Skill |
-| --- | --- |
-| New user-facing tool or product feature | `build-dev-tool-feature` |
-| Sync one or more existing Stitch screens into the app | `stitch-screen-sync` |
-| Refine one route to match a Stitch screenshot | `stitch-screen-improve` |
+| Task                                                     | Skill                    |
+| -------------------------------------------------------- | ------------------------ |
+| New user-facing tool or product feature                  | `build-dev-tool-feature` |
+| Sync one or more existing Stitch screens into the app    | `stitch-screen-sync`     |
+| Refine one route to match a Stitch screenshot            | `stitch-screen-improve`  |
+| Generate browser E2E coverage for an implemented feature | `playwright-e2e-testing` |
 
 Use `build-dev-tool-feature` for a new tool. Use the Stitch skills when visual work is driven by
 an existing Stitch screen.
@@ -19,13 +20,13 @@ an existing Stitch screen.
 design-draft -> design-review -> design-approved -> implementing -> delivered
 ```
 
-| Status | Meaning |
-| --- | --- |
-| `design-draft` | The feature brief and requirement are being prepared. |
-| `design-review` | A Stitch design exists and is awaiting feedback or explicit approval. Do not implement code. |
-| `design-approved` | The user explicitly approved the latest UI. |
-| `implementing` | Application code, tests, and required data layers are being changed. |
-| `delivered` | Checks and delivery evidence, including PR/preview when available, are complete. |
+| Status            | Meaning                                                                                      |
+| ----------------- | -------------------------------------------------------------------------------------------- |
+| `design-draft`    | The feature brief and requirement are being prepared.                                        |
+| `design-review`   | A Stitch design exists and is awaiting feedback or explicit approval. Do not implement code. |
+| `design-approved` | The user explicitly approved the latest UI.                                                  |
+| `implementing`    | Application code, tests, and required data layers are being changed.                         |
+| `delivered`       | Checks and delivery evidence, including PR/preview when available, are complete.             |
 
 If a Stitch screen changes after approval, return to `design-review` and request approval again.
 
@@ -99,6 +100,7 @@ tests, and intentionally edited shared files such as `lib/tools.ts` or `app/glob
 npx prettier --write <feature-related-paths>
 npx prettier --check <feature-related-paths>
 npm run check
+npm run test:e2e
 ```
 
 Do not use repository-wide formatting for a focused feature unless explicitly requested. Review
@@ -106,7 +108,8 @@ the diff for secrets, accidental files, unrelated changes, and requirement cover
 
 ## 6. Deliver
 
-Run checks, create a branch and pull request when available, and validate the Vercel Preview.
+After unit/component/API and Playwright E2E tests pass, create a branch and pull request when
+available, and validate the Vercel Preview.
 Mark a requirement `delivered` only when required checks and delivery evidence exist. Production
 deployment and production migration require separate explicit authorization.
 

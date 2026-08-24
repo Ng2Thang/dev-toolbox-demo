@@ -59,17 +59,17 @@ docs/                    Demo context and task log
 `app/(toolbox)/layout.tsx` owns the shared `AppShell`; pages within that route group must not
 wrap themselves in another shell. The group does not affect URLs.
 
-| URL | Owner | Rendering boundary |
-| --- | --- | --- |
-| `/` | `features/home` | Server composition |
-| `/tools/*` | matching feature folder | Server page + interactive client component |
-| `/history` | `features/runs` repository | Dynamic server page |
-| `/api/runs` | `features/runs` | Route handler |
-Add a tool by updating `lib/tools.ts`, creating a focused `features/<tool>/` folder, and adding
-its thin route page beneath `app/(toolbox)/tools/`. `lib/tools.ts` is the canonical tool registry:
-each registered tool must appear on Home under **Popular tools** and in the AppShell sidebar. Keep
-the registry in insertion order (first added, first displayed); do not duplicate tool lists in
-individual screens or layout components.
+| URL                                                                                                | Owner                      | Rendering boundary                         |
+| -------------------------------------------------------------------------------------------------- | -------------------------- | ------------------------------------------ |
+| `/`                                                                                                | `features/home`            | Server composition                         |
+| `/tools/*`                                                                                         | matching feature folder    | Server page + interactive client component |
+| `/history`                                                                                         | `features/runs` repository | Dynamic server page                        |
+| `/api/runs`                                                                                        | `features/runs`            | Route handler                              |
+| Add a tool by updating `lib/tools.ts`, creating a focused `features/<tool>/` folder, and adding    |
+| its thin route page beneath `app/(toolbox)/tools/`. `lib/tools.ts` is the canonical tool registry: |
+| each registered tool must appear on Home under **Popular tools** and in the AppShell sidebar. Keep |
+| the registry in insertion order (first added, first displayed); do not duplicate tool lists in     |
+| individual screens or layout components.                                                           |
 
 ## Feature conventions
 
@@ -129,11 +129,14 @@ npm run format       # apply formatting
 npm run lint         # ESLint + Next.js rules; warnings fail
 npm run typecheck    # strict TypeScript
 npm run test         # Vitest unit, component, and route tests
+npm run test:e2e     # Playwright browser tests
 npm run check        # format check + lint + typecheck + test + production build
 ```
 
 CI runs `npm run check` on pull requests and pushes to `main`. Add or update tests whenever a
-feature changes observable behavior, validation, or data access.
+feature changes observable behavior, validation, or data access. CI then runs the Chromium
+Playwright smoke suite. Browser tests should exercise critical user journeys with deterministic
+mocked network responses; real persistence integration belongs in a dedicated test environment.
 
 ## Agent change checklist
 

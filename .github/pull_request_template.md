@@ -26,6 +26,7 @@ Describe the user or delivery outcome and the reason for the change.
 - [ ] Unit tests
 - [ ] Component tests, when behavior is interactive
 - [ ] API/route tests, when a server boundary changes
+- [ ] Playwright E2E tests for the primary browser journey, when UI changes
 - [ ] `npm run check`
 - [ ] Desktop and narrow preview validation, when UI changes
 

@@ -18,6 +18,7 @@ The typed registry in `lib/tools.ts` is the source of truth for available tools 
 - Supabase/Postgres for optional saved-run persistence
 - Zod validation at the runs API boundary
 - Vitest, Testing Library, ESLint, and Prettier
+- Playwright for Chromium browser smoke tests
 
 ## Requirements and architecture
 
@@ -65,6 +66,15 @@ npx supabase db push
 
 `SUPABASE_SERVICE_ROLE_KEY` is server-only. Do not expose it in client components, browser variables, commits, or documentation.
 
+Install the Chromium browser once after dependencies are installed:
+
+```bash
+npx playwright install chromium
+```
+
+The E2E suite mocks ordinary saved-run API calls, so it does not write to Supabase. Reserve real
+persistence tests for a dedicated test environment.
+
 ## Commands
 
 ```bash
@@ -73,6 +83,8 @@ npm run format          # Apply Prettier formatting
 npm run lint            # Run ESLint
 npm run typecheck       # Run TypeScript checks
 npm run test            # Run the Vitest suite
+npm run test:e2e        # Run the Playwright Chromium E2E suite
+npm run test:e2e:ui     # Run E2E tests with the Playwright UI
 npm run test:report     # Generate timestamped test reports in docs/test-reports/
 npm run build           # Create a production build
 npm run check           # Run formatting, linting, types, tests, and build
@@ -105,6 +117,7 @@ This repository includes instruction packages (skills) under `.agents/skills/` a
 - `build-dev-tool-feature` - The default end-to-end workflow for a new Dev Toolbox feature: requirement, Stitch design, explicit UI approval, implementation, tests, pull request, and Vercel Preview.
 - `stitch-screen-to-feature` - Implements an existing approved Stitch screen as a Dev Toolbox route while preserving the repository architecture and design system.
 - `feature-test-generation` - Produces focused, evidence-based three-level feature tests from the requirement, approved UI, and implementation.
+- `playwright-e2e-testing` - Produces feature-owned Level 1–3 Playwright browser coverage without duplicating unit or route tests.
 
 ### Design support skills
 
