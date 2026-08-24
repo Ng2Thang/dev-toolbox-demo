@@ -17,12 +17,14 @@ HTML/CSS so they are accessible, editable, and accurate.
 
 Run `npm run slides:export` with Node.js 22 or newer to regenerate:
 
-- `exports/dev-toolbox-team-introduction.pptx` — a 16:9 PowerPoint deck.
+- `exports/dev-toolbox-team-introduction-editable.pptx` — a 16:9 deck with editable PowerPoint text,
+  sections, cards, tables, and diagrams.
 - `exports/slides/slide-01.png` through `slide-15.png` — high-fidelity slide images.
 
-Each PowerPoint slide uses its matching PNG as a full-bleed image. This preserves the HTML deck's
-layout, illustrations, and final animation state across PowerPoint versions. Update the HTML source,
-then rerun the command whenever slide content changes.
+The PowerPoint is assembled from native text boxes and shapes; only the two generated illustrations
+remain raster images. The PNGs are separate previews of the animated HTML deck and are not used as
+slide backgrounds. Update the HTML and exporter together, then rerun the command whenever slide
+content changes.
 
 ## Slide source
 

@@ -391,3 +391,12 @@ Completed: `npm run slides:export` now generates 15 PNGs and
 and delivery-example slides. Package inspection found 15 slide XML documents and 16 embedded media
 items in the 2.3 MB presentation. This export reflects the current HTML deck; the pending Stitch
 storyboard remains behind its explicit UI-approval gate.
+
+Correction: the first PowerPoint used each PNG as a full-slide image, which preserved fidelity but
+did not provide editable content. The exporter now recreates all 15 slides with native PowerPoint
+text boxes, sections, shapes, cards, tables, and workflow nodes. Only the two original illustrations
+remain images; the PNG files are preview artifacts only.
+
+Editable-package validation found 15 slide documents, 187 native editable text runs, and only three
+picture objects (the two original illustrations, with the hero reused). The corrected package is
+5.2 MB and is saved separately while the original flattened deck remains open and locked locally.
