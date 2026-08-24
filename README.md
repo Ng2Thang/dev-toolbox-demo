@@ -7,6 +7,7 @@ Dev Toolbox is a Next.js App Router application that collects small, browser-bas
 - **JWT Decoder** - Decodes and inspects compact JSON Web Tokens in the browser; it does not verify signatures.
 - **JSON Formatter** - Validates and pretty-prints JSON locally.
 - **Unix Timestamp Converter** - Converts Unix timestamps to readable dates and dates back to epoch values.
+- **UUID Generator** - Generates UUID v1, v4, and v7 values locally.
 - **Saved runs** - Successful tool runs can be stored in Supabase and viewed at `/history`.
 
 The typed registry in `lib/tools.ts` is the source of truth for available tools and sidebar navigation. When adding a tool, update both the registry and the **Included tools** list above so this README remains accurate.
@@ -24,7 +25,7 @@ The typed registry in `lib/tools.ts` is the source of truth for available tools 
 
 Feature requirements live in [`requirements/`](requirements/); their front matter records each feature's current design and implementation status. Read [ARCHITECTURE.md](ARCHITECTURE.md) before changing application code - it defines routing, feature ownership, client/server boundaries, persistence, security, and quality conventions.
 
-The current requirements cover the home screen, JWT Decoder, JSON Formatter, Unix Timestamp Converter, and a future local-only version that removes saved-run persistence.
+The current requirements cover the home screen, JWT Decoder, JSON Formatter, Unix Timestamp Converter, UUID Generator, and a future local-only version that removes saved-run persistence.
 
 ## Architecture alignment
 
@@ -102,10 +103,15 @@ lib/                    Shared helpers and the typed tool registry
 requirements/           Product requirements and UI-approval state
 supabase/migrations/    Immutable, ordered database migrations
 test/                   Shared test setup
+e2e/                    Feature-owned Playwright specs, fixtures, and helpers
 docs/                   Architecture, feature status, task log, and reports
 scripts/                Project diagnostics and test-report utilities
+DESIGN.md               Canonical application design-system guidance
+.stitch/                Stitch metadata and reviewed HTML/PNG design evidence
 .agents/skills/         Repository-scoped workflows
 .codex/skills/          Repository-scoped feature and test workflows
+.codex/rules/           Repository-scoped Codex rules
+.github/workflows/      Continuous-integration workflows
 ```
 
 ## Skills and agent workflow
@@ -118,6 +124,7 @@ This repository includes instruction packages (skills) under `.agents/skills/` a
 - `stitch-screen-to-feature` - Implements an existing approved Stitch screen as a Dev Toolbox route while preserving the repository architecture and design system.
 - `feature-test-generation` - Produces focused, evidence-based three-level feature tests from the requirement, approved UI, and implementation.
 - `playwright-e2e-testing` - Produces feature-owned Level 1–3 Playwright browser coverage without duplicating unit or route tests.
+- `manual-vercel-deploy` - Validates an explicitly requested Vercel Preview; it never promotes production.
 
 ### Design support skills
 

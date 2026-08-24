@@ -1,5 +1,14 @@
 # REQ-001 task log
 
+## Repository structure documentation alignment
+
+1. Reconcile the README and architecture maps with the E2E, Stitch, Codex rules,
+   CI, and design-system paths that now exist in the repository.
+2. Confirm the documented `npm run format` command and include the delivered UUID
+   Generator in the README inventory.
+3. Make root `DESIGN.md` the canonical design-system document and record that the
+   existing Home implementation still needs retained Stitch evidence and approval.
+
 ## Playwright E2E testing plan
 
 1. Add Playwright Chromium configuration and deterministic smoke coverage for navigation and the

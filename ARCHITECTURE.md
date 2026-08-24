@@ -48,10 +48,17 @@ lib/
   tools.ts               Typed tool and navigation registry
 
 test/                    Shared Vitest setup
+e2e/                     Feature-owned Playwright specs, fixtures, and helpers
 supabase/migrations/     Immutable, ordered database migrations
 requirements/            Product requirements given to agents
 docs/                    Demo context and task log
-.agents/skills/           Repository-scoped Codex feature workflows
+scripts/                 Project diagnostics and test-report utilities
+DESIGN.md                Canonical application design-system guidance
+.stitch/                 Stitch metadata and reviewed HTML/PNG design evidence
+.agents/skills/          Repository-scoped agent workflows
+.codex/skills/           Repository-scoped Codex feature and test workflows
+.codex/rules/            Repository-scoped Codex rules
+.github/workflows/       Continuous-integration workflows
 ```
 
 ## Route model
@@ -125,7 +132,7 @@ future screen sync does not overwrite application logic.
 Run these commands after relevant changes:
 
 ```bash
-npm run format       # apply formatting
+npm run format       # apply formatting to checked application files
 npm run lint         # ESLint + Next.js rules; warnings fail
 npm run typecheck    # strict TypeScript
 npm run test         # Vitest unit, component, and route tests
