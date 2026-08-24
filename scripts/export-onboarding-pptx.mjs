@@ -9,7 +9,13 @@ const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const onboarding = join(root, 'docs', 'onboarding');
 const exportDirectory = join(onboarding, 'exports');
 const previewDirectory = join(exportDirectory, 'slides');
-const presentationPath = join(exportDirectory, 'dev-toolbox-team-introduction-editable.pptx');
+const isVietnamese = process.argv.includes('--vi');
+const presentationPath = join(
+  exportDirectory,
+  isVietnamese
+    ? 'dev-toolbox-team-introduction-vi-editable.pptx'
+    : 'dev-toolbox-team-introduction-editable.pptx',
+);
 const heroImage = join(onboarding, 'assets', 'codex-toolbox-hero.png');
 const collaborationImage = join(onboarding, 'assets', 'human-codex-collaboration.png');
 
@@ -17,10 +23,16 @@ const pptx = new PptxGenJS();
 pptx.layout = 'LAYOUT_WIDE';
 pptx.author = 'Dev Toolbox team';
 pptx.company = 'Dev Toolbox';
-pptx.subject = 'Repository and Codex team onboarding';
-pptx.title = 'Dev Toolbox — Team Introduction';
-pptx.lang = 'en-US';
-pptx.theme = { headFontFace: 'Aptos Display', bodyFontFace: 'Aptos', lang: 'en-US' };
+pptx.subject = isVietnamese
+  ? 'Giới thiệu kho mã nguồn và cách cộng tác với Codex'
+  : 'Repository and Codex team onboarding';
+pptx.title = isVietnamese ? 'Dev Toolbox — Giới thiệu đội ngũ' : 'Dev Toolbox — Team Introduction';
+pptx.lang = isVietnamese ? 'vi-VN' : 'en-US';
+pptx.theme = {
+  headFontFace: 'Aptos Display',
+  bodyFontFace: 'Aptos',
+  lang: isVietnamese ? 'vi-VN' : 'en-US',
+};
 pptx.defineSlideMaster({
   title: 'DEV_TOOLBOX',
   background: { color: 'F8FAFC' },
@@ -55,8 +67,258 @@ const C = {
   white: 'FFFFFF',
 };
 
+const vietnameseReplacements = [
+  ['Team onboarding', 'Hội nhập đội ngũ'],
+  ['Why', 'Lý do'],
+  ['Product', 'Sản phẩm'],
+  ['Difference', 'Khác biệt'],
+  ['Collaboration', 'Cộng tác'],
+  ['Instructions', 'Chỉ dẫn'],
+  ['Real feature', 'Tính năng thực tế'],
+  ['Data flow', 'Luồng dữ liệu'],
+  ['Ownership', 'Phân quyền'],
+  ['Quality', 'Chất lượng'],
+  ['Security', 'Bảo mật'],
+  ['Current state', 'Trạng thái hiện tại'],
+  ['First 30 minutes', '30 phút đầu tiên'],
+  ['Before you start', 'Trước khi bắt đầu'],
+  ['Repository introduction', 'Giới thiệu kho mã nguồn'],
+  [
+    'Useful browser tools. A visible delivery system. A repository designed for people and Codex to work together.',
+    'Các công cụ trình duyệt hữu ích. Quy trình bàn giao minh bạch. Kho mã nguồn được thiết kế để con người và Codex cùng cộng tác.',
+  ],
+  [
+    'Developer chores should feel instant.',
+    'Các tác vụ nhỏ của lập trình viên nên được xử lý tức thì.',
+  ],
+  ['Product motivation', 'Động lực sản phẩm'],
+  ['Too much context switching', 'Chuyển đổi ngữ cảnh quá nhiều'],
+  [
+    'Small conversions often send developers through tabs, snippets, and untrusted sites.',
+    'Những chuyển đổi nhỏ thường khiến lập trình viên phải mở nhiều tab, đoạn mã và trang web không đáng tin cậy.',
+  ],
+  ['Sensitive input', 'Dữ liệu đầu vào nhạy cảm'],
+  [
+    'Tokens and payloads should remain in the browser whenever persistence is unnecessary.',
+    'Token và payload nên ở lại trong trình duyệt khi không cần lưu trữ.',
+  ],
+  ['Repeated team work', 'Công việc lặp lại trong đội'],
+  [
+    'A shared toolbox gives common tasks one predictable, testable home.',
+    'Một bộ công cụ chung tạo ra nơi xử lý thống nhất, dễ dự đoán và kiểm thử.',
+  ],
+  ['Meet the toolbox through examples.', 'Khám phá bộ công cụ qua các ví dụ.'],
+  ['Browser-first utilities', 'Tiện ích ưu tiên trình duyệt'],
+  ['Inspect header and payload.', 'Kiểm tra header và payload.'],
+  ['Validate and pretty-print.', 'Kiểm tra và định dạng dễ đọc.'],
+  ['Convert in both directions.', 'Chuyển đổi theo cả hai chiều.'],
+  ['Create v1, v4, or v7 values.', 'Tạo giá trị v1, v4 hoặc v7.'],
+  ['The repository stores more than code.', 'Kho mã nguồn lưu trữ nhiều hơn code.'],
+  ['Requirement → evidence', 'Yêu cầu → bằng chứng'],
+  ['Requirement', 'Yêu cầu'],
+  [
+    'Versioned scope and acceptance criteria.',
+    'Phạm vi và tiêu chí chấp nhận được quản lý phiên bản.',
+  ],
+  ['Visual contract', 'Cam kết giao diện'],
+  ['Stitch evidence and explicit UI approval.', 'Bằng chứng Stitch và phê duyệt UI rõ ràng.'],
+  ['Implementation', 'Hiện thực hóa'],
+  [
+    'Feature-owned behavior with clear boundaries.',
+    'Hành vi thuộc sở hữu tính năng với ranh giới rõ ràng.',
+  ],
+  ['Delivery evidence', 'Bằng chứng bàn giao'],
+  ['Tests, pull request, and preview status.', 'Kiểm thử, pull request và trạng thái preview.'],
+  [
+    'Traceability shows what was requested, approved, changed, and verified.',
+    'Khả năng truy vết cho biết điều gì đã được yêu cầu, phê duyệt, thay đổi và xác minh.',
+  ],
+  [
+    'Codex is a teammate, not autopilot.',
+    'Codex là đồng đội, không phải chế độ tự động hoàn toàn.',
+  ],
+  ['People approve; Codex delivers evidence', 'Con người phê duyệt; Codex cung cấp bằng chứng'],
+  ['People own', 'Con người chịu trách nhiệm'],
+  ['Scope and priority', 'Phạm vi và ưu tiên'],
+  ['UI approval', 'Phê duyệt UI'],
+  ['Risk decisions', 'Quyết định rủi ro'],
+  ['Final review', 'Đánh giá cuối cùng'],
+  ['Codex can', 'Codex có thể'],
+  ['Inspect context', 'Đọc hiểu ngữ cảnh'],
+  ['Implement changes', 'Hiện thực thay đổi'],
+  ['Run checks', 'Chạy kiểm tra'],
+  ['Prepare evidence', 'Chuẩn bị bằng chứng'],
+  ['Five layers answer five different questions.', 'Năm lớp trả lời năm câu hỏi khác nhau.'],
+  ['Explicit, reviewable context', 'Ngữ cảnh rõ ràng, có thể đánh giá'],
+  ['What did we agree to build?', 'Chúng ta đã thống nhất xây dựng điều gì?'],
+  ['Skill', 'Kỹ năng'],
+  [
+    'How should Codex perform this kind of work?',
+    'Codex nên thực hiện loại công việc này như thế nào?',
+  ],
+  ['Rule', 'Quy tắc'],
+  [
+    'What must always be allowed, required, or prevented?',
+    'Điều gì luôn được phép, bắt buộc hoặc phải ngăn chặn?',
+  ],
+  ['Architecture', 'Kiến trúc'],
+  ['Where does the implementation belong?', 'Phần hiện thực nên được đặt ở đâu?'],
+  ['Test evidence', 'Bằng chứng kiểm thử'],
+  ['How do we know the result works?', 'Làm sao biết kết quả hoạt động đúng?'],
+  ['One request becomes a delivery.', 'Một yêu cầu trở thành một lần bàn giao.'],
+  ['UUID Generator case study', 'Ví dụ thực tế: UUID Generator'],
+  ['UI approved', 'UI được duyệt'],
+  ['test levels', 'cấp kiểm thử'],
+  ['Domain', 'Nghiệp vụ'],
+  ['UUID v1, v4, and v7 generation logic.', 'Logic tạo UUID v1, v4 và v7.'],
+  ['Interaction', 'Tương tác'],
+  [
+    'Generate, select version, copy, clear, and save.',
+    'Tạo, chọn phiên bản, sao chép, xóa và lưu.',
+  ],
+  ['Evidence', 'Bằng chứng'],
+  [
+    'Requirement, Stitch HTML/PNG, tests, commit, PR, preview.',
+    'Yêu cầu, Stitch HTML/PNG, kiểm thử, commit, PR và preview.',
+  ],
+  [
+    'Most work stays local. Saving is explicit.',
+    'Phần lớn xử lý ở máy người dùng. Việc lưu là chủ động.',
+  ],
+  ['DEFAULT PATH', 'LUỒNG MẶC ĐỊNH'],
+  ['Browser-local tool', 'Công cụ chạy trong trình duyệt'],
+  [
+    'Input → feature logic → result. No server request is needed for decoding, formatting, conversion, or generation.',
+    'Đầu vào → logic tính năng → kết quả. Không cần gọi máy chủ để giải mã, định dạng, chuyển đổi hoặc tạo dữ liệu.',
+  ],
+  ['OPTIONAL PATH', 'LUỒNG TÙY CHỌN'],
+  ['Saved run', 'Lần chạy được lưu'],
+  [
+    'A successful result can be validated by the API and persisted through a server-only repository.',
+    'Kết quả thành công có thể được API kiểm tra và lưu qua repository chỉ chạy phía máy chủ.',
+  ],
+  ['Input', 'Đầu vào'],
+  ['Browser logic', 'Logic trình duyệt'],
+  ['Result', 'Kết quả'],
+  ['Where should I change code?', 'Tôi nên thay đổi code ở đâu?'],
+  ['Feature-first ownership', 'Phân quyền theo tính năng'],
+  ['Task', 'Tác vụ'],
+  ['Primary location', 'Vị trí chính'],
+  ['Remember', 'Lưu ý'],
+  ['Add a developer tool', 'Thêm công cụ lập trình'],
+  ['Add focused tests and Stitch evidence.', 'Thêm kiểm thử tập trung và bằng chứng Stitch.'],
+  ['Change shared navigation', 'Thay đổi điều hướng dùng chung'],
+  ['The registry remains the source of truth.', 'Registry vẫn là nguồn dữ liệu chuẩn.'],
+  ['Change saved runs', 'Thay đổi lịch sử đã lưu'],
+  ['Keep service-role access server-only.', 'Giữ quyền service-role chỉ ở máy chủ.'],
+  ['Change visual language', 'Thay đổi ngôn ngữ thiết kế'],
+  ['Obtain explicit UI approval first.', 'Cần phê duyệt UI rõ ràng trước.'],
+  ['Confidence is layered.', 'Độ tin cậy được xây theo nhiều lớp.'],
+  ['Core behavior', 'Hành vi cốt lõi'],
+  [
+    'Does the tool produce the right result for normal input?',
+    'Công cụ có tạo kết quả đúng với đầu vào thông thường không?',
+  ],
+  ['Interaction', 'Tương tác'],
+  [
+    'Do validation, controls, copy, clear, and save behave correctly?',
+    'Kiểm tra dữ liệu, điều khiển, sao chép, xóa và lưu có hoạt động đúng không?',
+  ],
+  ['Visible user states', 'Trạng thái hiển thị cho người dùng'],
+  ['Resilience', 'Khả năng phục hồi'],
+  [
+    'Can the user recover from malformed input, API failure, or repeated actions?',
+    'Người dùng có thể phục hồi sau dữ liệu lỗi, lỗi API hoặc thao tác lặp lại không?',
+  ],
+  ['Error recovery', 'Khôi phục sau lỗi'],
+  ['The server boundary is deliberate.', 'Ranh giới máy chủ được thiết kế có chủ đích.'],
+  ['Security boundary', 'Ranh giới bảo mật'],
+  ['Inside the trusted server boundary', 'Bên trong ranh giới máy chủ tin cậy'],
+  ['Zod validates external requests', 'Zod kiểm tra các yêu cầu từ bên ngoài'],
+  ['Repository owns Supabase access', 'Repository quản lý truy cập Supabase'],
+  ['Migrations are immutable and ordered', 'Migration bất biến và có thứ tự'],
+  ['Never cross this line', 'Không bao giờ vượt qua ranh giới này'],
+  [
+    'must not enter client components, public variables, commits, screenshots, or generated design evidence.',
+    'không được xuất hiện trong component phía client, biến công khai, commit, ảnh chụp hoặc bằng chứng thiết kế được tạo.',
+  ],
+  [
+    'Review every diff and artifact for secrets before delivery.',
+    'Kiểm tra mọi diff và artifact để tránh lộ bí mật trước khi bàn giao.',
+  ],
+  ['Use the live status index.', 'Sử dụng bảng trạng thái hiện hành.'],
+  ['Current state, not permanent history', 'Trạng thái hiện tại, không phải lịch sử cố định'],
+  ['DELIVERED', 'ĐÃ BÀN GIAO'],
+  ['Delivery evidence is recorded.', 'Bằng chứng bàn giao đã được ghi lại.'],
+  ['IN PROGRESS', 'ĐANG THỰC HIỆN'],
+  [
+    'Check each requirement for its exact next action.',
+    'Kiểm tra từng yêu cầu để biết hành động tiếp theo chính xác.',
+  ],
+  ['Source of truth', 'Nguồn dữ liệu chuẩn'],
+  [
+    'contains owners, blockers, approval state, and evidence.',
+    'chứa người phụ trách, trở ngại, trạng thái phê duyệt và bằng chứng.',
+  ],
+  [
+    'Avoid memorizing this slide—the checked-in status file is designed to change.',
+    'Đừng ghi nhớ slide này—tệp trạng thái trong kho mã được thiết kế để thay đổi.',
+  ],
+  ['Follow one feature end to end.', 'Theo dõi một tính năng từ đầu đến cuối.'],
+  ['A guided repository walk', 'Hướng dẫn khám phá kho mã nguồn'],
+  ['Orient', 'Định hướng'],
+  ['Read README, AGENTS, and architecture.', 'Đọc README, AGENTS và tài liệu kiến trúc.'],
+  ['Run', 'Chạy ứng dụng'],
+  ['Start the app and open the UUID tool.', 'Khởi động ứng dụng và mở công cụ UUID.'],
+  ['Trace', 'Truy vết'],
+  [
+    'Find its route, feature logic, registry entry, and tests.',
+    'Tìm route, logic tính năng, mục registry và kiểm thử.',
+  ],
+  ['Prove', 'Xác minh'],
+  [
+    'Run a focused test and inspect requirement evidence.',
+    'Chạy kiểm thử tập trung và xem bằng chứng yêu cầu.',
+  ],
+  ['Ask four useful questions.', 'Đặt bốn câu hỏi hữu ích.'],
+  ['Good questions prevent rework', 'Câu hỏi tốt giúp tránh làm lại'],
+  ['Is the requirement ready?', 'Yêu cầu đã sẵn sàng chưa?'],
+  [
+    'Check its status, acceptance criteria, and blockers.',
+    'Kiểm tra trạng thái, tiêu chí chấp nhận và trở ngại.',
+  ],
+  ['Is the UI approved?', 'UI đã được phê duyệt chưa?'],
+  [
+    'Application implementation waits for explicit approval.',
+    'Việc hiện thực ứng dụng phải chờ phê duyệt rõ ràng.',
+  ],
+  ['Does data stay local?', 'Dữ liệu có ở lại máy người dùng không?'],
+  [
+    'Add persistence only when the requirement needs it.',
+    'Chỉ thêm lưu trữ khi yêu cầu thực sự cần.',
+  ],
+  ['What is the smallest change?', 'Thay đổi nhỏ nhất cần thiết là gì?'],
+  ['Keep scope and review cost easy to understand.', 'Giữ phạm vi và chi phí đánh giá dễ hiểu.'],
+  ['Takeaway', 'Điểm chính'],
+  ['Start with the requirement.', 'Bắt đầu từ yêu cầu.'],
+  ['Finish with evidence.', 'Kết thúc bằng bằng chứng.'],
+  [
+    'Everything between those points should be understandable to the next teammate.',
+    'Mọi thứ ở giữa hai điểm đó phải dễ hiểu với đồng đội tiếp theo.',
+  ],
+  ['Questions and discussion', 'Câu hỏi và thảo luận'],
+];
+
+function translate(value) {
+  if (!isVietnamese || typeof value !== 'string') return value;
+  return vietnameseReplacements.reduce(
+    (translated, [english, vietnamese]) => translated.split(english).join(vietnamese),
+    value,
+  );
+}
+
 function addText(slide, value, x, y, w, h, options = {}) {
-  slide.addText(value, {
+  slide.addText(translate(value), {
     x,
     y,
     w,
@@ -90,7 +352,7 @@ function addBox(slide, x, y, w, h, options = {}) {
 
 function base(eyebrow, title, footer) {
   const slide = pptx.addSlide('DEV_TOOLBOX');
-  addText(slide, eyebrow.toUpperCase(), 0.72, 0.46, 11.8, 0.25, {
+  addText(slide, translate(eyebrow).toUpperCase(), 0.72, 0.46, 11.8, 0.25, {
     size: 10,
     color: C.blue,
     bold: true,
@@ -393,7 +655,7 @@ addText(
         'DESIGN.md and Stitch artifacts',
         'Obtain explicit UI approval first.',
       ],
-    ],
+    ].map((row) => row.map(translate)),
     {
       x: 0.72,
       y: 1.72,
@@ -541,33 +803,38 @@ cardsSlide(
   slide.addImage({ path: heroImage, x: 6, y: 0.85, w: 6.25, h: 5.45 });
 }
 
-await mkdir(previewDirectory, { recursive: true });
+await mkdir(exportDirectory, { recursive: true });
 await pptx.writeFile({ fileName: presentationPath });
 
 // These PNGs preview the animated HTML deck; the editable PPTX does not use them.
-const browser = await chromium.launch({ headless: true });
-try {
-  const page = await browser.newPage({ viewport: { width: 1600, height: 900 } });
-  await page.goto(pathToFileURL(join(onboarding, 'dev-toolbox-team-introduction.html')).href, {
-    waitUntil: 'load',
-  });
-  await page.evaluate(() => document.fonts.ready);
-  const count = await page.locator('.slide').count();
-  for (let index = 0; index < count; index += 1) {
-    await page.evaluate(
-      (activeIndex) =>
-        document
-          .querySelectorAll('.slide')
-          .forEach((item, itemIndex) => item.classList.toggle('active', itemIndex === activeIndex)),
-      index,
-    );
-    await page.waitForTimeout(800);
-    await page.locator('.deck').screenshot({
-      path: join(previewDirectory, `slide-${String(index + 1).padStart(2, '0')}.png`),
+if (!isVietnamese) {
+  await mkdir(previewDirectory, { recursive: true });
+  const browser = await chromium.launch({ headless: true });
+  try {
+    const page = await browser.newPage({ viewport: { width: 1600, height: 900 } });
+    await page.goto(pathToFileURL(join(onboarding, 'dev-toolbox-team-introduction.html')).href, {
+      waitUntil: 'load',
     });
+    await page.evaluate(() => document.fonts.ready);
+    const count = await page.locator('.slide').count();
+    for (let index = 0; index < count; index += 1) {
+      await page.evaluate(
+        (activeIndex) =>
+          document
+            .querySelectorAll('.slide')
+            .forEach((item, itemIndex) =>
+              item.classList.toggle('active', itemIndex === activeIndex),
+            ),
+        index,
+      );
+      await page.waitForTimeout(800);
+      await page.locator('.deck').screenshot({
+        path: join(previewDirectory, `slide-${String(index + 1).padStart(2, '0')}.png`),
+      });
+    }
+  } finally {
+    await browser.close();
   }
-} finally {
-  await browser.close();
 }
 
 console.log(`Exported 15 editable slides to ${presentationPath}`);

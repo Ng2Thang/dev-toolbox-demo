@@ -19,6 +19,8 @@ Run `npm run slides:export` with Node.js 22 or newer to regenerate:
 
 - `exports/dev-toolbox-team-introduction-editable.pptx` — a 16:9 deck with editable PowerPoint text,
   sections, cards, tables, and diagrams.
+- `exports/dev-toolbox-team-introduction-vi-editable.pptx` — the matching editable Vietnamese deck,
+  generated with `npm run slides:export:vi`.
 - `exports/slides/slide-01.png` through `slide-15.png` — high-fidelity slide images.
 
 The PowerPoint is assembled from native text boxes and shapes; only the two generated illustrations

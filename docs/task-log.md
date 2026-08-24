@@ -400,3 +400,9 @@ remain images; the PNG files are preview artifacts only.
 Editable-package validation found 15 slide documents, 187 native editable text runs, and only three
 picture objects (the two original illustrations, with the hero reused). The corrected package is
 5.2 MB and is saved separately while the original flattened deck remains open and locked locally.
+
+## REQ-006 Vietnamese PowerPoint
+
+Added a reproducible `npm run slides:export:vi` variant that applies a reviewed Vietnamese content
+map to the same native PowerPoint layout. The resulting 15-slide deck retains editable text, cards,
+tables, workflow nodes, and the three intentional illustration placements.

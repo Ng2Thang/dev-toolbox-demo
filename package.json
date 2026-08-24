@@ -21,6 +21,7 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "slides:export": "node scripts/export-onboarding-pptx.mjs",
+    "slides:export:vi": "node scripts/export-onboarding-pptx.mjs --vi",
     "doctor": "node scripts/doctor.mjs",
     "doctor:offline": "node scripts/doctor.mjs --offline",
     "check": "npm run format:check && npm run lint && npm run typecheck && npm run test && npm run build"
