@@ -141,7 +141,12 @@ user.
 After generation, download the HTML and screenshot urls from `outputComponents`
 to the `.stitch/designs` directory.
 
-- **Naming**: Use the screen ID or a descriptive slug for the filename.
+- **Naming**: Use the feature's descriptive kebab-case slug for both assets,
+  never the opaque Stitch screen ID. Derive it from the feature title or route;
+  for example, **UUID Generator** at `/tools/uuid` is
+  `uuid-generator.html` and `uuid-generator.png`.
+- **Traceability**: Record the Stitch screen ID separately in
+  `.stitch/metadata.json`; it must not be used as the artifact filename.
 - **Tools**: Use `curl -o` via `run_command` or similar.
 - **Directory**: Ensure `.stitch/designs` exists.
 
@@ -196,7 +201,12 @@ user.
 Download the HTML and screenshot urls from `outputComponents` to the
 `.stitch/designs` directory.
 
-- **Naming**: Use the screen ID or a descriptive slug for the filename.
+- **Naming**: Use the feature's descriptive kebab-case slug for both assets,
+  never the opaque Stitch screen ID. Derive it from the feature title or route;
+  for example, **UUID Generator** at `/tools/uuid` is
+  `uuid-generator.html` and `uuid-generator.png`.
+- **Traceability**: Record the Stitch screen ID separately in
+  `.stitch/metadata.json`; it must not be used as the artifact filename.
 - **Tools**: Use `curl -o` via `run_command` or similar.
 - **Directory**: Ensure `.stitch/designs` exists.
 
@@ -242,7 +252,14 @@ After editing, download the updated HTML and screenshot urls from
 `outputComponents` to the `.stitch/designs` directory, overwriting previous
 versions to ensure the local files reflect the latest edits.
 
-- **Naming**: Use the screen ID or a descriptive slug for the filename.
+- **Naming**: Use the feature's descriptive kebab-case slug for both assets,
+  never the opaque Stitch screen ID. Derive it from the feature title or route;
+  for example, **UUID Generator** at `/tools/uuid` is
+  `uuid-generator.html` and `uuid-generator.png`.
+- **Overwrite**: Replace the existing matching feature-named HTML and PNG pair
+  so it represents the latest version of that screen.
+- **Traceability**: Record the Stitch screen ID separately in
+  `.stitch/metadata.json`; it must not be used as the artifact filename.
 - **Tools**: Use `curl -o` via `run_command` or similar.
 - **Directory**: Ensure `.stitch/designs` exists.
 
@@ -304,7 +321,12 @@ user.
 Download the variant HTML and screenshot urls from `outputComponents` to the
 `.stitch/designs` directory.
 
-- **Naming**: Use the screen ID or a descriptive slug for the filename.
+- **Naming**: Use the feature's descriptive kebab-case slug plus a stable
+  variant suffix for both assets, never the opaque Stitch screen ID. For
+  example: `uuid-generator-variant-1.html` and
+  `uuid-generator-variant-1.png`.
+- **Traceability**: Record each Stitch screen ID separately in
+  `.stitch/metadata.json`; it must not be used as an artifact filename.
 - **Tools**: Use `curl -o` via `run_command` or similar.
 - **Directory**: Ensure `.stitch/designs` exists.
 

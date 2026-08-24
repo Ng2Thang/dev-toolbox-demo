@@ -20,6 +20,13 @@
       "title": "Unix Timestamp Converter - Refined",
       "route": "/tools/timestamp",
       "deviceType": "DESKTOP"
+    },
+    {
+      "id": "9526f5b6ba6b472f9d123d8a242389ca",
+      "title": "UUID Generator",
+      "route": "/tools/uuid",
+      "deviceType": "DESKTOP",
+      "artifactBasename": "uuid-generator"
     }
   ]
 }
