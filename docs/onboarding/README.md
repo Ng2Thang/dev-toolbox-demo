@@ -1,154 +1,113 @@
 # Dev Toolbox team introduction
 
-Presentation source for the repository onboarding deck. Open
-[`dev-toolbox-team-introduction.html`](dev-toolbox-team-introduction.html) in a browser, then use
-the arrow keys, spacebar, or on-screen controls to navigate.
+Open [`dev-toolbox-team-introduction.html`](dev-toolbox-team-introduction.html) in a browser. Use
+the arrow keys, spacebar, or on-screen controls to navigate. The deck is printable and includes a
+`prefers-reduced-motion` fallback.
 
-The visual deck includes an original hero illustration in `assets/codex-toolbox-hero.png`,
-progressive visual reveals, and a reduced-motion fallback. The illustration was generated with
-the built-in OpenAI image-generation workflow for this repository; it contains no text or logos.
+## Visual assets
 
-## Slide outline
+- `assets/codex-toolbox-hero.png` — modular Dev Toolbox hero illustration.
+- `assets/human-codex-collaboration.png` — human/Codex delivery partnership illustration.
 
----
+Both project-bound illustrations were created with the built-in OpenAI image-generation workflow.
+They contain no readable text, logos, or repository data. Workflow diagrams and examples remain
+HTML/CSS so they are accessible, editable, and accurate.
 
-# Dev Toolbox
+## Slide source
 
-## The team introduction
+### 1. Dev Toolbox
 
-Small browser-based developer utilities, built through a traceable Codex workflow.
+Useful browser tools, a visible delivery system, and a repository designed for people and Codex to
+work together.
 
----
+### 2. Why it exists
 
-# What we are building
+- Reduce context switching for small developer tasks.
+- Keep sensitive input in the browser when persistence is unnecessary.
+- Give repeated team work one predictable, testable home.
 
-- JWT Decoder, JSON Formatter, Unix Timestamp Converter, and UUID Generator
-- Browser-first tool behavior; optional saved-run persistence in Supabase
-- A practical demonstration of an autonomous, reviewable delivery process
+### 3. Meet the toolbox
 
----
+- JWT Decoder: inspect a compact token's header and payload.
+- JSON Formatter: validate and pretty-print JSON.
+- Unix Timestamp Converter: convert epoch values and dates in both directions.
+- UUID Generator: create UUID v1, v4, and v7 values.
 
-# Codex in this repository
+### 4. What makes the repository different
 
-Codex is the coding agent used to take scoped work from requirement to reviewable delivery.
-It reads repository instructions, inspects code, can use approved tools, implements changes,
-runs checks, and prepares delivery evidence. People remain responsible for scope, approvals, and
-review.
+The repository keeps the requirement, reviewed visual contract, implementation, tests, pull
+request, and preview evidence together so delivery is traceable.
 
-Official product context: <https://developers.openai.com/>.
+### 5. Codex is a teammate, not autopilot
 
----
+People own scope, priority, UI approval, risk decisions, and final review. Codex can inspect
+repository context, implement scoped changes, run checks, and prepare evidence. General product
+context is available in the [official OpenAI documentation](https://developers.openai.com/).
 
-# Skills turn repeatable work into workflows
+### 6. Five instruction layers
 
-Skills are task-specific instruction packages. This repository includes workflows for:
-
-- New-feature delivery (`build-dev-tool-feature`)
-- Stitch design generation and design-system management
-- Focused feature tests and Playwright E2E coverage
-- Implementing approved Stitch screens and validating manual previews
-
----
-
-# Rules make the workflow safe and consistent
-
-| Source | Purpose |
+| Layer | Question answered |
 | --- | --- |
-| `AGENTS.md` | Delivery contract: inspect, plan, implement, test, PR, preview |
-| `ARCHITECTURE.md` | Route ownership, client/server boundaries, persistence, security |
-| `.codex/rules/` | Local execution and pull-request constraints |
-| `requirements/` | Feature scope, status, acceptance criteria, design approval |
-| `docs/FEATURE_STATUS.md` | Compact handoff and milestone index |
+| Requirement | What did we agree to build? |
+| Skill | How should Codex perform this kind of work? |
+| Rule | What must always be allowed, required, or prevented? |
+| Architecture | Where does the implementation belong? |
+| Test evidence | How do we know the result works? |
 
----
+### 7. UUID Generator delivery example
 
-# A feature delivery loop
+`REQ-005 → Stitch screen → explicit UI approval → features/uuid/ → three test levels → PR #9`
 
-```text
-Requirement → architecture review → plan → Stitch design → explicit UI approval
-    → implementation → tests and npm run check → PR → Vercel Preview validation
-```
+The resulting evidence includes the requirement, Stitch HTML and PNG, domain logic, client
+interaction, tests, commit, pull request, and preview status.
 
-No production deployment belongs in this loop. A schema change requires a new immutable
-Supabase migration; secrets never belong in client code or commits.
+### 8. Local and saved-run paths
 
----
+Normal tool behavior stays in the browser: `input → feature logic → result`. Saving is optional:
+`POST /api/runs → Zod validation → server-only repository → Supabase`.
 
-# Application architecture
+### 9. Where code belongs
 
-```text
-Browser tool UI → feature-owned browser logic
-                     ↓ optional saved run
-                 POST /api/runs
-                     ↓
-        Zod validation → server-only repository → Supabase/Postgres
-```
-
-Thin route pages compose feature components. `lib/tools.ts` is the canonical tool and navigation
-registry.
-
----
-
-# Repository map
-
-```text
-app/                App Router pages, layouts, API routes
-components/         Shared shell and tool presentation
-features/           Feature logic, client components, unit/component tests
-lib/                Shared helpers and typed tool registry
-requirements/       Scope, acceptance criteria, approval state
-supabase/migrations/ Immutable database history
-e2e/                Playwright journeys and fixtures
-docs/               Status, task logs, onboarding, reports
-.stitch/            Reviewed visual-design evidence
-```
-
----
-
-# Git timeline: August 19–24, 2026
-
-- Repository foundation, quality gates, requirements, and agent workflows established
-- JWT delivery evidence and manual-preview controls added
-- Unix Timestamp Converter delivered in PR #8
-- UUID Generator delivered in PR #9
-- Playwright E2E coverage added and merged in PR #10
-
-Git history is evidence of delivery; requirements and feature status are the source of current
-scope and state.
-
----
-
-# Current work at a glance
-
-| State | Work |
+| Task | Primary location |
 | --- | --- |
-| Delivered | Unix Timestamp Converter; UUID Generator |
-| Implementing | JWT Decoder; JSON Formatter; this onboarding deck |
-| Design review/draft | Toolbox Home; local-only toolbox |
+| Add a tool | Feature folder, thin route, `lib/tools.ts`, focused tests |
+| Change shared navigation | `components/layout/`; keep the registry canonical |
+| Change saved runs | Runs feature, API, and a new migration when required |
+| Change visual language | `DESIGN.md` and reviewed Stitch evidence |
 
-See `docs/FEATURE_STATUS.md` for current owners, blockers, and delivery evidence.
+### 10. Layered quality
 
----
+- Level 1: correct core behavior.
+- Level 2: interaction, validation, and visible states.
+- Level 3: resilience and ordinary error recovery.
+- The repository combines Vitest, Playwright, and `npm run check`.
 
-# Your first contribution
+### 11. Security boundary
 
-1. Read `README.md`, `AGENTS.md`, and `ARCHITECTURE.md`.
-2. Choose one requirement and check its status and UI-approval state.
-3. Run `npm ci`, configure `.env.local` only if saved runs are needed, then use `npm run dev`.
-4. Follow the relevant skill, preserve feature boundaries, and run `npm run check`.
-5. Review the diff for secrets and scope, then deliver through a pull request and preview.
+Zod validates external requests, the server-only repository owns Supabase access, and migrations
+are immutable. `SUPABASE_SERVICE_ROLE_KEY` must never enter client code, public variables,
+commits, screenshots, or generated design artifacts.
 
----
+### 12. Current project state
 
-# Questions to bring to the team
+Use `docs/FEATURE_STATUS.md` for live owners, blockers, approval state, and delivery evidence. The
+slide intentionally avoids becoming a second detailed status source.
 
-- Which requirements are ready for review or implementation?
-- Who owns product approval and Vercel preview access?
-- Is persistence required for the work, or can it remain browser-local?
-- What is the smallest useful first change?
+### 13. First 30 minutes
 
----
+1. Read README, AGENTS, and architecture.
+2. Run the app and open the UUID tool.
+3. Trace its route, feature logic, registry entry, and tests.
+4. Run a focused test and inspect its requirement evidence.
 
-# Thank you
+### 14. Four questions before starting
 
-Start with the requirement, keep the work traceable, and make every change easy to review.
+- Is the requirement ready?
+- Is the UI explicitly approved?
+- Should data remain browser-local?
+- What is the smallest useful change?
+
+### 15. Takeaway
+
+Start with the requirement. Finish with evidence. Everything between those points should be
+understandable to the next teammate.

@@ -346,3 +346,20 @@ progressive animations with a `prefers-reduced-motion` fallback, and an explicit
 example. Structural review confirmed 12 opening and closing slide elements, keyboard navigation,
 accessible labels, no credential markers, and a clean diff check. Committed and pushed as
 `4d2e477`.
+
+## REQ-006 story-driven content refactor
+
+1. Reframe the deck around the product problem and practical tool examples.
+2. Clarify human versus Codex responsibilities and distinguish requirements, skills, rules,
+   architecture, and test evidence.
+3. Use REQ-005 as the real delivery case study; visualize local and persisted data paths, code
+   ownership, quality levels, and the security boundary.
+4. End with a time-boxed first-day repository exercise and four pre-work questions.
+
+Implemented as a 15-slide narrative with a second original illustration,
+`human-codex-collaboration.png`, plus accessible HTML/CSS diagrams and progressive motion.
+
+Browser validation used installed Chromium at 1280×720: 15 slides found, exactly one active slide,
+both illustration assets loaded at 1536-pixel natural width, next-slide navigation updated the
+document title to `2/15`, and no page errors were reported. The fully revealed animation state was
+visually reviewed. The deck retains keyboard, button, print, responsive, and reduced-motion paths.
