@@ -340,3 +340,9 @@ change.
 1. Add an original illustrated hero, animated progressive reveals, and a reduced-motion fallback.
 2. Replace text-heavy product and skills summaries with tool cards and workflow lanes.
 3. Add a concrete UUID Generator delivery example to make the repository workflow tangible.
+
+Completed: added the project-bound `codex-toolbox-hero.png` illustration, 12-slide visual deck,
+progressive animations with a `prefers-reduced-motion` fallback, and an explicit UUID delivery
+example. Structural review confirmed 12 opening and closing slide elements, keyboard navigation,
+accessible labels, no credential markers, and a clean diff check. Committed and pushed as
+`4d2e477`.

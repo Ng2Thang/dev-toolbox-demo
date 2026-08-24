@@ -46,6 +46,8 @@ Codex-enabled engineering workflow used to build it.
 - Validated with Node 24.14.0: ESLint passed, TypeScript check passed, 75 Vitest tests passed, and
   the production build passed.
 - Delivery commit: `88b580e` on `feature-006-repo-onboarding-deck`, pushed to `origin`.
+- Visual-refactor commit: `4d2e477`, adding the illustration, animated visual system, and UUID
+  delivery example; pushed to the same branch.
 - Blocker: `npm run check` currently fails at `format:check` because 69 pre-existing application
   files do not match the configured Prettier version. This documentation-only requirement does
   not modify those files; repository formatting-baseline ownership is needed to clear the gate.
