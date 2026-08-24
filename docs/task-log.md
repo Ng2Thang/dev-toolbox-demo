@@ -328,3 +328,9 @@ TypeScript, 75 Vitest tests, and the production build passed. `npm run check` re
 the initial Prettier check by 69 existing, out-of-scope application files; active Node 20.19.1 is
 also below the repository's documented Node 22 minimum. The requirement is recorded as `blocked`
 until the formatting baseline has an owner.
+
+Delivery update: commit `88b580e` was created through `scripts/commit.sh` and pushed to
+`origin/feature-006-repo-onboarding-deck`. Pull-request creation is blocked because `gh auth
+status` reports that the configured GitHub token is invalid. Re-authenticate with
+`gh auth refresh -h github.com`; no Vercel Preview is applicable for this static documentation-only
+change.

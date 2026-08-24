@@ -43,6 +43,10 @@ Codex-enabled engineering workflow used to build it.
 - Presentation: `docs/onboarding/dev-toolbox-team-introduction.html`
 - Validated with Node 24.14.0: ESLint passed, TypeScript check passed, 75 Vitest tests passed, and
   the production build passed.
+- Delivery commit: `88b580e` on `feature-006-repo-onboarding-deck`, pushed to `origin`.
 - Blocker: `npm run check` currently fails at `format:check` because 69 pre-existing application
   files do not match the configured Prettier version. This documentation-only requirement does
   not modify those files; repository formatting-baseline ownership is needed to clear the gate.
+- Pull-request blocker: the configured GitHub CLI account has an invalid token. Re-authenticate
+  with `gh auth refresh -h github.com` before creating the PR. A Vercel Preview is not applicable
+  because this change is static repository documentation and does not alter the deployed app.
