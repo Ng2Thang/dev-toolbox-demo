@@ -1,5 +1,31 @@
 # REQ-001 task log
 
+## REQ-005 UUID Generator design plan
+
+1. Use the confirmed browser-local UUID Generator brief to create and inspect a focused Dev Toolbox Stitch screen for `/tools/uuid`.
+2. Keep REQ-005 in `design-review` until the user explicitly approves the latest UUID Generator UI; do not change application code before that approval.
+3. After approval, add the thin `/tools/uuid` route, registry entry, UUID generation domain helper, and client workspace; no server endpoint, saved-run integration, or migration is expected.
+4. Generate focused feature tests, run scoped formatting and `npm run check`, review the diff for requirement coverage and secrets, then prepare branch, pull request, and Vercel Preview evidence if repository connections are available.
+
+## REQ-005 UUID Generator tiered test matrix
+
+| Level | Behavior                                  | Evidence                                                       | Layer         | Expected assertion                                                            |
+| ----- | ----------------------------------------- | -------------------------------------------------------------- | ------------- | ----------------------------------------------------------------------------- |
+| 1     | Generate valid UUID v1, v4, and v7 values | Approved requirement and Stitch version selector               | Domain        | Selected version, canonical format, and requested count are returned.         |
+| 1     | Generate action and initial empty state   | Approved Stitch workspace                                      | Client        | Results appear only after Generate UUIDs is selected.                         |
+| 1     | Invalid quantity                          | Requirement validation and Stitch error state                  | Domain/client | An actionable 1–100 whole-number error is visible and current results remain. |
+| 2     | Bounds and recovery                       | Requirement quantity constraint                                | Domain/client | One and 100 succeed; error clears after corrected input.                      |
+| 2     | Copy and clear interactions               | Approved Stitch actions                                        | Client        | Clipboard receives an item/all values; clear restores empty state.            |
+| 3     | UUID structural invariants and uniqueness | Generator utility guide                                        | Domain        | Version/variant bits are valid and batches have no duplicates.                |
+| 3     | Browser capability and clipboard failures | Requirement capability validation and approved copied feedback | Client        | Unsupported crypto and rejected clipboard show actionable errors.             |
+| 3     | v1 monotonic time / v7 timestamp ordering | UUID version semantics                                         | Domain        | Sequential generated values preserve nondecreasing encoded timestamps.        |
+
+## REQ-005 UUID Generator delivery evidence
+
+- Approved Stitch reference: `9526f5b6ba6b472f9d123d8a242389ca` (Dev Toolbox, `/tools/uuid`).
+- Full `npm run check` passed: formatting, lint, strict typecheck, 75 Vitest tests, and production build.
+- Pull request: #9. Vercel Preview is Ready at `https://dev-toolbox-demo-qc8meqgcs-sample-d689.vercel.app`; direct route access is SSO-gated, while deployment status and build output were validated.
+
 ## REQ-004 approved implementation plan
 
 1. Use the approved Dev Toolbox Stitch screen `e9c4c707ccbe45369e244a11ecb6ba3c` as the visual contract for `/tools/timestamp`.

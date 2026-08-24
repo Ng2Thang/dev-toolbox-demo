@@ -27,13 +27,14 @@ and validate the Vercel Preview. Production deployment is never part of this wor
 2. Write a concise plan in the task log.
 3. Update `docs/FEATURE_STATUS.md` when a feature starts, reaches `design-review`, is `blocked`, or is `delivered`; record blockers, owners, and delivery evidence, and update the detailed requirement file too.
 4. If UI changes are requested, use Google Stitch MCP to generate/inspect the intended screen before implementation.
-5. Implement the feature across all necessary layers.
-6. For schema changes, create a new file in `supabase/migrations/`; never edit an already-applied migration.
-7. Run typecheck/build/tests. Fix errors autonomously until checks pass or a real external blocker is identified.
-8. Review `git diff` for secrets, accidental files, and requirement coverage.
-9. Commit on a feature branch and open a GitHub pull request.
-10. Use the Vercel preview deployment for validation. Do not promote to production unless the configured policy permits it.
-11. Report requirement coverage, changed files, migration impact, checks, preview URL, and remaining risks.
+5. For every implemented Stitch-backed feature, commit that feature's generated `.stitch/designs/` HTML and PNG artifacts with the implementation after reviewing them for secrets; do not omit the design evidence.
+6. Implement the feature across all necessary layers.
+7. For schema changes, create a new file in `supabase/migrations/`; never edit an already-applied migration.
+8. Run typecheck/build/tests. Fix errors autonomously until checks pass or a real external blocker is identified.
+9. Review `git diff` for secrets, accidental files, and requirement coverage.
+10. Commit on a feature branch and open a GitHub pull request.
+11. Use the Vercel preview deployment for validation. Do not promote to production unless the configured policy permits it.
+12. Report requirement coverage, changed files, migration impact, checks, preview URL, and remaining risks.
 
 ## Guardrails
 

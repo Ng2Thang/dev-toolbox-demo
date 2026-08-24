@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UUID Generator - Dev Toolbox</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#33343c",
+                        "secondary": "#c0c1ff",
+                        "inverse-on-surface": "#2f3038",
+                        "secondary-fixed": "#e1e0ff",
+                        "inverse-primary": "#005ac2",
+                        "surface": "#12131a",
+                        "on-background": "#e3e1ec",
+                        "secondary-fixed-dim": "#c0c1ff",
+                        "surface-container-lowest": "#0d0e15",
+                        "on-error": "#690005",
+                        "error-container": "#93000a",
+                        "on-tertiary": "#502400",
+                        "secondary-container": "#3131c0",
+                        "primary-container": "#4d8eff",
+                        "on-primary": "#002e6a",
+                        "outline": "#8c909f",
+                        "on-surface": "#e3e1ec",
+                        "tertiary-container": "#df7412",
+                        "on-primary-fixed-variant": "#004395",
+                        "surface-variant": "#33343c",
+                        "surface-container": "#1e1f26",
+                        "error": "#ffb4ab",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#ffb786",
+                        "on-secondary-fixed-variant": "#2f2ebe",
+                        "on-primary-fixed": "#001a42",
+                        "inverse-surface": "#e3e1ec",
+                        "surface-dim": "#12131a",
+                        "surface-container-high": "#292931",
+                        "primary-fixed": "#d8e2ff",
+                        "on-surface-variant": "#c2c6d6",
+                        "surface-bright": "#383941",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-tertiary-fixed": "#311400",
+                        "tertiary": "#ffb786",
+                        "on-tertiary-fixed-variant": "#723600",
+                        "outline-variant": "#424754",
+                        "on-secondary": "#1000a9",
+                        "on-primary-container": "#00285d",
+                        "primary": "#adc6ff",
+                        "background": "#12131a",
+                        "on-tertiary-container": "#461f00",
+                        "surface-container-low": "#1a1b22",
+                        "tertiary-fixed": "#ffdcc6",
+                        "surface-tint": "#adc6ff",
+                        "on-secondary-fixed": "#07006c",
+                        "on-secondary-container": "#b0b2ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin": "24px",
+                        "xs": "4px",
+                        "xl": "48px",
+                        "sm": "8px",
+                        "unit": "4px",
+                        "md": "16px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Geist"],
+                        "code-md": ["JetBrains Mono"],
+                        "body-md": ["Geist"],
+                        "label-caps": ["Geist"],
+                        "headline-lg": ["Geist"],
+                        "body-sm": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "code-md": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Geist', sans-serif; background-color: #09090b; color: #e3e1ec; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-background">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col w-[240px] h-screen p-md gap-sm border-r border-outline-variant bg-surface-container dark:border-outline-variant dark:bg-surface-container fixed left-0 top-0">
+<div class="mb-lg">
+<div class="flex items-center gap-sm mb-sm">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A minimalist, modern developer avatar icon, flat design, subtle gradients, dark background, high-contrast white and blue elements." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuptjplpSYV-rtMLsxvQN6o5F1t6yMfVS4cn7yCycNZANpXpfMst0xhw3l2nM1GLlaIirYEdBsR0X4EpKfYoI-O-L-3mnIzlHUEjTvvB_Yg8kRMvLgyMpIdlBHLeO-MgVBa2mHK00nPSaDJ2SPlka1-C8uADPYDMMrO98aomYLuwGDzL4CKQHHi3Dz5QN8obYUa3BxKkoQf5cIgSu16xK1mpLHUhfQzZ_RzqEm3WzhS7riC2GiPDGIvMIpwvfkk1SwbG54AYTYS6yP"/>
+<div>
+<h1 class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant">Developer Toolset</h1>
+<span class="font-body-sm text-body-sm text-on-surface-variant">v1.0.4</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-sm flex-1">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-all cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">subject</span>
+<span class="font-body-sm text-body-sm">Text Tools</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-all cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">enhanced_encryption</span>
+<span class="font-body-sm text-body-sm">Encode/Decode</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-all cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">data_object</span>
+<span class="font-body-sm text-body-sm">JSON Tools</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-secondary-container text-on-secondary-container font-semibold cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">settings_suggest</span>
+<span class="font-body-sm text-body-sm">Generators</span>
+</a>
+<div class="pl-xl flex flex-col gap-xs mt-xs">
+<a class="font-body-sm text-body-sm text-primary py-xs flex items-center gap-sm" href="#">
+<div class="w-1 h-4 bg-primary rounded-r"></div>
+                    UUID Generator
+                 </a>
+</div>
+</div>
+<div class="mt-auto border-t border-outline-variant pt-sm">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-all cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-body-sm text-body-sm">Docs</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-all cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-body-sm text-body-sm">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 md:ml-[240px] flex flex-col h-screen overflow-y-auto">
+<!-- Header -->
+<header class="px-margin py-lg border-b border-[#27272a] bg-[#18181b]">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">UUID Generator</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Generate copy-ready UUIDs locally.</p>
+</div>
+<div class="flex items-center gap-sm px-md py-xs bg-surface-container-high rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-[16px] text-primary">gpp_good</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Local-only: UUIDs are generated entirely in your browser. No data is transmitted.</span>
+</div>
+</div>
+</header>
+<!-- Workspace -->
+<div class="p-margin grid grid-cols-1 lg:grid-cols-12 gap-margin">
+<!-- Left Column: Controls -->
+<div class="lg:col-span-4 flex flex-col gap-margin">
+<section class="bg-[#18181b] border border-[#27272a] rounded-xl p-md flex flex-col gap-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface border-b border-[#27272a] pb-sm">Settings</h3>
+<div class="flex flex-col gap-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">UUID Version</label>
+<div class="flex bg-surface-container-low p-1 rounded-lg border border-outline-variant">
+<button class="flex-1 py-sm font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface rounded-md transition-colors">v1</button>
+<button class="flex-1 py-sm font-body-sm text-body-sm bg-surface-bright text-primary rounded-md shadow-sm border border-[#27272a]">v4</button>
+<button class="flex-1 py-sm font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface rounded-md transition-colors">v7</button>
+</div>
+</div>
+<div class="flex flex-col gap-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest flex justify-between">
+                            Quantity
+                            <span class="text-error font-body-sm lowercase normal-case tracking-normal">Enter a whole number from 1 to 100</span>
+</label>
+<input class="w-full bg-[#12131a] border border-error text-on-surface rounded-md px-md py-sm focus:outline-none focus:border-error focus:ring-1 focus:ring-error font-code-md text-code-md shadow-[0_0_8px_rgba(255,180,171,0.2)]" max="100" min="1" type="number" value="10"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Range: 1-100</span>
+</div>
+<button class="w-full bg-[#3b82f6] hover:bg-[#2563eb] text-white font-body-md text-body-md py-md rounded-lg transition-colors font-medium shadow-[0_0_12px_rgba(59,130,246,0.3)] mt-sm">
+                        Generate UUIDs
+                    </button>
+</section>
+</div>
+<!-- Right Column: Results -->
+<div class="lg:col-span-8 flex flex-col gap-margin">
+<section class="bg-[#18181b] border border-[#27272a] rounded-xl p-md flex flex-col h-full shadow-sm">
+<div class="flex justify-between items-center border-b border-[#27272a] pb-sm mb-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Generated UUIDs <span class="font-body-sm text-body-sm text-on-surface-variant ml-sm font-normal">10 UUIDs</span></h3>
+<button class="flex items-center gap-xs px-md py-xs bg-transparent border border-outline-variant hover:bg-surface-container-highest text-on-surface rounded-md transition-colors font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+                            Copy All
+                        </button>
+</div>
+<div class="flex-1 bg-[#0d0e15] border border-[#27272a] rounded-lg p-sm overflow-y-auto max-h-[500px]">
+<!-- List of UUIDs -->
+<div class="flex flex-col gap-xs">
+<div class="group flex items-center justify-between p-sm hover:bg-surface-container-high rounded transition-colors">
+<span class="font-code-md text-code-md text-on-surface">550e8400-e29b-41d4-a716-446655440000</span>
+<button class="opacity-0 group-hover:opacity-100 text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+</div>
+<div class="group flex items-center justify-between p-sm hover:bg-surface-container-high rounded transition-colors bg-surface-container-high/50 border border-primary/20">
+<span class="font-code-md text-code-md text-primary">b04e0e5a-73d8-4a6c-94cc-19d80d287d65</span>
+<span class="text-primary font-body-sm text-body-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">check</span> Copied
+                                </span>
+</div>
+<div class="group flex items-center justify-between p-sm hover:bg-surface-container-high rounded transition-colors">
+<span class="font-code-md text-code-md text-on-surface">c1234567-89ab-cdef-0123-456789abcdef</span>
+<button class="opacity-0 group-hover:opacity-100 text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+</div>
+<div class="group flex items-center justify-between p-sm hover:bg-surface-container-high rounded transition-colors">
+<span class="font-code-md text-code-md text-on-surface">123e4567-e89b-12d3-a456-426614174000</span>
+<button class="opacity-0 group-hover:opacity-100 text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+</div>
+<!-- More empty space for visual layout -->
+<div class="h-10"></div>
+</div>
+</div>
+<div class="flex justify-end gap-md mt-md pt-sm border-t border-[#27272a]">
+<button class="px-md py-sm bg-transparent text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm transition-colors">
+                            Clear
+                        </button>
+<button class="px-md py-sm bg-transparent border border-outline-variant hover:bg-surface-container-highest text-on-surface rounded-md transition-colors font-body-sm text-body-sm">
+                            Regenerate
+                        </button>
+</div>
+</section>
+</div>
+</div>
+</main>
+</body></html>
