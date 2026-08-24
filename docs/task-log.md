@@ -378,3 +378,16 @@ The story-driven deck and second generated illustration were committed and pushe
 Stitch generated screen `38d25ced2eca46f9a249ca658e5672c0`, “Onboarding Storyboard -
 Extended”. Visual and source inspection confirmed Frames 1–6, the requested empty image
 placeholders, generic diagrams, and the reference footer.
+
+## REQ-006 PowerPoint export
+
+1. Capture every current HTML slide after its reveal animation finishes.
+2. Package the captures as a 16:9 PowerPoint while retaining the PNG files for reuse.
+3. Add a repeatable npm command and document the export workflow.
+4. Validate the rendered slides and inspect the PowerPoint package structure.
+
+Completed: `npm run slides:export` now generates 15 PNGs and
+`docs/onboarding/exports/dev-toolbox-team-introduction.pptx`. Visual inspection covered the title
+and delivery-example slides. Package inspection found 15 slide XML documents and 16 embedded media
+items in the 2.3 MB presentation. This export reflects the current HTML deck; the pending Stitch
+storyboard remains behind its explicit UI-approval gate.

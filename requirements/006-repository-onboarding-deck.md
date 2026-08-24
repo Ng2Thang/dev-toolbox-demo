@@ -49,6 +49,8 @@ Codex-enabled engineering workflow used to build it.
 
 - Deck source: `docs/onboarding/README.md`
 - Presentation: `docs/onboarding/dev-toolbox-team-introduction.html`
+- PowerPoint: `docs/onboarding/exports/dev-toolbox-team-introduction.pptx`, with 15 matching PNG
+  slide exports and a reproducible `npm run slides:export` command.
 - Validated with Node 24.14.0: ESLint passed, TypeScript check passed, 75 Vitest tests passed, and
   the production build passed.
 - Delivery commit: `88b580e` on `feature-006-repo-onboarding-deck`, pushed to `origin`.
@@ -66,6 +68,8 @@ Codex-enabled engineering workflow used to build it.
   not modify those files; repository formatting-baseline ownership is needed to clear the gate.
 - Pull request: PR #11. A Vercel Preview is not applicable because this change is static repository
   documentation and does not alter the deployed app.
+- PowerPoint validation: visually reviewed slides 1 and 7; the generated 2.3 MB package contains 15
+  slide XML documents and all embedded slide media.
 
 ## Design-review gate
 

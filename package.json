@@ -20,6 +20,7 @@
     "test:report": "node scripts/test-report.mjs",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "slides:export": "node scripts/export-onboarding-pptx.mjs",
     "doctor": "node scripts/doctor.mjs",
     "doctor:offline": "node scripts/doctor.mjs --offline",
     "check": "npm run format:check && npm run lint && npm run typecheck && npm run test && npm run build"
@@ -48,6 +49,7 @@
     "eslint-config-prettier": "^10.1.8",
     "jsdom": "^30.0.1",
     "msw": "^2.15.0",
+    "pptxgenjs": "^4.0.1",
     "prettier": "^3.9.6",
     "typescript": "^5.8.0",
     "vitest": "^4.1.10"

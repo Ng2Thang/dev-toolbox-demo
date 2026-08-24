@@ -13,6 +13,17 @@ Both project-bound illustrations were created with the built-in OpenAI image-gen
 They contain no readable text, logos, or repository data. Workflow diagrams and examples remain
 HTML/CSS so they are accessible, editable, and accurate.
 
+## PowerPoint export
+
+Run `npm run slides:export` with Node.js 22 or newer to regenerate:
+
+- `exports/dev-toolbox-team-introduction.pptx` — a 16:9 PowerPoint deck.
+- `exports/slides/slide-01.png` through `slide-15.png` — high-fidelity slide images.
+
+Each PowerPoint slide uses its matching PNG as a full-bleed image. This preserves the HTML deck's
+layout, illustrations, and final animation state across PowerPoint versions. Update the HTML source,
+then rerun the command whenever slide content changes.
+
 ## Slide source
 
 ### 1. Dev Toolbox
@@ -46,13 +57,13 @@ context is available in the [official OpenAI documentation](https://developers.o
 
 ### 6. Five instruction layers
 
-| Layer | Question answered |
-| --- | --- |
-| Requirement | What did we agree to build? |
-| Skill | How should Codex perform this kind of work? |
-| Rule | What must always be allowed, required, or prevented? |
-| Architecture | Where does the implementation belong? |
-| Test evidence | How do we know the result works? |
+| Layer         | Question answered                                    |
+| ------------- | ---------------------------------------------------- |
+| Requirement   | What did we agree to build?                          |
+| Skill         | How should Codex perform this kind of work?          |
+| Rule          | What must always be allowed, required, or prevented? |
+| Architecture  | Where does the implementation belong?                |
+| Test evidence | How do we know the result works?                     |
 
 ### 7. UUID Generator delivery example
 
@@ -68,12 +79,12 @@ Normal tool behavior stays in the browser: `input → feature logic → result`.
 
 ### 9. Where code belongs
 
-| Task | Primary location |
-| --- | --- |
-| Add a tool | Feature folder, thin route, `lib/tools.ts`, focused tests |
-| Change shared navigation | `components/layout/`; keep the registry canonical |
-| Change saved runs | Runs feature, API, and a new migration when required |
-| Change visual language | `DESIGN.md` and reviewed Stitch evidence |
+| Task                     | Primary location                                          |
+| ------------------------ | --------------------------------------------------------- |
+| Add a tool               | Feature folder, thin route, `lib/tools.ts`, focused tests |
+| Change shared navigation | `components/layout/`; keep the registry canonical         |
+| Change saved runs        | Runs feature, API, and a new migration when required      |
+| Change visual language   | `DESIGN.md` and reviewed Stitch evidence                  |
 
 ### 10. Layered quality
 
