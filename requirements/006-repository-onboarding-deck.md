@@ -52,7 +52,8 @@ Codex-enabled engineering workflow used to build it.
 - Visual-refactor commit: `4d2e477`, adding the illustration, animated visual system, and UUID
   delivery example; pushed to the same branch.
 - Story-driven refactor: 15-slide narrative and `human-codex-collaboration.png`; Chromium verified
-  slide count, illustration loading, navigation, and a clean browser console.
+  slide count, illustration loading, navigation, and a clean browser console. Committed and pushed
+  as `0426b41`.
 - Blocker: `npm run check` currently fails at `format:check` because 69 pre-existing application
   files do not match the configured Prettier version. This documentation-only requirement does
   not modify those files; repository formatting-baseline ownership is needed to clear the gate.

@@ -363,3 +363,4 @@ Browser validation used installed Chromium at 1280×720: 15 slides found, exactl
 both illustration assets loaded at 1536-pixel natural width, next-slide navigation updated the
 document title to `2/15`, and no page errors were reported. The fully revealed animation state was
 visually reviewed. The deck retains keyboard, button, print, responsive, and reduced-motion paths.
+The story-driven deck and second generated illustration were committed and pushed as `0426b41`.
