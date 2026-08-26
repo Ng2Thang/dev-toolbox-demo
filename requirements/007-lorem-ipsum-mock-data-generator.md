@@ -1,6 +1,6 @@
 ---
 id: REQ-007
-status: implementing
+status: delivered
 route: /tools/mock-data
 stitch_project: Dev Toolbox
 stitch_screen_id: 10dc4b58fdf54837881c3273aa4eaa67
@@ -77,6 +77,8 @@ Let developers generate realistic, non-personal placeholder text and structured 
 - Focused Vitest suite passed: 15 tests across Level 1–3.
 - Focused Playwright suite passed: 7 Chromium tests across Level 1–3.
 - Strict TypeScript check and production build passed under Node 24.14.0.
+- Pull request: #13.
+- Vercel Preview deployment `dpl_hEgdFBFZSLSugLUU2TMhGBJVFn8K` reached `READY`; `/tools/mock-data` returned HTTP 200 with the expected shared shell and generator workspace.
 
 ## Delivery note
 
