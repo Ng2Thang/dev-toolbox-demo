@@ -352,3 +352,11 @@ Completed: Git deployments are enabled, Vercel's Next.js build configuration is 
 22 is pinned to match CI, and the local production build passed. The outstanding dependency is
 Vercel project authentication, GitHub repository linking, and environment-variable setup before
 preview validation.
+
+## Pull-request template enforcement
+
+Plan:
+
+1. Make `.github/pull_request_template.md` mandatory for creating or updating any feature PR.
+2. Require the exact template structure and current evidence for every applicable section.
+3. Keep the repository-wide PR rule aligned with the autonomous-agent contract.
