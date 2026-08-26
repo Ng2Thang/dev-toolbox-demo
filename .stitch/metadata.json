@@ -41,6 +41,13 @@
       "route": "/tools/mock-data",
       "deviceType": "DESKTOP",
       "artifactBasename": "lorem-ipsum-mock-data-generator"
+    },
+    {
+      "id": "38f5d84f78d24f54a405c361446bb770",
+      "title": "SQL Formatter - Validation States",
+      "route": "/tools/sql-formatter",
+      "deviceType": "DESKTOP",
+      "artifactBasename": "sql-formatter"
     }
   ]
 }

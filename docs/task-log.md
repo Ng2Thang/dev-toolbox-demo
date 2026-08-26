@@ -387,3 +387,23 @@ Implementation completed with a browser-local route, deterministic generator, re
 User authorized proceeding without the unrelated repository-wide Prettier gate. Continue with commit, full-project test report, pull request, and Preview validation.
 
 Delivered: PR #13 was opened after the full Vitest report passed (105 tests) and the complete Chromium suite passed (39 tests). Vercel Preview deployment `dpl_hEgdFBFZSLSugLUU2TMhGBJVFn8K` reached `READY`; `/tools/mock-data` returned HTTP 200 and rendered the shared shell and mock-data workspace.
+
+## REQ-008 SQL Formatter design plan
+
+1. Read REQ-008 and the Dev Toolbox design-system guidance, then resolve the existing Stitch project and design system.
+2. Generate and visually review a desktop-first SQL formatting workspace covering dialect, keyword-case, indentation, copy, local validation, recovery, and privacy states.
+3. Export the reviewed Stitch HTML and PNG evidence, record the latest screen metadata, and move the requirement to design review.
+4. Pause application implementation until the latest Stitch UI receives explicit user approval.
+
+Generated and reviewed Stitch screen `38f5d84f78d24f54a405c361446bb770`, titled `SQL Formatter - Validation States`. The current reference includes the shared toolbox shell, formatting controls, split input/output editors, valid and error syntax states, preserved-output guidance, local-only boundary, and copied feedback. Exported `.stitch/designs/sql-formatter.html` and `.stitch/designs/sql-formatter.png`; implementation is paused pending explicit UI approval.
+
+UI approval received on 2026-08-26. Latest Stitch screen `38f5d84f78d24f54a405c361446bb770` was retrieved and remains the implementation contract.
+
+Implementation plan:
+
+1. Add a thin `/tools/sql-formatter` route, append SQL Formatter to the typed registry, and keep all transformation and validation browser-local.
+2. Implement dialect-aware formatting, keyword casing, indentation, syntax feedback, preserved valid output, clear, and clipboard states in a focused feature module matching the approved screen.
+3. Generate evidence-backed Level 1–3 Vitest and Playwright coverage, format only REQ-008 files, then run focused tests, E2E, and `npm run check`.
+4. Review the diff and Stitch artifacts for secrets, commit on a feature branch, create the template-backed PR, deploy a Vercel Preview, and record delivery evidence.
+
+Implementation completed with a browser-local SQL formatter and parser, five dialects, keyword-case and indentation controls, preserved-output syntax recovery, clipboard feedback, registry integration, 16 focused Vitest tests, and 7 focused Playwright tests. Scoped formatting, lint, strict typecheck, all 121 Vitest tests, the production build, and the complete 46-test Chromium suite pass. The aggregate `npm run check` command stops at 18 pre-existing Prettier failures in Base64 and Mock Data files outside REQ-008; all REQ-008 files pass scoped formatting.

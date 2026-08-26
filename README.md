@@ -10,6 +10,7 @@ Dev Toolbox is a Next.js App Router application that collects small, browser-bas
 - **UUID Generator** - Generates UUID v1, v4, and v7 values locally.
 - **Base64 Encoder / Decoder** - Converts UTF-8 text between standard and URL-safe Base64 locally.
 - **Lorem Ipsum / Mock Data Generator** - Generates deterministic placeholder text and synthetic mock records locally.
+- **SQL Formatter** - Formats and syntax-checks PostgreSQL, MySQL, SQLite, SQL Server, and BigQuery locally.
 - **Saved runs** - Successful tool runs can be stored in Supabase and viewed at `/history`.
 
 The typed registry in `lib/tools.ts` is the source of truth for available tools and sidebar navigation. When adding a tool, update both the registry and the **Included tools** list above so this README remains accurate.

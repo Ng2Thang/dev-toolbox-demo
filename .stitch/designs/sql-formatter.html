@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SQL Formatter - Dev Toolbox</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-tint": "#adc6ff",
+                      "surface-container-low": "#1a1b22",
+                      "on-tertiary-fixed-variant": "#723600",
+                      "inverse-on-surface": "#2f3038",
+                      "on-tertiary-container": "#461f00",
+                      "tertiary-fixed": "#ffdcc6",
+                      "background": "#12131a",
+                      "on-surface-variant": "#c2c6d6",
+                      "on-primary-container": "#00285d",
+                      "on-primary-fixed-variant": "#004395",
+                      "surface-container-highest": "#33343c",
+                      "secondary-fixed-dim": "#c0c1ff",
+                      "on-tertiary-fixed": "#311400",
+                      "outline-variant": "#424754",
+                      "on-primary-fixed": "#001a42",
+                      "surface-dim": "#12131a",
+                      "on-error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#ffb786",
+                      "primary-container": "#4d8eff",
+                      "on-surface": "#e3e1ec",
+                      "tertiary-container": "#df7412",
+                      "on-secondary-fixed-variant": "#2f2ebe",
+                      "surface-container": "#1e1f26",
+                      "secondary": "#c0c1ff",
+                      "on-tertiary": "#502400",
+                      "surface-variant": "#33343c",
+                      "on-secondary-container": "#b0b2ff",
+                      "inverse-primary": "#005ac2",
+                      "surface-bright": "#383941",
+                      "on-secondary": "#1000a9",
+                      "on-background": "#e3e1ec",
+                      "error-container": "#93000a",
+                      "primary-fixed-dim": "#adc6ff",
+                      "surface-container-lowest": "#0d0e15",
+                      "surface-container-high": "#292931",
+                      "on-error": "#690005",
+                      "surface": "#12131a",
+                      "on-secondary-fixed": "#07006c",
+                      "outline": "#8c909f",
+                      "on-primary": "#002e6a",
+                      "primary": "#adc6ff",
+                      "primary-fixed": "#d8e2ff",
+                      "tertiary": "#ffb786",
+                      "secondary-container": "#3131c0",
+                      "inverse-surface": "#e3e1ec",
+                      "secondary-fixed": "#e1e0ff",
+                      "error": "#ffb4ab"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xl": "48px",
+                      "sm": "8px",
+                      "gutter": "16px",
+                      "xs": "4px",
+                      "margin": "24px",
+                      "lg": "24px",
+                      "unit": "4px",
+                      "md": "16px"
+              },
+              "fontFamily": {
+                      "label-caps": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ],
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "headline-md": [
+                              "Geist"
+                      ],
+                      "code-md": [
+                              "JetBrains Mono"
+                      ],
+                      "body-sm": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "label-caps": [
+                              "11px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "30px",
+                              {
+                                      "lineHeight": "36px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "code-md": [
+                              "13px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-sm": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap');
+        
+        .code-editor-line { counter-increment: line; }
+        .code-editor-line::before {
+            content: counter(line);
+            @apply inline-block w-8 text-right pr-4 text-on-surface-variant/50 select-none border-r border-outline-variant/30 mr-4;
+        }
+        
+        /* Custom Scrollbar for dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #12131a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #33343c; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #424754; 
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-hidden flex h-screen">
+<!-- Sidebar Component -->
+<nav class="fixed h-full w-[240px] left-0 top-0 bg-surface-container-low border-r border-outline-variant flex flex-col p-md z-10 shrink-0 hidden md:flex">
+<div class="mb-lg flex items-center justify-between">
+<div>
+<h1 class="text-headline-md font-headline-md text-primary tracking-tight">Dev Toolbox</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase mt-1">v1.2.0</p>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-2 px-4 rounded-lg font-body-md font-semibold mb-margin hover:bg-primary/90 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+            New Request
+        </button>
+<div class="flex-1 overflow-y-auto pr-2 -mr-2">
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-2 px-3">Tools</div>
+<ul class="space-y-1 font-body-sm text-body-sm">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-on-surface transition-colors" data-icon="search" style="font-size: 18px;">search</span>
+<span class="group-hover:text-on-surface transition-colors">Explore</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-on-surface transition-colors" data-icon="security" style="font-size: 18px;">security</span>
+<span class="group-hover:text-on-surface transition-colors">JWT Decoder</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-on-surface transition-colors" data-icon="code" style="font-size: 18px;">code</span>
+<span class="group-hover:text-on-surface transition-colors">JSON Formatter</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-on-surface transition-colors" data-icon="schedule" style="font-size: 18px;">schedule</span>
+<span class="group-hover:text-on-surface transition-colors">Unix Timestamp</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-on-surface transition-colors" data-icon="fingerprint" style="font-size: 18px;">fingerprint</span>
+<span class="group-hover:text-on-surface transition-colors">UUID Generator</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-on-surface transition-colors" data-icon="sync_alt" style="font-size: 18px;">sync_alt</span>
+<span class="group-hover:text-on-surface transition-colors">Base64 Tool</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-on-surface transition-colors" data-icon="dataset" style="font-size: 18px;">dataset</span>
+<span class="group-hover:text-on-surface transition-colors">Mock Data</span>
+</a>
+</li>
+<li>
+<!-- Active State -->
+<a class="flex items-center gap-3 px-3 py-2 bg-secondary-container text-on-secondary-container rounded-lg opacity-80 transition-opacity duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="storage" data-weight="fill" style="font-variation-settings: 'FILL' 1; font-size: 18px;">storage</span>
+<span>SQL Formatter</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="mt-auto pt-lg border-t border-outline-variant/50">
+<ul class="space-y-1 font-body-sm text-body-sm mb-4">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-on-surface transition-colors" data-icon="settings" style="font-size: 18px;">settings</span>
+<span class="group-hover:text-on-surface transition-colors">Settings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-on-surface transition-colors" data-icon="description" style="font-size: 18px;">description</span>
+<span class="group-hover:text-on-surface transition-colors">Docs</span>
+</a>
+</li>
+</ul>
+<div class="px-3 flex items-center gap-2 text-on-surface-variant/70 font-label-caps text-label-caps uppercase">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+                Local-only processing
+            </div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-[240px] flex flex-col h-full bg-background overflow-hidden relative">
+<!-- Header -->
+<header class="flex-none px-margin py-margin border-b border-outline-variant/30">
+<div class="flex items-center gap-2 font-body-sm text-on-surface-variant mb-2">
+<span>Tools</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span>Formatters</span>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<div class="flex items-center gap-3 mb-1">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">SQL Formatter</h2>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high border border-outline-variant/50 font-label-caps text-label-caps text-on-surface-variant uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                            Local Only
+                        </span>
+</div>
+<p class="font-body-md text-on-surface-variant">Format, indent, and validate SQL syntax locally in your browser.</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-highest text-on-surface-variant transition-colors" title="Settings">
+<span class="material-symbols-outlined" style="font-size: 20px;">tune</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-highest text-on-surface-variant transition-colors" title="Documentation">
+<span class="material-symbols-outlined" style="font-size: 20px;">help</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Toolbar -->
+<div class="flex-none px-margin py-3 border-b border-outline-variant/30 bg-surface-container-lowest flex items-center justify-between">
+<div class="flex items-center gap-4">
+<!-- Dialect -->
+<div class="flex items-center gap-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Dialect</label>
+<div class="relative">
+<select class="appearance-none bg-surface-container-low border border-outline-variant rounded-md py-1.5 pl-3 pr-8 font-body-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-colors w-32 cursor-pointer">
+<option selected="">PostgreSQL</option>
+<option>MySQL</option>
+<option>SQLite</option>
+<option>SQL Server</option>
+<option>BigQuery</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none" style="font-size: 16px;">arrow_drop_down</span>
+</div>
+</div>
+<div class="w-px h-6 bg-outline-variant/50"></div>
+<!-- Case Segmented Control -->
+<div class="flex items-center gap-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Case</label>
+<div class="flex bg-surface-container-low border border-outline-variant rounded-md p-0.5">
+<button class="px-3 py-1 rounded-[4px] bg-surface-variant text-primary font-body-sm font-semibold transition-colors">Uppercase</button>
+<button class="px-3 py-1 rounded-[4px] text-on-surface-variant hover:text-on-surface font-body-sm transition-colors">Lowercase</button>
+</div>
+</div>
+<div class="w-px h-6 bg-outline-variant/50"></div>
+<!-- Indent -->
+<div class="flex items-center gap-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Indent</label>
+<div class="relative">
+<select class="appearance-none bg-surface-container-low border border-outline-variant rounded-md py-1.5 pl-3 pr-8 font-body-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-colors w-28 cursor-pointer">
+<option selected="">2 spaces</option>
+<option>4 spaces</option>
+<option>Tabs</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none" style="font-size: 16px;">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-3">
+<button class="px-4 py-1.5 rounded-md border border-outline-variant text-on-surface hover:bg-surface-container-highest font-body-sm transition-colors">Clear</button>
+<button class="px-4 py-1.5 rounded-md bg-primary text-on-primary font-body-sm font-semibold hover:bg-primary/90 transition-colors shadow-[0_0_8px_rgba(173,198,255,0.2)]">Format SQL</button>
+</div>
+</div>
+<!-- Workspace (Editors) -->
+<div class="flex-1 flex overflow-hidden p-margin gap-margin">
+<!-- Input Panel -->
+<div class="flex-1 flex flex-col bg-[#18181b] border border-outline-variant/50 rounded-xl overflow-hidden shadow-sm relative">
+<div class="flex-none px-4 py-2 border-b border-outline-variant/30 bg-[#18181b] flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Input SQL</span>
+</div>
+<div class="flex-1 overflow-auto font-code-md text-code-md text-on-surface p-4 pb-0 whitespace-pre font-mono leading-relaxed bg-[#14151a]">
+<div class="code-editor-line text-[#c0c1ff]">select u.id, u.username, p.title, count(c.id) as comments_count</div>
+<div class="code-editor-line text-[#adc6ff]">from users u</div>
+<div class="code-editor-line text-[#adc6ff]">join posts p on p.user_id = u.id</div>
+<div class="code-editor-line text-[#adc6ff]">left join comments c on c.post_id = p.id</div>
+<div class="code-editor-line text-[#adc6ff]">where u.active = true</div>
+<div class="code-editor-line text-[#adc6ff]">and p.created_at &gt; '2023-01-01'</div>
+<div class="code-editor-line text-[#adc6ff]">group by u.id, u.username, p.title</div>
+<div class="code-editor-line text-[#adc6ff]">order by comments_count desc</div>
+<div class="code-editor-line text-[#adc6ff]">limit 10;</div>
+</div>
+<!-- Validation Feedback -->
+<div class="flex-none bg-[#14151a] border-t border-outline-variant/20 p-2 px-4 flex justify-between items-center text-xs">
+<div class="flex items-center gap-2 text-[#4ade80]">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="font-body-sm">Valid PostgreSQL syntax</span>
+</div>
+<!-- Example of error state (hidden by default, shown for layout reference) -->
+<!-- 
+                    <div class="flex items-center gap-2 text-error">
+                         <span class="material-symbols-outlined text-[16px]">error</span>
+                         <span class="font-body-sm">Unexpected FROM at line 3, column 8</span>
+                    </div>
+                    -->
+<div class="flex flex-col gap-1 mt-2 pt-2 border-t border-outline-variant/20 w-full"><div class="flex items-center justify-between w-full"><div class="flex items-center gap-2 text-error"><span class="material-symbols-outlined text-[16px]">error</span><span class="font-body-sm">Unexpected FROM at line 3, column 8. Correct the query and format again. Previous valid output is preserved.</span></div><span class="text-on-surface-variant/70 font-body-sm italic">Syntax only; database objects are not verified.</span></div></div></div>
+</div>
+<!-- Output Panel -->
+<div class="flex-1 flex flex-col bg-[#18181b] border border-outline-variant/50 rounded-xl overflow-hidden shadow-sm relative">
+<div class="flex-none px-4 py-2 border-b border-outline-variant/30 bg-[#18181b] flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Formatted SQL</span>
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-on-surface transition-colors" onclick="document.getElementById('toast').classList.remove('translate-y-20', 'opacity-0')">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span class="font-body-sm">Copy</span>
+</button>
+</div>
+<div class="flex-1 overflow-auto font-code-md text-code-md text-on-surface p-4 pb-0 whitespace-pre font-mono leading-relaxed bg-[#14151a]">
+<div class="code-editor-line text-[#c0c1ff]">SELECT</div>
+<div class="code-editor-line text-[#adc6ff]">  u.id,</div>
+<div class="code-editor-line text-[#adc6ff]">  u.username,</div>
+<div class="code-editor-line text-[#adc6ff]">  p.title,</div>
+<div class="code-editor-line text-[#adc6ff]">  COUNT(c.id) AS comments_count</div>
+<div class="code-editor-line text-[#c0c1ff]">FROM</div>
+<div class="code-editor-line text-[#adc6ff]">  users u</div>
+<div class="code-editor-line text-[#c0c1ff]">JOIN</div>
+<div class="code-editor-line text-[#adc6ff]">  posts p ON p.user_id = u.id</div>
+<div class="code-editor-line text-[#c0c1ff]">LEFT JOIN</div>
+<div class="code-editor-line text-[#adc6ff]">  comments c ON c.post_id = p.id</div>
+<div class="code-editor-line text-[#c0c1ff]">WHERE</div>
+<div class="code-editor-line text-[#adc6ff]">  u.active = true</div>
+<div class="code-editor-line text-[#adc6ff]">  AND p.created_at &gt; '2023-01-01'</div>
+<div class="code-editor-line text-[#c0c1ff]">GROUP BY</div>
+<div class="code-editor-line text-[#adc6ff]">  u.id,</div>
+<div class="code-editor-line text-[#adc6ff]">  u.username,</div>
+<div class="code-editor-line text-[#adc6ff]">  p.title</div>
+<div class="code-editor-line text-[#c0c1ff]">ORDER BY</div>
+<div class="code-editor-line text-[#adc6ff]">  comments_count DESC</div>
+<div class="code-editor-line text-[#c0c1ff]">LIMIT</div>
+<div class="code-editor-line text-[#adc6ff]">  10;</div>
+</div>
+</div>
+</div>
+<!-- Footer Info -->
+<div class="flex-none py-2 px-margin border-t border-outline-variant/30 flex justify-center bg-surface-container-lowest">
+<p class="font-body-sm text-on-surface-variant/70 text-center flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">shield</span>
+                 Your SQL never leaves this browser. This tool does not connect to or execute against a database.
+             </p>
+</div>
+<!-- Toast Notification -->
+<div class="absolute bottom-6 right-6 bg-[#27272a] border border-primary/30 text-on-surface font-body-sm px-4 py-2 rounded-lg shadow-[0_4px_12px_rgba(0,0,0,0.5)] flex items-center gap-2 transition-all duration-300 transform z-50" id="toast">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+            Copied to clipboard
+        </div>
+</main>
+<script>
+        // Simple auto-hide for toast demo
+        document.querySelectorAll('button').forEach(btn => {
+            if(btn.innerText.includes('Copy')) {
+                btn.addEventListener('click', () => {
+                    const toast = document.getElementById('toast');
+                    toast.classList.remove('translate-y-20', 'opacity-0');
+                    setTimeout(() => {
+                        toast.classList.add('translate-y-20', 'opacity-0');
+                    }, 3000);
+                });
+            }
+        });
+    </script>
+</body></html>

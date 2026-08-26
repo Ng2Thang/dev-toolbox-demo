@@ -49,6 +49,13 @@ export const tools: readonly ToolDefinition[] = [
     category: 'Developer',
     icon: 'MD',
   },
+  {
+    href: '/tools/sql-formatter',
+    label: 'SQL Formatter',
+    description: 'Format and validate SQL syntax locally in your browser.',
+    category: 'Formatters',
+    icon: 'SQL',
+  },
 ];
 
 const shellNavigation = [{ href: '/', label: 'Explore', icon: 'EX' }];
