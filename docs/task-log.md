@@ -372,3 +372,16 @@ deployment `dpl_D68xX1gSCyi1hhv5ogmtcP7ZBSti` reached `READY`, and `/tools/base6
 2. Wait for `READY`, validate the changed route, and record the deployment ID and preview URL in
    the requirement, feature status, PR body, and PR comment.
 3. Keep production promotion out of scope.
+
+# REQ-007 Lorem Ipsum / Mock Data Generator design plan
+
+1. Read REQ-007 and the Dev Toolbox design-system guidance, then resolve the existing Stitch project and design system.
+2. Generate and visually review a desktop-first shared-shell workspace covering deterministic settings, JSON/CSV output, copy/download actions, and browser-local reassurance.
+3. Export the reviewed Stitch HTML and PNG evidence, record the screen metadata, and move the requirement to design review.
+4. Pause application implementation until the latest Stitch UI receives explicit user approval.
+
+UI approval received on 2026-08-26. Latest screen `10dc4b58fdf54837881c3273aa4eaa67` was retrieved and remains the implementation contract.
+
+Implementation completed with a browser-local route, deterministic generator, registry entry, scoped styling, 15 focused Vitest tests, and 7 Playwright tests. REQ-007 is blocked from PR and Preview delivery because `npm run check` fails repository-wide formatting checks in unrelated Base64 files and `package.json`; strict typecheck and production build pass under Node 24.14.0.
+
+User authorized proceeding without the unrelated repository-wide Prettier gate. Continue with commit, full-project test report, pull request, and Preview validation.

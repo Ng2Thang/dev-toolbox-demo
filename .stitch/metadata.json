@@ -34,6 +34,13 @@
       "route": "/tools/base64",
       "deviceType": "DESKTOP",
       "artifactBasename": "base64-encoder-decoder"
+    },
+    {
+      "id": "10dc4b58fdf54837881c3273aa4eaa67",
+      "title": "Lorem Ipsum / Mock Data Generator",
+      "route": "/tools/mock-data",
+      "deviceType": "DESKTOP",
+      "artifactBasename": "lorem-ipsum-mock-data-generator"
     }
   ]
 }
