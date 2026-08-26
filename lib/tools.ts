@@ -42,6 +42,13 @@ export const tools: readonly ToolDefinition[] = [
     category: 'Encode / decode',
     icon: '64',
   },
+  {
+    href: '/tools/mock-data',
+    label: 'Mock Data Generator',
+    description: 'Generate deterministic placeholder text and records locally.',
+    category: 'Developer',
+    icon: 'MD',
+  },
 ];
 
 const shellNavigation = [{ href: '/', label: 'Explore', icon: 'EX' }];
