@@ -65,3 +65,12 @@ Let developers encode UTF-8 text as standard or URL-safe Base64 and decode Base6
 - Base32, hexadecimal, data URL, compression, encryption, or hashing operations.
 - Automatic character-set detection or conversion for encodings other than UTF-8.
 - Saved-run history, accounts, or persistent storage.
+
+## Delivery evidence
+
+- Approved Stitch screen: `a62b045a4be24efdafd675451df1127d` (Dev Toolbox, `/tools/base64`).
+- Focused Base64 Vitest suite passed: 15 tests across the three required levels.
+- Complete serial Vitest suite passed: 90 tests; committed report: `docs/test-reports/2026-08-26T04-06-50-466Z-test-report.md`.
+- Focused Base64 Playwright suite passed: 7 Chromium tests; the complete suite was run with no reported test failure, but its execution wrapper omitted the final aggregate line.
+- Production build passed and includes `/tools/base64` as a static route.
+- Delivery blocker: `npm run check` stops at 67 pre-existing formatting violations outside this feature, so no pull request or Vercel Preview has been created.
