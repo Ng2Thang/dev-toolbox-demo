@@ -409,3 +409,5 @@ Implementation plan:
 Implementation completed with a browser-local SQL formatter and parser, five dialects, keyword-case and indentation controls, preserved-output syntax recovery, clipboard feedback, registry integration, 16 focused Vitest tests, and 7 focused Playwright tests. Scoped formatting, lint, strict typecheck, all 121 Vitest tests, the production build, and the complete 46-test Chromium suite pass. The aggregate `npm run check` command stops at 18 pre-existing Prettier failures in Base64 and Mock Data files outside REQ-008; all REQ-008 files pass scoped formatting.
 
 Committed implementation as `c3af0f9` and generated the full-project report at `docs/test-reports/2026-08-26T09-33-01-771Z-test-report.md` and `.json`: 121 passed, 0 failed, 0 skipped.
+
+Pushed `feature/req-008-sql-formatter` to the configured GitHub remote. Template-backed PR creation is blocked: GitHub MCP returned HTTP 403 (`Resource not accessible by personal access token`) and the local GitHub CLI reports an invalid credential. Vercel Preview remains pending because the required workflow creates or updates the PR before direct Preview deployment.
