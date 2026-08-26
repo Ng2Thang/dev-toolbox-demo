@@ -94,6 +94,20 @@ npm run check           # Run formatting, linting, types, tests, and build
 
 Run `npm run doctor` before an end-to-end agent workflow to check Stitch, Supabase, GitHub, and Vercel integration. Use `npm run doctor:offline` to validate local configuration without the Supabase network probe, or add `-- --json` for machine-readable output.
 
+## Vercel deployment
+
+Vercel is configured to recognize this repository as a Next.js app, use Node.js 22, run
+`npm run build`, and create Git deployments for pushed branches. After importing the GitHub
+repository into Vercel, configure these environment variables for both Preview and Production
+environments:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+
+Keep the service-role key server-side in Vercel's environment settings; never add it to
+`NEXT_PUBLIC_*` variables, `vercel.json`, or the repository. Vercel will use `main` as the
+production branch unless the project setting is changed; other pushed branches receive previews.
+
 ## Repository map
 
 ```text

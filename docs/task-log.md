@@ -339,3 +339,16 @@ Scoped JWT formatting passed. The full repository gate passed: formatting, lint,
 1. Disable Git-triggered Vercel deployments with `git.deploymentEnabled: false` in `vercel.json`.
 2. Add an explicit-only manual deployment skill that validates a ready preview target and refuses production deployment or promotion.
 3. Validate the skill structure and configuration, then commit and update the active PR without staging unrelated local changes.
+
+## Vercel Git deployment configuration
+
+Plan:
+
+1. Enable Git-triggered Vercel deployments for the Next.js repository and retain the standard production build command.
+2. Document the required Preview and Production environment-variable names without storing any values.
+3. Validate the configuration and local production build, then recheck the REQ-006 preview blocker.
+
+Completed: Git deployments are enabled, Vercel's Next.js build configuration is explicit, Node.js
+22 is pinned to match CI, and the local production build passed. The outstanding dependency is
+Vercel project authentication, GitHub repository linking, and environment-variable setup before
+preview validation.

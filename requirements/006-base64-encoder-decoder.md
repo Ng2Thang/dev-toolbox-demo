@@ -75,4 +75,4 @@ Let developers encode UTF-8 text as standard or URL-safe Base64 and decode Base6
 - Production build passed and includes `/tools/base64` as a static route.
 - Repository formatting was repaired with Prettier; `format:check`, lint, typecheck, the full 90-test Vitest suite, and the production build now pass under Node 24.14.0.
 - Pull request: https://github.com/Ng2Thang/dev-toolbox-demo/pull/12
-- Delivery blocker: Vercel Preview validation cannot run because `vercel.json` sets `git.deploymentEnabled` to `false` and the configured Vercel CLI token is invalid. No manual deployment was attempted.
+- Delivery blocker (rechecked 2026-08-26): Git deployments are enabled in `vercel.json` and the production build passes. Vercel Preview validation still needs an authenticated Vercel account to import or link the GitHub repository and add the required environment variables. This environment has no Vercel CLI credentials; `vercel whoami` reported logged out and login could not start because its network fetch failed. No manual deployment was attempted.
