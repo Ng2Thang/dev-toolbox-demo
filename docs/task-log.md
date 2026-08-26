@@ -364,3 +364,11 @@ Plan:
 Completed: REQ-006 was deployed through Vercel MCP to the `dev-toolbox-demo` project. Preview
 deployment `dpl_D68xX1gSCyi1hhv5ogmtcP7ZBSti` reached `READY`, and `/tools/base64` returned HTTP
 200 with the Base64 workspace rendered.
+
+## Default Vercel MCP delivery plan
+
+1. After feature implementation, checks, commits, and PR updates, deploy directly through Vercel
+   MCP to the `dev-toolbox-demo` project with target `preview`.
+2. Wait for `READY`, validate the changed route, and record the deployment ID and preview URL in
+   the requirement, feature status, PR body, and PR comment.
+3. Keep production promotion out of scope.

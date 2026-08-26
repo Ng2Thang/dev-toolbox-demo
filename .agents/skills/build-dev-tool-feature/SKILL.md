@@ -105,8 +105,7 @@ changes, requirement coverage, and migration safety.
 
 Create a feature branch and commit, then run `npm run test:report` against that committed `HEAD`.
 Include its full-project result, tested commit SHA, and report paths in the `## Test Report`
-section of the pull-request template before opening a GitHub pull request and validating the Vercel
-Preview when those connections are available.
+section of the pull-request template before opening a GitHub pull request.
 
 After the pull request is created or updated, add one PR conversation comment with a compact report
 summary: tested commit SHA, passed/failed/skipped totals, the Markdown and JSON report paths, and
@@ -117,6 +116,13 @@ Before opening the pull request, read `.github/pull_request_template.md` and use
 completing every applicable field with evidence from the requirement and verification. Do not replace
 it with an ad-hoc PR body. If the template is unavailable, report that delivery blocker. Never
 promote to production as part of this skill.
+
+After all implementation, checks, commits, and PR-template updates are complete, deploy the current
+feature through Vercel MCP to project `dev-toolbox-demo` with target `preview`. Wait for the
+deployment to reach `READY`, validate the feature route, then update the requirement,
+`docs/FEATURE_STATUS.md`, PR template, and PR comment with the deployment ID and preview URL. Use
+this direct MCP deployment even if the project has no Git repository link. Do not promote to
+production.
 Set the requirement status to `delivered` only when the required checks pass and the requested
 delivery evidence exists. Otherwise leave the accurate status and report the blocker.
 

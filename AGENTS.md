@@ -37,7 +37,10 @@ and validate the Vercel Preview. Production deployment is never part of this wor
     structure for the PR description. Complete every applicable field with current requirement,
     implementation, test, security, Stitch, and preview evidence; do not replace it with an
     ad-hoc PR body. Then commit on a feature branch and create or update the GitHub pull request.
-11. Use the Vercel preview deployment for validation. Do not promote to production unless the configured policy permits it.
+11. After all implementation, checks, commits, and PR-template updates are complete, deploy the
+    current feature through Vercel MCP to the `dev-toolbox-demo` project with target `preview`.
+    Wait for `READY`, validate the feature route, and record the deployment ID and preview URL in
+    the requirement, feature-status index, and PR template/comment. Do not promote to production.
 12. Report requirement coverage, changed files, migration impact, checks, preview URL, and remaining risks.
 
 ## Guardrails
