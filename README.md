@@ -8,6 +8,7 @@ Dev Toolbox is a Next.js App Router application that collects small, browser-bas
 - **JSON Formatter** - Validates and pretty-prints JSON locally.
 - **Unix Timestamp Converter** - Converts Unix timestamps to readable dates and dates back to epoch values.
 - **UUID Generator** - Generates UUID v1, v4, and v7 values locally.
+- **Base64 Encoder / Decoder** - Converts UTF-8 text between standard and URL-safe Base64 locally.
 - **Saved runs** - Successful tool runs can be stored in Supabase and viewed at `/history`.
 
 The typed registry in `lib/tools.ts` is the source of truth for available tools and sidebar navigation. When adding a tool, update both the registry and the **Included tools** list above so this README remains accurate.

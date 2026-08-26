@@ -1,3 +1,30 @@
+# REQ-006 Base64 Encoder / Decoder design plan
+
+1. Generate a desktop-first `/tools/base64` screen in the existing Dev Toolbox Stitch project using REQ-006 and the configured project design system.
+2. Inspect the generated screen for the shared shell, encode/decode and Base64-variant controls, input/output workspace, actions, and empty, success, copied, and error states.
+3. Save the generated HTML and PNG as `.stitch/designs/base64-encoder-decoder.*`, record the screen in Stitch metadata and REQ-006, and move the feature to `design-review`.
+4. Stop at the explicit UI approval gate; do not implement application code until the user approves the latest screen.
+
+## REQ-006 Base64 Encoder / Decoder test matrix
+
+| Level | Behavior                                  | Evidence                     | Layer             | Expected assertion                                                   |
+| ----- | ----------------------------------------- | ---------------------------- | ----------------- | -------------------------------------------------------------------- |
+| 1     | Standard encode and decode                | REQ-006 criteria 1 and 3     | Domain/client/E2E | Canonical Base64 and readable text are displayed.                    |
+| 1     | URL-safe encode                           | REQ-006 criterion 2          | Domain/client/E2E | URL-safe substitutions and omitted padding are returned.             |
+| 1     | Empty input                               | REQ-006 validation           | Domain/client     | Actionable validation is visible and output is unchanged.            |
+| 1     | Primary encode action                     | Approved Stitch workspace    | Client            | Input produces a copyable output.                                    |
+| 1     | Initial empty state                       | Approved Stitch workspace    | Client            | Input/output panels and local-only copy are present.                 |
+| 2     | URL-safe padded and unpadded decode       | REQ-006 inputs               | Domain/client/E2E | Both valid forms decode identically.                                 |
+| 2     | Mode/variant selection                    | REQ-006 actions              | Client/E2E        | The selected mode controls conversion behavior.                      |
+| 2     | Swap/reverse recovery                     | REQ-006 criterion 4          | Client/E2E        | Output becomes input, direction reverses, and recovery succeeds.     |
+| 2     | Malformed input recovery                  | REQ-006 criterion 5          | Domain/client/E2E | Error preserves input and previous output; corrected retry succeeds. |
+| 2     | Clear and copy                            | REQ-006 actions              | Client            | Clear restores empty state; copy reports status.                     |
+| 3     | Unicode round trip                        | REQ-006 validation           | Domain/client/E2E | Unicode text survives encode/decode.                                 |
+| 3     | UTF-8 byte rejection                      | REQ-006 validation           | Domain            | Invalid decoded UTF-8 is rejected.                                   |
+| 3     | Padding and malformed-structure rejection | REQ-006 validation           | Domain/client     | Invalid Base64 cannot produce output.                                |
+| 3     | Clipboard unavailable                     | Browser capability risk      | Client/E2E        | Copy failure is actionable and does not alter output.                |
+| 3     | Large local text                          | Text utility resilience risk | Domain            | A large deterministic text payload round-trips without truncation.   |
+
 # REQ-001 task log
 
 ## Repository structure documentation alignment

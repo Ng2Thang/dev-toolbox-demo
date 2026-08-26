@@ -35,6 +35,13 @@ export const tools: readonly ToolDefinition[] = [
     category: 'Developer',
     icon: 'ID',
   },
+  {
+    href: '/tools/base64',
+    label: 'Base64 Encoder / Decoder',
+    description: 'Convert text to standard or URL-safe Base64 locally.',
+    category: 'Encode / decode',
+    icon: '64',
+  },
 ];
 
 const shellNavigation = [{ href: '/', label: 'Explore', icon: 'EX' }];

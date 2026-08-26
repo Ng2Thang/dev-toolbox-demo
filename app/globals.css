@@ -1334,6 +1334,200 @@ summary {
   color: #5ee6a8;
 }
 
+.base64-tool {
+  display: grid;
+  gap: 16px;
+}
+
+.base64-header,
+.base64-controls,
+.base64-actions,
+.base64-panel-heading {
+  display: flex;
+  align-items: center;
+}
+
+.base64-header {
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.base64-header h1,
+.base64-header p,
+.base64-guidance {
+  margin: 0;
+}
+
+.base64-header h1 {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 36px;
+}
+
+.base64-header > div > p:not(.eyebrow),
+.base64-local-note,
+.base64-panel-heading,
+.base64-guidance,
+.base64-copy-status {
+  color: #8c909f;
+  font-size: 12px;
+}
+
+.base64-header > div > p:not(.eyebrow) {
+  margin-top: 5px;
+}
+
+.base64-local-note {
+  border: 1px solid #424754;
+  border-radius: 999px;
+  padding: 6px 10px;
+  white-space: nowrap;
+}
+
+.base64-controls {
+  gap: 16px;
+}
+
+.base64-controls fieldset {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.base64-controls legend {
+  color: #8c909f;
+  font:
+    10px 'Geist Mono',
+    monospace;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.base64-segmented-control {
+  display: flex;
+  border: 1px solid #424754;
+  border-radius: 4px;
+  background: #33343c;
+  padding: 3px;
+}
+
+.base64-segmented-control button {
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: #c2c6d6;
+  font:
+    11px 'Geist Mono',
+    monospace;
+  padding: 7px 10px;
+}
+
+.base64-segmented-control button.is-selected {
+  background: #1a1b22;
+  color: #adc6ff;
+}
+
+.base64-workspace {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.base64-panel {
+  display: grid;
+  min-width: 0;
+  gap: 9px;
+  border: 1px solid #424754;
+  border-radius: 5px;
+  background: #1e1f26;
+  padding: 14px;
+}
+
+.base64-panel-heading {
+  justify-content: space-between;
+  color: #c2c6d6;
+  font:
+    11px 'Geist Mono',
+    monospace;
+}
+
+.base64-panel-heading span {
+  color: #8c909f;
+}
+
+.base64-panel textarea,
+.base64-panel pre {
+  box-sizing: border-box;
+  min-height: 230px;
+  margin: 0;
+  border: 1px solid #424754;
+  border-radius: 4px;
+  background: #0d0e15;
+  color: #e3e1ec;
+  font:
+    13px 'JetBrains Mono',
+    monospace;
+  line-height: 1.55;
+  padding: 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.base64-panel textarea {
+  resize: vertical;
+}
+
+.base64-panel textarea:focus {
+  border-color: #4d8eff;
+  outline: 0;
+}
+
+.base64-copy-button {
+  justify-self: end;
+}
+
+.base64-error {
+  margin: 0;
+  border-left: 2px solid #ffb4ab;
+  color: #ffb4ab;
+  font-size: 12px;
+  padding-left: 9px;
+}
+
+.base64-actions {
+  gap: 9px;
+}
+
+.base64-actions button:disabled,
+.base64-copy-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.base64-guidance {
+  display: grid;
+  gap: 4px;
+  border: 1px solid #424754;
+  border-radius: 5px;
+  background: #1e1f26;
+  padding: 12px 14px;
+}
+
+.base64-guidance strong {
+  color: #c2c6d6;
+  font-size: 12px;
+}
+
+.base64-copy-status {
+  justify-self: end;
+  margin: 0;
+  color: #5ee6a8;
+}
+
 @media (max-width: 800px) {
   .uuid-generator-header {
     align-items: flex-start;
@@ -1341,6 +1535,16 @@ summary {
   }
 
   .uuid-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .base64-header,
+  .base64-controls {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .base64-workspace {
     grid-template-columns: 1fr;
   }
 }

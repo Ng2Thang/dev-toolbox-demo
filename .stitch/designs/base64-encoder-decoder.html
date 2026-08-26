@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Base64 Encoder / Decoder - Dev Toolbox</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-fixed": "#d8e2ff",
+                      "on-primary": "#002e6a",
+                      "on-surface": "#e3e1ec",
+                      "error-container": "#93000a",
+                      "secondary-fixed": "#e1e0ff",
+                      "on-tertiary-container": "#461f00",
+                      "surface-container-high": "#292931",
+                      "primary": "#adc6ff",
+                      "on-background": "#e3e1ec",
+                      "tertiary-fixed-dim": "#ffb786",
+                      "surface-tint": "#adc6ff",
+                      "surface-container-low": "#1a1b22",
+                      "secondary": "#c0c1ff",
+                      "inverse-on-surface": "#2f3038",
+                      "on-secondary": "#1000a9",
+                      "surface": "#12131a",
+                      "tertiary-fixed": "#ffdcc6",
+                      "background": "#12131a",
+                      "on-primary-container": "#00285d",
+                      "on-error": "#690005",
+                      "surface-variant": "#33343c",
+                      "on-tertiary-fixed-variant": "#723600",
+                      "inverse-surface": "#e3e1ec",
+                      "on-error-container": "#ffdad6",
+                      "on-primary-fixed-variant": "#004395",
+                      "outline": "#8c909f",
+                      "on-secondary-fixed": "#07006c",
+                      "tertiary-container": "#df7412",
+                      "surface-container-lowest": "#0d0e15",
+                      "surface-bright": "#383941",
+                      "secondary-fixed-dim": "#c0c1ff",
+                      "on-secondary-container": "#b0b2ff",
+                      "error": "#ffb4ab",
+                      "inverse-primary": "#005ac2",
+                      "surface-dim": "#12131a",
+                      "on-tertiary-fixed": "#311400",
+                      "tertiary": "#ffb786",
+                      "primary-fixed-dim": "#adc6ff",
+                      "on-surface-variant": "#c2c6d6",
+                      "surface-container": "#1e1f26",
+                      "primary-container": "#4d8eff",
+                      "on-secondary-fixed-variant": "#2f2ebe",
+                      "surface-container-highest": "#33343c",
+                      "secondary-container": "#3131c0",
+                      "outline-variant": "#424754",
+                      "on-primary-fixed": "#001a42",
+                      "on-tertiary": "#502400"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "margin": "24px",
+                      "xl": "48px",
+                      "lg": "24px",
+                      "unit": "4px",
+                      "sm": "8px",
+                      "md": "16px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "label-caps": [
+                              "Geist"
+                      ],
+                      "headline-md": [
+                              "Geist"
+                      ],
+                      "body-sm": [
+                              "Geist"
+                      ],
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "code-md": [
+                              "JetBrains Mono"
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "label-caps": [
+                              "11px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "30px",
+                              {
+                                      "lineHeight": "36px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "code-md": [
+                              "13px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+            },
+          }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background antialiased flex h-screen overflow-hidden selection:bg-primary-container selection:text-on-primary-container font-body-sm">
+<!-- SideNavBar (from JSON) -->
+<nav class="w-[240px] h-screen fixed left-0 top-0 bg-surface-container dark:bg-surface-container border-r border-outline-variant dark:border-outline-variant flex flex-col h-full p-md z-50">
+<!-- Header -->
+<div class="mb-8 flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">terminal</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface text-[16px] leading-tight">Dev Toolbox</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Utility Suite</p>
+</div>
+</div>
+<!-- CTA -->
+<button class="w-full mb-6 py-2 px-3 rounded flex items-center justify-between border border-outline-variant hover:bg-surface-container-high transition-colors text-on-surface-variant hover:text-on-surface group">
+<span class="font-body-sm text-body-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">search</span>
+                Command Palette
+            </span>
+<kbd class="font-code-md text-[10px] py-0.5 px-1.5 rounded bg-surface-container-highest border border-outline-variant text-on-surface-variant group-hover:text-on-surface">⌘K</kbd>
+</button>
+<!-- Main Navigation -->
+<div class="flex-1 overflow-y-auto"><ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-body-sm hover:bg-surface-container-high transition-colors active:scale-[0.98] duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">explore</span>
+                        Explore
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-body-sm hover:bg-surface-container-high transition-colors active:scale-[0.98] duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">token</span>
+                        JWT Decoder
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-body-sm hover:bg-surface-container-high transition-colors active:scale-[0.98] duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">data_object</span>
+                        JSON Formatter
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-body-sm hover:bg-surface-container-high transition-colors active:scale-[0.98] duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+                        Unix Timestamp
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-body-sm hover:bg-surface-container-high transition-colors active:scale-[0.98] duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">fingerprint</span>
+                        UUID Generator
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-primary font-bold bg-surface-container-highest transition-colors active:scale-[0.98] duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">enhanced_encryption</span>
+                        Base64 Encoder / Decoder
+                    </a>
+</li>
+</ul></div>
+<!-- Footer Navigation -->
+<div class="mt-auto pt-4 border-t border-outline-variant">
+<ul class="space-y-1"><li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-body-sm hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">history</span>
+                        Saved runs
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-body-sm hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+                        Settings
+                    </a>
+</li>
+<li>
+<button class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-on-surface-variant font-body-sm hover:bg-surface-container-high transition-colors">
+<span class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[18px]">dark_mode</span>
+                            Dark Mode
+                        </span>
+<div class="w-8 h-4 bg-primary rounded-full relative">
+<div class="w-3 h-3 bg-surface rounded-full absolute right-0.5 top-0.5"></div>
+</div>
+</button>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-[240px] flex-1 flex flex-col h-screen overflow-hidden bg-background">
+<!-- TopAppBar (from JSON but adapted for the content view) -->
+<header class="h-16 px-lg flex items-center justify-between border-b border-outline-variant bg-surface dark:bg-surface sticky top-0 z-40 shrink-0">
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm">
+<span>Tools</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span>Encode/Decode</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface">Base64</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+</div>
+</header>
+<!-- Tool Workspace -->
+<div class="flex-1 overflow-y-auto p-lg">
+<div class="max-w-6xl mx-auto space-y-md">
+<!-- Tool Header -->
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Base64 Encoder / Decoder</h2>
+<p class="text-on-surface-variant font-body-md">Convert UTF-8 text to Standard or URL-safe Base64 locally.</p>
+</div>
+<!-- Controls -->
+<div class="flex items-center gap-4 bg-surface-container-low p-2 rounded border border-outline-variant inline-flex">
+<!-- Encode / Decode Toggle -->
+<div class="flex bg-surface-container-highest rounded p-1 border border-outline-variant/50">
+<button class="px-4 py-1.5 rounded text-primary bg-surface border border-outline-variant font-label-caps text-label-caps shadow-sm">Encode</button>
+<button class="px-4 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps">Decode</button>
+</div>
+<!-- Variant Toggle -->
+<div class="flex bg-surface-container-highest rounded p-1 border border-outline-variant/50">
+<button class="px-4 py-1.5 rounded text-primary bg-surface border border-outline-variant font-label-caps text-label-caps shadow-sm">Standard</button>
+<button class="px-4 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps">URL-safe</button>
+</div>
+</div>
+<!-- Editor Workspace -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 h-[400px]">
+<!-- Left: Input -->
+<div class="bg-surface-container border border-outline-variant rounded flex flex-col focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/50 transition-all shadow-sm">
+<div class="flex justify-between items-center px-4 py-2 border-b border-outline-variant bg-surface-container-low rounded-t">
+<span class="font-label-caps text-label-caps text-on-surface">Input</span>
+<span class="font-code-md text-code-md text-on-surface-variant text-[11px]">21 chars</span>
+</div>
+<div class="flex-1 relative bg-[#0f1015]">
+<!-- Gutter for line numbers (simplified) -->
+<div class="absolute left-0 top-0 bottom-0 w-8 border-r border-outline-variant/30 bg-surface-container-lowest flex flex-col items-center pt-3 font-code-md text-[11px] text-outline select-none">
+<span>1</span>
+</div>
+<textarea class="w-full h-full bg-transparent text-on-surface font-code-md text-code-md resize-none focus:outline-none focus:ring-0 border-none p-3 pl-11" placeholder="Paste text or Base64 here...">Hello, Dev Toolbox!</textarea>
+</div>
+<div class="px-4 py-1.5 bg-error-container/10 border-t border-outline-variant/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-[14px]">error</span>
+<span class="text-[11px] text-error font-body-sm">Enter valid Base64 characters and padding.</span>
+</div></div>
+<!-- Right: Output -->
+<div class="bg-surface-container border border-outline-variant rounded flex flex-col shadow-sm">
+<div class="flex justify-between items-center px-4 py-2 border-b border-outline-variant bg-surface-container-low rounded-t">
+<span class="font-label-caps text-label-caps text-on-surface">Output</span>
+<div class="flex items-center gap-3">
+<span class="font-code-md text-code-md text-on-surface-variant text-[11px]">28 chars</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center" title="Copy to clipboard">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+</div>
+<div class="flex-1 relative bg-[#0f1015]">
+<div class="absolute left-0 top-0 bottom-0 w-8 border-r border-outline-variant/30 bg-surface-container-lowest flex flex-col items-center pt-3 font-code-md text-[11px] text-outline select-none">
+<span>1</span>
+</div>
+<textarea class="w-full h-full bg-transparent text-primary-fixed-dim font-code-md text-code-md resize-none focus:outline-none focus:ring-0 border-none p-3 pl-11" readonly="">SGVsbG8sIERldiBUb29sYm94IQ==</textarea>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-3">
+<button class="bg-primary hover:bg-primary/90 text-on-primary font-label-caps text-label-caps px-6 py-2.5 rounded shadow-sm transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+                        Encode
+                    </button>
+<button class="bg-transparent border border-outline hover:border-on-surface text-on-surface font-label-caps text-label-caps px-4 py-2.5 rounded transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">swap_horiz</span>
+                        Swap
+                    </button>
+<button class="bg-transparent border border-outline-variant hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps px-4 py-2.5 rounded transition-colors flex items-center gap-2 ml-auto">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+                        Clear
+                    </button>
+</div>
+<!-- Info Footer -->
+<div class="mt-8 p-4 bg-surface-container-lowest border border-outline-variant rounded flex gap-4 items-start">
+<span class="material-symbols-outlined text-outline mt-0.5">info</span>
+<div>
+<h4 class="font-body-md text-on-surface font-semibold mb-1">Standard vs URL-safe Base64</h4>
+<p class="font-body-sm text-on-surface-variant">Standard Base64 uses <code class="bg-surface-variant px-1 rounded text-primary-fixed-dim font-code-md">+</code> and <code class="bg-surface-variant px-1 rounded text-primary-fixed-dim font-code-md">/</code> characters, which can break URLs. URL-safe Base64 replaces them with <code class="bg-surface-variant px-1 rounded text-primary-fixed-dim font-code-md">-</code> and <code class="bg-surface-variant px-1 rounded text-primary-fixed-dim font-code-md">_</code> respectively, making the output safe for web transmission.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Toast Notification -->
+<div class="fixed bottom-6 right-6 bg-surface-container-highest border border-primary/30 text-on-surface px-4 py-3 rounded-lg shadow-[0_4px_12px_rgba(0,0,0,0.5)] flex items-center gap-3 z-50 animate-[slideIn_0.3s_ease-out]">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-sm">Copied to clipboard</span>
+</div>
+<style>
+        @keyframes slideIn {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</body></html>
