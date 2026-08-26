@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Generate Feature Requirement'
+  short_description: 'Turn feature ideas into project-formatted REQs'
+  default_prompt: 'Use $generate-feature-requirement to turn my feature idea into a detailed Dev Toolbox requirement.'

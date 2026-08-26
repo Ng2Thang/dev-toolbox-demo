@@ -2,6 +2,15 @@
 
 Apply these rules before creating or updating a GitHub pull request for this repository.
 
+## Required PR template
+
+For every pull request that creates or updates a feature, read
+`.github/pull_request_template.md` before creating or editing the pull request. Use its exact
+section structure for the PR description and complete every applicable field with current
+evidence. Do not replace the template with an ad-hoc PR body. When a feature changes after the PR
+already exists, update the PR description so its requirement, implementation, test report,
+security, Stitch, preview, and risk information remains accurate.
+
 ## Branch requirements
 
 - Run `git branch --show-current` before creating the PR.
@@ -55,5 +64,6 @@ Complete these steps in order before invoking `gh pr create`:
 2. Validate the branch convention and length.
 3. Validate or generate the current full-repository test report and collect its summary.
 4. Calculate changed lines against the base branch and add the large-PR warning if required.
-5. Prepare the PR body, including `## Test Report`.
+5. Read `.github/pull_request_template.md` and prepare the PR body using its exact structure,
+   including `## Test Report`.
 6. Create the PR only after every prior check succeeds.

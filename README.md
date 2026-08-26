@@ -8,6 +8,7 @@ Dev Toolbox is a Next.js App Router application that collects small, browser-bas
 - **JSON Formatter** - Validates and pretty-prints JSON locally.
 - **Unix Timestamp Converter** - Converts Unix timestamps to readable dates and dates back to epoch values.
 - **UUID Generator** - Generates UUID v1, v4, and v7 values locally.
+- **Base64 Encoder / Decoder** - Converts UTF-8 text between standard and URL-safe Base64 locally.
 - **Saved runs** - Successful tool runs can be stored in Supabase and viewed at `/history`.
 
 The typed registry in `lib/tools.ts` is the source of truth for available tools and sidebar navigation. When adding a tool, update both the registry and the **Included tools** list above so this README remains accurate.
@@ -92,6 +93,20 @@ npm run check           # Run formatting, linting, types, tests, and build
 ```
 
 Run `npm run doctor` before an end-to-end agent workflow to check Stitch, Supabase, GitHub, and Vercel integration. Use `npm run doctor:offline` to validate local configuration without the Supabase network probe, or add `-- --json` for machine-readable output.
+
+## Vercel deployment
+
+Vercel is configured to recognize this repository as a Next.js app, use Node.js 22, run
+`npm run build`, and create Git deployments for pushed branches. After importing the GitHub
+repository into Vercel, configure these environment variables for both Preview and Production
+environments:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+
+Keep the service-role key server-side in Vercel's environment settings; never add it to
+`NEXT_PUBLIC_*` variables, `vercel.json`, or the repository. Vercel will use `main` as the
+production branch unless the project setting is changed; other pushed branches receive previews.
 
 ## Repository map
 

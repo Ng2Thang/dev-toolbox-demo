@@ -27,6 +27,13 @@
       "route": "/tools/uuid",
       "deviceType": "DESKTOP",
       "artifactBasename": "uuid-generator"
+    },
+    {
+      "id": "a62b045a4be24efdafd675451df1127d",
+      "title": "Base64 Encoder / Decoder - Refined Workspace",
+      "route": "/tools/base64",
+      "deviceType": "DESKTOP",
+      "artifactBasename": "base64-encoder-decoder"
     }
   ]
 }
