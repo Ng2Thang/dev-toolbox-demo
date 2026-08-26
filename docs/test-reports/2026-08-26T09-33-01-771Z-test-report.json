@@ -1,0 +1,122 @@
+{
+  "timestamp": "2026-08-26T09:33:19.636Z",
+  "repository": "dev-toolbox-demo",
+  "branch": "feature/req-008-sql-formatter",
+  "commit": "c3af0f901800",
+  "command": "vitest run --reporter=json --outputFile <generated-file>",
+  "success": true,
+  "durationMs": 17861,
+  "files": {
+    "passed": 26,
+    "failed": 0,
+    "skipped": 0
+  },
+  "tests": {
+    "passed": 121,
+    "failed": 0,
+    "skipped": 0,
+    "total": 121
+  },
+  "categories": [
+    {
+      "category": "Shared libraries",
+      "passedFiles": 1,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 3,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "Feature: tools",
+      "passedFiles": 1,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 3,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "Feature: base64",
+      "passedFiles": 3,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 15,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "Feature: jwt",
+      "passedFiles": 3,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 15,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "Feature: json",
+      "passedFiles": 4,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 18,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "Feature: mock-data",
+      "passedFiles": 3,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 15,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "Feature: runs",
+      "passedFiles": 1,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 2,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "Feature: timestamp",
+      "passedFiles": 3,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 15,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "Feature: sql-formatter",
+      "passedFiles": 3,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 16,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "Feature: uuid",
+      "passedFiles": 3,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 15,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    {
+      "category": "API/routes",
+      "passedFiles": 1,
+      "failedFiles": 0,
+      "skippedFiles": 0,
+      "passedTests": 4,
+      "failedTests": 0,
+      "skippedTests": 0
+    }
+  ],
+  "failedOrSkipped": []
+}
