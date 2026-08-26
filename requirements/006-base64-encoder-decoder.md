@@ -1,6 +1,6 @@
 ---
 id: REQ-006
-status: implementing
+status: blocked
 route: /tools/base64
 stitch_project: Dev Toolbox
 stitch_screen_id: a62b045a4be24efdafd675451df1127d
@@ -74,4 +74,5 @@ Let developers encode UTF-8 text as standard or URL-safe Base64 and decode Base6
 - Focused Base64 Playwright suite passed: 7 Chromium tests; the complete suite was run with no reported test failure, but its execution wrapper omitted the final aggregate line.
 - Production build passed and includes `/tools/base64` as a static route.
 - Repository formatting was repaired with Prettier; `format:check`, lint, typecheck, the full 90-test Vitest suite, and the production build now pass under Node 24.14.0.
-- Pull request creation and Vercel Preview validation remain pending.
+- Pull request: https://github.com/Ng2Thang/dev-toolbox-demo/pull/12
+- Delivery blocker: Vercel Preview validation cannot run because `vercel.json` sets `git.deploymentEnabled` to `false` and the configured Vercel CLI token is invalid. No manual deployment was attempted.
