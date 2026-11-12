@@ -22,7 +22,7 @@ Next.js App Router routes and layouts
                   Zod validation + server-only repository
                          |
                          v
-                  Supabase / Postgres
+                  Database / Postgres
 ```
 
 ## Directory map
@@ -44,12 +44,10 @@ features/
 
 lib/
   jwt.ts                 Shared JWT parsing logic
-  supabase-server.ts     Server-only Supabase client factory
   tools.ts               Typed tool and navigation registry
 
 test/                    Shared Vitest setup
 e2e/                     Feature-owned Playwright specs, fixtures, and helpers
-supabase/migrations/     Immutable, ordered database migrations
 requirements/            Product requirements given to agents
 docs/                    Demo context and task log
 scripts/                 Project diagnostics and test-report utilities
@@ -96,7 +94,7 @@ features/<feature>/
 - Put reusable presentation components in `components/`; do not create a generic component until
   at least two features need the same abstraction.
 - Use the `@/` import alias for application modules.
-- Do not put business logic, fetch calls, or Supabase access in a route page.
+- Do not put business logic, fetch calls, or database access in a route page.
 - Do not reintroduce a catch-all component for unrelated tools.
 
 ## Saved-run data flow
@@ -104,17 +102,14 @@ features/<feature>/
 1. A client tool sends a JSON-compatible run to `POST /api/runs`.
 2. `createToolRunSchema` validates `tool`, `input`, and recursive JSON `output`; invalid input
    returns HTTP 400 before any database call.
-3. `run.repository.ts` performs persistence and reads using the server-only Supabase client.
+3. `run.repository.ts` performs persistence and reads using the server-only database client.
 4. `/history` calls the same repository and renders the latest 50 runs, newest first.
 
-The `tool_runs` table is created by
-`supabase/migrations/202608170001_create_tool_runs.sql`. Never edit that applied migration;
-create a new timestamped migration for every schema change.
+The repository does not contain a migration for `tool_runs`; provision and version the schema separately when saved runs are required.
 
 ## Security boundaries
 
-- `SUPABASE_SERVICE_ROLE_KEY` is server-only. It may be read only by server modules such as
-  `lib/supabase-server.ts` and must never appear in client components or `NEXT_PUBLIC_*` variables.
+- Database credentials are server-only and must never appear in client components or public environment variables.
 - Validate every external request at the server boundary with Zod before persistence.
 - Do not commit `.env*`, API keys, access tokens, temporary MCP configuration, or generated local
   configuration files. Use local ignored configuration and rotate a credential if it is exposed.
@@ -150,6 +145,6 @@ mocked network responses; real persistence integration belongs in a dedicated te
 1. Read the relevant requirement and this document.
 2. Record a concise plan in `docs/task-log.md`.
 3. Preserve route, client/server, and feature ownership boundaries.
-4. Add a new migration for schema changes; never modify an applied migration.
+4. Manage schema changes through a versioned migration process.
 5. Run `npm run check`, review the diff for secrets and accidental files, then commit on a feature
    branch and validate its preview deployment.
