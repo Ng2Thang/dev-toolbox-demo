@@ -10,7 +10,7 @@ Dev Toolbox is a Next.js App Router application that collects small, browser-bas
 - **UUID Generator** - Generates UUID v1, v4, and v7 values locally.
 - **Base64 Encoder / Decoder** - Converts UTF-8 text between standard and URL-safe Base64 locally.
 - **Lorem Ipsum / Mock Data Generator** - Generates deterministic placeholder text and synthetic mock records locally.
-- **Saved runs** - Successful tool runs can be stored in Supabase and viewed at `/history`.
+- **Saved runs** - Successful tool runs can be stored in the configured database and viewed at `/history`.
 
 The typed registry in `lib/tools.ts` is the source of truth for available tools and sidebar navigation. When adding a tool, update both the registry and the **Included tools** list above so this README remains accurate.
 
@@ -18,7 +18,7 @@ The typed registry in `lib/tools.ts` is the source of truth for available tools 
 
 - Next.js 15 and React 19
 - TypeScript
-- Supabase/Postgres for optional saved-run persistence
+- Postgres for optional saved-run persistence
 - Zod validation at the runs API boundary
 - Vitest, Testing Library, ESLint, and Prettier
 - Playwright for Chromium browser smoke tests
@@ -40,34 +40,18 @@ The current requirements cover the home screen, JWT Decoder, JSON Formatter, Uni
 | `/history`  | Dynamic server page backed by the saved-run repository                                                              |
 | `/api/runs` | Route handler that validates requests with Zod before server-only persistence                                       |
 
-Route pages must not contain business logic, client fetches, or Supabase access. Keep pure tool behavior in `features/<tool>/`, reusable UI in `components/`, and server persistence in the runs feature. Add tools through `lib/tools.ts`, the matching feature folder, and a thin route beneath `app/(toolbox)/tools/`.
+Route pages must not contain business logic, client fetches, or database access. Keep pure tool behavior in `features/<tool>/`, reusable UI in `components/`, and server persistence in the runs feature. Add tools through `lib/tools.ts`, the matching feature folder, and a thin route beneath `app/(toolbox)/tools/`.
 
-Saved runs use JSON-compatible client output, `POST /api/runs`, schema validation, the server-only repository, and the `tool_runs` migration. The `/history` page displays the 50 newest runs first.
+Saved runs use JSON-compatible client output, `POST /api/runs`, schema validation, and the server-only repository backed by the `tool_runs` table. The `/history` page displays the 50 newest runs first.
 
 ## Local setup
 
-Prerequisites: Node.js 22 or newer and npm. A Supabase project is required only when using saved-run persistence.
+Prerequisites: Node.js 22 and npm. Tool processing works locally; saved runs require the existing server-side database configuration. The repository no longer contains database migrations, so provisioning the saved-run table requires a separately managed schema.
 
 ```bash
 npm ci
-cp .env.example .env.local
 npm run dev
 ```
-
-On PowerShell, use `Copy-Item .env.example .env.local` in place of `cp` if necessary. Set these values in `.env.local` when persistence is enabled:
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
-```
-
-Apply the versioned migration in [`supabase/migrations/`](supabase/migrations/) to the target Supabase project before saving runs. For a linked project, the Supabase CLI command is typically:
-
-```bash
-npx supabase db push
-```
-
-`SUPABASE_SERVICE_ROLE_KEY` is server-only. Do not expose it in client components, browser variables, commits, or documentation.
 
 Install the Chromium browser once after dependencies are installed:
 
@@ -75,7 +59,7 @@ Install the Chromium browser once after dependencies are installed:
 npx playwright install chromium
 ```
 
-The E2E suite mocks ordinary saved-run API calls, so it does not write to Supabase. Reserve real
+The E2E suite mocks ordinary saved-run API calls, so it does not write to the database. Reserve real
 persistence tests for a dedicated test environment.
 
 ## Commands
@@ -93,20 +77,14 @@ npm run build           # Create a production build
 npm run check           # Run formatting, linting, types, tests, and build
 ```
 
-Run `npm run doctor` before an end-to-end agent workflow to check Stitch, Supabase, GitHub, and Vercel integration. Use `npm run doctor:offline` to validate local configuration without the Supabase network probe, or add `-- --json` for machine-readable output.
+Run `npm run doctor` before an end-to-end agent workflow to check configured integrations. Use `npm run doctor:offline` to validate local configuration without the database network probe, or add `-- --json` for machine-readable output.
 
 ## Vercel deployment
 
 Vercel is configured to recognize this repository as a Next.js app, use Node.js 22, run
 `npm run build`, and create Git deployments for pushed branches. After importing the GitHub
-repository into Vercel, configure these environment variables for both Preview and Production
-environments:
-
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY`
-
-Keep the service-role key server-side in Vercel's environment settings; never add it to
-`NEXT_PUBLIC_*` variables, `vercel.json`, or the repository. Vercel will use `main` as the
+repository into Vercel, configure the server-side database credentials if saved runs are needed.
+Keep credentials out of client-side variables and the repository. Vercel uses `main` as the
 production branch unless the project setting is changed; other pushed branches receive previews.
 
 ## Repository map
@@ -117,7 +95,6 @@ components/             Shared layout and tool presentation components
 features/               Feature-owned logic, client components, and tests
 lib/                    Shared helpers and the typed tool registry
 requirements/           Product requirements and UI-approval state
-supabase/migrations/    Immutable, ordered database migrations
 test/                   Shared test setup
 e2e/                    Feature-owned Playwright specs, fixtures, and helpers
 docs/                   Architecture, feature status, task log, and reports
@@ -163,6 +140,6 @@ For a new Dev Toolbox feature, follow [AGENTS.md](AGENTS.md): read its requireme
 ## Security
 
 - Never commit `.env*` files, credentials, or generated local configuration.
-- Keep Supabase service-role access in server-only modules.
+- Keep database credentials in server-only modules.
 - Validate incoming saved-run payloads before persistence.
-- Create a new migration for every schema change; never edit an applied migration.
+- Manage schema changes through a versioned migration process.

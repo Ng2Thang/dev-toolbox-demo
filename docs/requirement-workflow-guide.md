@@ -87,7 +87,7 @@ as the visual source of truth and preserve app architecture.
 - Prefer local browser processing for utilities.
 - Reuse Saved Runs when appropriate.
 - Validate new server inputs with Zod.
-- Keep `SUPABASE_SERVICE_ROLE_KEY` server-only.
+- Keep database credentials server-only.
 - Add a new timestamped migration for schema changes; never edit an applied migration.
 - Never commit `.env*`, tokens, credentials, or temporary generated configuration.
 
